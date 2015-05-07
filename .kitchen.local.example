@@ -1,0 +1,13 @@
+---
+ suites:
+   - name: default
+     run_list:
+       - recipe[chefdk_bootstrap-test]
+       - recipe[chefdk_bootstrap]
+     attributes:
+       chefdk_bootstrap-test:
+         proxy:
+           automatic_proxy_script_url: https://mycompany.example.com/proxy.js
+       chefdk_bootstrap:
+         package:
+           atom: false

@@ -1,0 +1,17 @@
+DEPENDENCIES
+  chefdk_bootstrap
+    path: .
+    metadata: true
+  chefdk_bootstrap-test
+    path: test/fixtures/cookbooks/chefdk_bootstrap-test
+
+GRAPH
+  chef_handler (1.1.6)
+  chefdk_bootstrap (0.1.0)
+    chocolatey (~> 0.3)
+  chefdk_bootstrap-test (0.0.1)
+    chefdk_bootstrap (>= 0.0.0)
+  chocolatey (0.3.0)
+    windows (~> 1.31)
+  windows (1.36.6)
+    chef_handler (>= 0.0.0)
