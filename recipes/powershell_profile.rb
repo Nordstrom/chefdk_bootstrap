@@ -10,7 +10,7 @@ require 'rubygems'
 begin
   Gem::Specification.find_by_name('chef-dk', ['~> 0.3', '>= 0.3.6'])
 rescue Gem::LoadError
-  fail "ChefDK 0.3.6 or higher is required; please upgrade"
+  raise 'ChefDK 0.3.6 or higher is required; please upgrade'
 end
 
 # add powershell_out to powershell_script
@@ -39,6 +39,6 @@ if node['chefdk_bootstrap']['powershell']['configure']
   template ::File.join(profiledir, 'profile.ps1') do
     action :create_if_missing
     source 'global_profile.ps1.erb'
-    variables({ :profiledir => real_profiledir })
+    variables(profiledir: real_profiledir)
   end
 end

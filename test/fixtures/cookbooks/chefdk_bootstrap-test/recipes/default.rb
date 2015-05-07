@@ -7,7 +7,7 @@ http_proxy = node['chefdk_bootstrap-test']['proxy']['http_proxy']
 proxy_override = node['chefdk_bootstrap-test']['proxy']['no_proxy']
 
 registry_key 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings' do
-  values [{name: 'AutoConfigURL', type: :string, data: autoconfig_url}]
+  values [{ name: 'AutoConfigURL', type: :string, data: autoconfig_url }]
   not_if { autoconfig_url.nil? }
 end
 
