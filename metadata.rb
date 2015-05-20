@@ -11,3 +11,4 @@ description      'Installs/Configures chefdk_bootstrap'
 version          '0.1.0'
 
 depends 'chocolatey', '~> 0.3'
+depends 'git', '~> 4.2'

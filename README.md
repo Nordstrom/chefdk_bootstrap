@@ -1,25 +1,39 @@
-# chefdk_bootstrap
+# Zero to First Cookbook in Twenty Minutes
 
 ## Description
 
-THIS COOKBOOK ISN'T READY FOR USE YET. 05/01/2015
+Install ChefDK and run two simple commands to easily setup your Windows
+or Mac workstation for Chef cookbook development in **20 minutes**.
 
-## Usage
+This cookbook installs these tools:
 
-Add 'recipe[chefdk_bootstrap::default]' to your node's run-list.
+### Editor
+[Atom](https://atom.io), a free, general purpose, cross-platform, open source,
+text editor. Out of the box, Atom supports all the languages you will need
+for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 
-To use this cookbook in another recipe, add a dependency on it to your
-cookbook's metadata.rb:
+### Source Control
+[Git]() - command line git client and tools.
 
-    depends 'chefdk_bootstrap', '~> 0.1'
 
-Then include it in one of your recipes:
+### Local Virtualization
+[Virtualbox]() - Oracle's free, open source virtualization tool for local cookbook testing.
 
-    include_recipe 'chefdk_bootstrap::default'
+[Vagrant]() - ChefDK's included [Test Kitchen]() tool uses Vagrant to spin up local VMs for cookbook testing.
 
-(the ~> syntax will pull in the latest version in the 0.x series but
-not any version in 1.x.  As the cookbook you depend on is updated, you
-will have to change this to '~> 1.0' as appropriate.)
+
+## I'm on Windows
+
+1. Install [ChefDK](http://chef.io).
+1. Download this cookbook via [Berkshelf]().
+1. Run this cookbook via `chef-client` on your workstation.
+
+## I'm on a Mac
+
+1. Install [ChefDK](http://chef.io).
+1. Download this cookbook via [Berkshelf]().
+1. Run this cookbook via `chef-client` on your workstation.
+
 
 ## Recipes
 

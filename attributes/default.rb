@@ -1,5 +1,11 @@
 default['chocolatey']['upgrade'] = false
 
+default['chefdk_bootstrap']['atom']['source_url'] =
+  value_for_platform_family(
+  'mac_os_x' => nil,
+  'windows' => 'https://atom.io/download/windows'
+  )
+
 # What to install
 default['chefdk_bootstrap']['package'].tap do |install|
   install['atom'] = true

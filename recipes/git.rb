@@ -1,6 +1,4 @@
-chocolatey 'git' do
-  options '-params' => '/GitOnlyOnPath'
-end
+git_client node['git']['display_name']
 
 chocolatey 'git-credential-winstore'
 chocolatey 'poshgit'
