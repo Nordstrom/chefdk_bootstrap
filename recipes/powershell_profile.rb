@@ -1,18 +1,3 @@
-# the new chef shell-init functionality requires ChefDK 0.3.6 or higher
-# unfortunately we can't just load chef-dk/version, because it's designed
-# to run under Chef 12 and when running chef-client we're on Chef 11, so
-# constraints cause RubyGems to blow up.  We instead use the gem catalog
-# to determine what version of ChefDK we have without loading it
-# this will go away once ChefDK 0.4.0 (which only has chef-client v12)
-# is released
-require 'rubygems'
-
-begin
-  Gem::Specification.find_by_name('chef-dk', ['~> 0.3', '>= 0.3.6'])
-rescue Gem::LoadError
-  raise 'ChefDK 0.3.6 or higher is required; please upgrade'
-end
-
 # add powershell_out to powershell_script
 Chef::Resource::PowershellScript.send(:include, Chef::Mixin::PowershellOut)
 
