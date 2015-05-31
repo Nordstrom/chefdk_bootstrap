@@ -6,34 +6,3 @@ $env:HOME = $env:USERPROFILE
 
 # let ChefDK set up our environment variables properly
 chef shell-init powershell | Invoke-Expression
-
-<% if node['chefdk_bootstrap']['package']['putty'] -%>
-# create the PuTTY hierarchy if it doesn't exist
-$paths = "SimonTatham\PuTTY\Sessions\Default%20Settings", "SimonTatham\PuTTY\SshHostKeys"
-foreach( $path in $paths ) {
-  if( -Not( Test-Path "HKCU:\Software\$path" ) ) {
-    New-Item "HKCU:\Software\$path" -Force | Out-Null
-  }
-}
-
-# turn on the winadj bugfix in PuTTY's default profile
-Set-ItemProperty -Path "HKCU:\Software\SimonTatham\PuTTY\Sessions\Default%20Settings" -Name BugWinadj -Type DWord -Value 2
-
-# create a startup shortcut to PAgeant if the user has created an SSH key
-$sshkey = "$env:USERPROFILE\documents\" + $env:USERNAME + "_stash.ppk"
-$shortcut = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\pageant.lnk"
-if( Test-Path $sshkey ) {
-  if( -Not( Test-Path $shortcut ) ) {
-    echo "Creating shortcut to run PAgeant on startup"
-	$objShell = New-Object -ComObject ("WScript.Shell")
-	$objShortCut = $objShell.CreateShortcut($shortcut)
-	$objShortCut.TargetPath = "$env:ChocolateyInstall\bin\PAGEANT.exe"
-	$objShortCut.Arguments = $sshkey
-	$objShortCut.Save()
-	& "$env:ChocolateyInstall\bin\PAGEANT.exe" "$sshkey"
-  }
-}
-
-# make command-line Git use plink instead of OpenSSH
-$env:GIT_SSH = "$env:ChocolateyInstall\bin\PLINK.exe"
-<% end -%>

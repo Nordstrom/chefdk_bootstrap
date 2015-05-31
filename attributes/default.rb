@@ -9,7 +9,6 @@ default['chefdk_bootstrap']['atom']['source_url'] =
 # What to install
 default['chefdk_bootstrap']['package'].tap do |install|
   install['atom'] = true
-  install['putty'] = true
   install['kdiff3'] = true
   install['virtualbox'] = true
   install['vagrant'] = true
