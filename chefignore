@@ -99,3 +99,7 @@ vendor/*
 # Test Kitchen #
 ################
 .kitchen/*
+
+# bootstrap scripts #
+#####################
+bootstrap.ps1
