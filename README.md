@@ -1,10 +1,27 @@
 # Zero to First Cookbook in Twenty Minutes
 
-## Description
+Run one simple command to easily setup your Windows workstation
+for Chef cookbook development in **20 minutes**.
 
-Install ChefDK and run two simple commands to easily setup your Windows
-or Mac workstation for Chef cookbook development in **20 minutes**.
+## Quickstart - Windows
 
+Run the command below from a PowerShell Admin console. This will execute the [bootstrap] (https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/Rakefile) script on your workstation.
+
+```PowerShell
+PS> Invoke-WebRequest https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | iex
+```
+
+### The bootstrap script will:
+1. Install the latest ChefDK package
+1. Create a `chef` directory in your home directory.
+1. Download the `chefdk_bootstrap` cookbook via [Berkshelf](http://berkshelf.com/)
+1. Run `chef-client` to install the rest of the tools you'll need.
+
+## Quickstart - Mac
+
+Mac support is coming soon.
+
+## What does it do?
 This cookbook installs these tools:
 
 ### Editor
@@ -13,27 +30,13 @@ text editor. Out of the box, Atom supports all the languages you will need
 for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 
 ### Source Control
-[Git]() - command line git client and tools.
+[Git](http://git-scm.com/) - command line git client and tools.
 
 
 ### Local Virtualization
-[Virtualbox]() - Oracle's free, open source virtualization tool for local cookbook testing.
+[Virtualbox](https://www.virtualbox.org/) - Oracle's free, open source virtualization tool for local cookbook testing.
 
-[Vagrant]() - ChefDK's included [Test Kitchen]() tool uses Vagrant to spin up local VMs for cookbook testing.
-
-
-## I'm on Windows
-
-1. Install [ChefDK](http://chef.io).
-1. Download this cookbook via [Berkshelf]().
-1. Run this cookbook via `chef-client` on your workstation.
-
-## I'm on a Mac
-
-1. Install [ChefDK](http://chef.io).
-1. Download this cookbook via [Berkshelf]().
-1. Run this cookbook via `chef-client` on your workstation.
-
+[Vagrant](https://www.vagrantup.com/) - ChefDK's included [Test Kitchen]() tool uses Vagrant to spin up local VMs for cookbook testing.
 
 ## Recipes
 
