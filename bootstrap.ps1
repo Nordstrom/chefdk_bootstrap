@@ -30,7 +30,7 @@ $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 
 # Install ChefDK .msi package from Chef
 Write-Host 'Installing ChefDK...'
-# Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
+Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
 
 # Add ChefDK to the path
 $env:Path += ";c:\opscode\chefdk\bin"
