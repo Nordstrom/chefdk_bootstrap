@@ -8,7 +8,7 @@ maintainer       'Nordstrom, Inc.'
 maintainer_email 'techcheftm@nordstrom.com'
 license          'Apache 2.0'
 description      'Bootstrap a developer workstation for local Chef development using the ChefDK'
-version          '0.2.1'
+version          '0.2.2'
 
 supports 'windows'
 

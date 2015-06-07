@@ -1,6 +1,9 @@
 $chefDkSource = 'https://www.chef.io/chef/download-chefdk?p=windows&pv=2008r2&m=x86_64&v=latest'
 $bootstrapCookbook = 'chefdk_bootstrap'
+
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
+$berksfilePath = Join-Path -path $userChefDir -childPath 'Berksfile'
+$chefConfigPath = Join-Path -path $userChefDir -childPath 'bootstrap.rb'
 
 $berksfile = @"
 source 'https://supermarket.chef.io'
@@ -8,8 +11,9 @@ source 'https://supermarket.chef.io'
 cookbook '$bootstrapCookbook'
 "@
 
-# Install ChefDK .msi package from Chef
-Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
+$chefConfig = @"
+cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
+"@
 
 # create the chef directory
 if (!(Test-Path $userChefDir -pathType container)) {
@@ -19,19 +23,27 @@ if (!(Test-Path $userChefDir -pathType container)) {
 Set-Location $userChefDir
 
 # Write out a local Berksfile for Berkshelf to use
-$berksfile | Out-File -FilePath .\Berksfile -Encoding ASCII
+$berksfile | Out-File -FilePath $berksfilePath -Encoding ASCII
 
-# Install the bootstrap cookbooks to .\cookbooks using Berkshelf
-# If we find an existing .\cookbooks directory, bail out because Berkshelf
-# will overwrite the cookbooks directory without asking.
-if (Test-Path .\cookbooks -pathType container) {
-  throw 'Found existing .\cookbooks directory.
-    Please rename or delete the .\cookbooks directory and rerun this script.'
-}
-else {
-  berks vendor cookbooks
-}
+# Write out minimal chef-client config file
+$chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
+
+# Install ChefDK .msi package from Chef
+Write-Host 'Installing ChefDK...'
+# Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
+
+# Add ChefDK to the path
+$env:Path += ";c:\opscode\chefdk\bin"
+
+# Install the bootstrap cookbooks using Berkshelf
+berks vendor
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
-# it will look for a .\cookbooks directory in the current directory
-chef-client -A -z -l error -o $bootstrapCookbook
+chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
+
+# Cleanup
+rm $berksfilePath
+rm "$berksfilePath.lock"
+rm $chefConfigPath
+rm -Recurse nodes
+rm -Recurse berks-cookbooks
