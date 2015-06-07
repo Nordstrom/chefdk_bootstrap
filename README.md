@@ -8,7 +8,7 @@ for Chef cookbook development in **20 minutes**.
 Run the command below from a PowerShell Admin console. This will execute the [bootstrap] (https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/Rakefile) script on your workstation.
 
 ```PowerShell
-PS> Invoke-WebRequest https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | iex
+PS> (Invoke-WebRequest https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | iex
 ```
 
 ### The bootstrap script will:
