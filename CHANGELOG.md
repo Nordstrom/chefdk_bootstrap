@@ -1,5 +1,16 @@
 # Revision History for chefdk_bootstrap
 
+## 0.2.3
+* Update README
+* Add introduction to bootstrap script.
+* Add Atom source URL for Mac platform
+
+## 0.2.2
+* Bootstrap script bug fixes
+
+## 0.2.1
+* Add PowerShell bootstrap script
+
 ## 0.2.0
 
 * [Remove support for PuTTY](https://github.com/Nordstrom/chefdk_bootstrap/issues/6)

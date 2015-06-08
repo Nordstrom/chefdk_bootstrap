@@ -2,7 +2,7 @@ default['chocolatey']['upgrade'] = false
 
 default['chefdk_bootstrap']['atom']['source_url'] =
   value_for_platform_family(
-  'mac_os_x' => nil,
+  'mac_os_x' => 'https://atom.io/download/mac',
   'windows' => 'https://atom.io/download/windows'
   )
 
