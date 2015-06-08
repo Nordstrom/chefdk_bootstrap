@@ -15,6 +15,18 @@ $chefConfig = @"
 cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
 "@
 
+$introduction = @"
+### This bootstrap script will:
+
+1. Install the latest ChefDK package.
+2. Create a `chef` directory in your user profile (home) directory.
+3. Download the `chefdk_bootstrap` cookbook via Berkshelf
+4. Run `chef-client` to install the rest of the tools you'll need.
+
+"@
+
+Write-Host $introduction
+
 # create the chef directory
 if (!(Test-Path $userChefDir -pathType container)) {
   New-Item -ItemType 'directory' -path $userChefDir

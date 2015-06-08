@@ -3,19 +3,21 @@
 Run one simple command to easily setup your Windows workstation
 for Chef cookbook development in **20 minutes**.
 
-## Quickstart - Windows
-
-Run the command below from a PowerShell Admin console. This will execute the [bootstrap] (https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/Rakefile) script on your workstation.
-
-```PowerShell
-PS> (Invoke-WebRequest https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | iex
-```
-
 ### The bootstrap script will:
 1. Install the latest ChefDK package
 1. Create a `chef` directory in your home directory.
 1. Download the `chefdk_bootstrap` cookbook via [Berkshelf](http://berkshelf.com/)
 1. Run `chef-client` to install the rest of the tools you'll need.
+
+## Quickstart - Windows
+
+Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
+script on your workstation.
+
+```PowerShell
+$script = (Invoke-WebRequest https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content
+$script | Invoke-Expression
+```
 
 ## Quickstart - Mac
 
@@ -41,8 +43,34 @@ for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 ## Recipes
 
 ### default
+* Installs [Chocolatey](https://chocolatey.org/), a Windows package manager, similar to `apt-get` on Ubuntu or `homebrew` on Mac. Chocolatey is used to install packages like `posh-git` and `kdiff3`.
 
-The default recipe ...
+* Installs all the other tools marked `true` in the
+`node['chefdk_bootstrap']['package']` hash.
+
+* Includes the Powershell profile configuration recipe.
+
+### atom
+* Installs the Atom editor
+
+### git
+* Installs git, git-credential-winstore, and posh-git.
+
+### gitextensions
+* Installs gitextensions, a GUI git client.
+
+### kdiff3
+* Installs the free, open-source diff/merge tool, kdiff3.
+
+### powershell_profile
+* Configures a global PowerShell profile to correct the $env:HOME environment
+variable and run `chef shell-init powershell`.
+
+### vagrant
+* Installs Vagrant.
+
+### virtualbox
+* Installs Virtualbox.
 
 ## Attributes
 
@@ -51,9 +79,14 @@ The attributes defined by this recipe are organized under the
 
 Attribute | Description | Type   | Default
 ----------|-------------|--------|--------
-...       | ...         | String | ...
-
-## LWRP
+['atom']['source_url'] | Windows: Atom installer package source URL | URL String | https://atom.io/download/windows
+['atom']['source_url'] | Mac: Atom installer package source URL | URL String | https://atom.io/download/mac
+['package']['atom'] | Whether to install Atom or not | boolean | true
+['package']['kdiff3'] | Whether to install kdiff3 or not | boolean | true
+['package']['vagrant'] | Whether to install Vagrant or not | boolean | true
+['package']['virtualbox'] | Whether to install Virtualbox or not | boolean | true
+['package']['git'] | Whether to install git and related packages or not | boolean | true
+['package']['gitextensions'] | Whether to install gitextensions or not | boolean | true
 
 ## Development
 
