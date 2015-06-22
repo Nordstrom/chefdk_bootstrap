@@ -1,13 +1,13 @@
-# Zero to First Cookbook in Twenty Minutes
+# ChefDK_Bootstrap
+## Setup your laptop for Chef development in minutes
 
-Run one simple command to easily setup your Windows workstation
-for Chef cookbook development in **20 minutes**.
+Run one simple command to easily setup your Windows machine
+for Chef cookbook development in about **20 minutes**.
 
 ### The bootstrap script will:
-1. Install the latest ChefDK package
-1. Create a `chef` directory in your home directory.
-1. Download the `chefdk_bootstrap` cookbook via [Berkshelf](http://berkshelf.com/)
-1. Run `chef-client` to install the rest of the tools you'll need.
+1. Install the latest [ChefDK](https://downloads.chef.io/chef-dk/) package from Chef.
+1. Create a `chef` directory in your home directory for your cookbook development.
+1. Using `chef-client`, install developer tools required for Chef cookbook development, like git, Vagrant, and the Atom editor.
 
 ## Quickstart - Windows
 
@@ -15,8 +15,15 @@ Copy the PowerShell commands below and paste them into a **PowerShell Admin** co
 script on your workstation.
 
 ```PowerShell
-$script = (Invoke-WebRequest https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content
+$script = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content
 $script | Invoke-Expression
+```
+
+### If you're behind a proxy, run this instead...
+If you need to go through a proxy server use this version:
+
+```PowerShell
+$env:http_proxy='http://myproxy.example.com:8080'; $env:https_proxy=$env:http_proxy; (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
 ```
 
 ## Quickstart - Mac
@@ -39,6 +46,8 @@ for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 [Virtualbox](https://www.virtualbox.org/) - Oracle's free, open source virtualization tool for local cookbook testing.
 
 [Vagrant](https://www.vagrantup.com/) - ChefDK's included [Test Kitchen]() tool uses Vagrant to spin up local VMs for cookbook testing.
+
+----
 
 ## Recipes
 
@@ -87,6 +96,8 @@ Attribute | Description | Type   | Default
 ['package']['virtualbox'] | Whether to install Virtualbox or not | boolean | true
 ['package']['git'] | Whether to install git and related packages or not | boolean | true
 ['package']['gitextensions'] | Whether to install gitextensions or not | boolean | true
+
+----
 
 ## Development
 
@@ -138,13 +149,10 @@ DISABLE_PRY_RESCUE before running guard:
 
 ### Integration Tests
 
-    bunlde exec rake kitchen:all
+    bundle exec rake kitchen:all
 
 Will run the test kitchen integration tests.  These tests use Vagrant
 and Virtualbox, which must be installed for the tests to execute.
-
-These are only available for cookbooks that target Unix-like systems.
-Support for Windows targets is expected by the end of 2014.
 
 After converging in a virtual machine, ServerSpec tests are executed.
 This skeleton comes with a very basic ServerSpec test; refer to
