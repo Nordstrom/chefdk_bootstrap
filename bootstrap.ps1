@@ -5,6 +5,10 @@ $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
 $berksfilePath = Join-Path -path $userChefDir -childPath 'Berksfile'
 $chefConfigPath = Join-Path -path $userChefDir -childPath 'bootstrap.rb'
 
+# Set HOME to be c:\users\<username> so cookbook gem installs are on the c:\
+# drive.
+$env:HOME = $env:USERPROFILE
+
 $berksfile = @"
 source 'https://supermarket.chef.io'
 
@@ -16,6 +20,7 @@ cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
 "@
 
 $introduction = @"
+
 ### This bootstrap script will:
 
 1. Install the latest ChefDK package.
@@ -32,8 +37,6 @@ if (!(Test-Path $userChefDir -pathType container)) {
   New-Item -ItemType 'directory' -path $userChefDir
 }
 
-Set-Location $userChefDir
-
 # Write out a local Berksfile for Berkshelf to use
 $berksfile | Out-File -FilePath $berksfilePath -Encoding ASCII
 
@@ -46,6 +49,8 @@ Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
 
 # Add ChefDK to the path
 $env:Path += ";c:\opscode\chefdk\bin"
+
+Set-Location $userChefDir
 
 # Install the bootstrap cookbooks using Berkshelf
 berks vendor
