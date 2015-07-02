@@ -28,7 +28,11 @@ $env:http_proxy='http://myproxy.example.com:8080'; $env:https_proxy=$env:http_pr
 
 ## Quickstart - Mac
 
-Mac support is coming soon.
+Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh) script on your workstation.
+
+```bash
+curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash
+```
 
 ## What does it do?
 This cookbook installs these tools:
