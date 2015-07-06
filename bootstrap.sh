@@ -51,7 +51,7 @@ echo "$chefConfig" > $userChefDir/bootstrap.rb
 berks vendor
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
-
+sudo chef-client -z -l error -c "$userChefDir/bootstrap.rb"
 
 #cleanup
 rm "$userChefDir/berksfile"
