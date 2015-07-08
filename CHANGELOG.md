@@ -1,5 +1,14 @@
 # Revision History for chefdk_bootstrap
 
+## 0.3.0
+* Add ability to set `http_proxy`, `https_proxy`, and `no_proxy` env vars.
+
+These env vars allow Chef related command line tools, e.g. git, berkshelf, to
+work via a web proxy.
+
+## 0.2.4
+* Add proxy support to `bootstrap` script.
+
 ## 0.2.3
 * Update README
 * Add introduction to bootstrap script.

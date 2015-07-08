@@ -1,8 +1,0 @@
-# Set HOME to be c:\users\<username>
-# chef shell-init relies on `Gem.user_dir` which is $env:HOME on Windows
-# If your $env:HOME is a network drive, using gems from a network drive can be very slow
-# See https://github.com/chef/chef-dk/issues/374
-$env:HOME = $env:USERPROFILE
-
-# let ChefDK set up our environment variables properly
-chef shell-init powershell | Invoke-Expression

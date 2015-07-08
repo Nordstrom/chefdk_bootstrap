@@ -1,2 +1,20 @@
-# pulls in the ChefDK profile vars
-. "<%= ::File.join(@profiledir, 'chefdk.ps1') %>"
+# Set HOME to be c:\users\<username>
+# chef shell-init relies on `Gem.user_dir` which is $env:HOME on Windows
+# If your $env:HOME is a network drive, using gems from a network drive can be very slow
+# See https://github.com/chef/chef-dk/issues/374
+$env:HOME = $env:USERPROFILE
+
+<%= render 'powershell_proxy', variables: { } if @proxy.http %>
+
+$env:http_proxy = '<%= @proxy['http'] %>'
+$env:https_proxy = $env:http_proxy
+<% if @proxy['no_proxy'] -%>
+$env:no_proxy = '<%= @proxy['no_proxy'] %>'
+<% end -%>
+
+# proxy env vars for Stove (https://github.com/sethvargo/stove)
+$env:CHEF_API_PROXY_ADDRESS = '<%= @proxy_host %>'
+$env:CHEF_API_PROXY_PORT = <%= @proxy_port %>
+
+# let ChefDK set up our environment variables properly
+chef shell-init powershell | Invoke-Expression
