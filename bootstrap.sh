@@ -39,14 +39,14 @@ echo "$berksfile" > $userChefDir/Berksfile
 
 echo "$chefConfig" > $userChefDir/bootstrap.rb
 
-# # install Homebrew
-# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-#
-# # install brew-cask
-# brew install caskroom/cask/brew-cask
-#
-# # install chefDK
-# brew cask install chefdk
+# install Homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# install brew-cask
+brew install caskroom/cask/brew-cask
+
+# install chefDK
+brew cask install chefdk
 
 berks vendor
 
