@@ -1,31 +1,23 @@
-# add powershell_out to powershell_script
-Chef::Resource::PowershellScript.send(:include, Chef::Mixin::PowershellOut)
+::Chef::Recipe.send(:include, Windows::Helper)
 
-# get the real path to the powershell profiles.  Note that sysnative is a virtual alias
-# that lets a 32-bit app reference the 64-bit system dir which is called system32
-# http://support2.microsoft.com/kb/942589
-profiledir = File.join(ENV['SystemRoot'], 'SysNative', 'WindowsPowerShell', 'v1.0')
-real_profiledir = File.join(ENV['SystemRoot'], 'System32', 'WindowsPowerShell', 'v1.0')
+http_proxy = node['chefdk_bootstrap']['proxy']['http']
 
-# create the PowerShell snippet
-template ::File.join(profiledir, 'chefdk.ps1') do
-  source 'chefdk_profile.ps1.erb'
+if http_proxy
+  require 'uri'
+  proxy_uri = URI.parse(http_proxy)
+  # assign proxy vars to local var here
 end
 
-# only change PowerShell execution policy and global profile if not
-# suppressed via attributes
-if node['chefdk_bootstrap']['powershell']['configure']
-  # set the PowerShell Execution Policy to RemoteSigned
-  powershell_script 'set execution policy to RemoteSigned' do
-    code 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force'
-    only_if { powershell_out('Get-ExecutionPolicy -Scope LocalMachine | Select-String RemoteSigned').stdout.empty? }
-  end
+# TODO: include Windows helpers to get locate_sysnative_cmd
+powershell_profile = File.join(locate_sysnative_cmd('WindowsPowerShell\v1.0'), 'profile.ps1')
 
-  # create the global PowerShell profile to include the snippet
-  # (if it does not already exist)
-  template ::File.join(profiledir, 'profile.ps1') do
-    action :create_if_missing
-    source 'global_profile.ps1.erb'
-    variables(profiledir: real_profiledir)
-  end
+template powershell_profile do
+  action :create_if_missing
+  source 'global_profile.ps1.erb'
+  # variables(
+  #   proxy: http_proxy,
+  #   proxy_host: proxy_uri.host,
+  #   proxy_port: proxy_uri.port
+  # )
+  only_if { node['chefdk_bootstrap']['powershell']['configure'] }
 end

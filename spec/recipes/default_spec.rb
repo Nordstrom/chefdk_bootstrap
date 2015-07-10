@@ -12,4 +12,18 @@ RSpec.describe 'chefdk_bootstrap::default' do
       expect(windows_node).to include_recipe(described_recipe)
     end
   end
+
+  context 'On a Mac OS X machine' do
+    let(:mac_os_x_node) do
+      ChefSpec::ServerRunner.new(
+        platform: 'mac_os_x',
+        version: '10.10'
+      )
+    end
+
+    it 'converges successfully' do
+      mac_os_x_node.converge(described_recipe)
+      expect(mac_os_x_node).to include_recipe(described_recipe)
+    end
+  end
 end

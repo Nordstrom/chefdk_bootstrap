@@ -25,6 +25,9 @@ EOF
 # make userChefDir variable
 userChefDir=~/chef
 
+# define bootstrapCookbook
+bootstrapCookbook = 'chefdk_bootstrap'
+
 echo "$intro"
 
 # create the chef directory
@@ -51,7 +54,11 @@ brew cask install chefdk
 berks vendor
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
+<<<<<<< HEAD
+sudo chef-client -z -l error -c "$userChefDir/bootstrap.rb" -o "$bootstrapCookbook"
+=======
 sudo chef-client -z -l error -c "$userChefDir/bootstrap.rb"
+>>>>>>> master
 
 #cleanup
 rm "$userChefDir/berksfile"
