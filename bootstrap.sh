@@ -26,7 +26,7 @@ EOF
 userChefDir=~/chef
 
 # define bootstrapCookbook
-bootstrapCookbook = 'chefdk_bootstrap'
+bootstrapCookbook='chefdk_bootstrap'
 
 echo "$intro"
 
@@ -40,7 +40,7 @@ cd "$userChefDir"
 
 echo "$berksfile" > $userChefDir/Berksfile
 
-echo "$chefConfig" > $userChefDir/bootstrap.rb
+echo "$chefConfig" > $userChefDir/client.rb
 
 # install Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -54,14 +54,10 @@ brew cask install chefdk
 berks vendor
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
-<<<<<<< HEAD
-sudo chef-client -z -l error -c "$userChefDir/bootstrap.rb" -o "$bootstrapCookbook"
-=======
-sudo chef-client -z -l error -c "$userChefDir/bootstrap.rb"
->>>>>>> master
+sudo -E chef-client -z -l error -c "$userChefDir/client.rb" -o "$bootstrapCookbook"
 
 #cleanup
 rm "$userChefDir/berksfile"
 rm "$userChefDir/Berksfile.lock"
-rm "$userChefDir/bootstrap.rb"
+rm "$userChefDir/client.rb"
 rm -r berks-cookbooks

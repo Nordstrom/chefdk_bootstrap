@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+brew cask uninstall iterm2
+brew uninstall git
+brew cask uninstall atom
+brew cask uninstall vagrant
+brew cask uninstall virtualbox

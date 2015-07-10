@@ -4,7 +4,7 @@ http_proxy = node['chefdk_bootstrap']['proxy']['http']
 
 if http_proxy
   require 'uri'
-  proxy_uri = URI.parse(http_proxy)
+  # proxy_uri = URI.parse(http_proxy)
   # assign proxy vars to local var here
 end
 

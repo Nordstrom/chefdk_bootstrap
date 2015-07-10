@@ -3,7 +3,7 @@ $bootstrapCookbook = 'chefdk_bootstrap'
 
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
 $berksfilePath = Join-Path -path $userChefDir -childPath 'Berksfile'
-$chefConfigPath = Join-Path -path $userChefDir -childPath 'bootstrap.rb'
+$chefConfigPath = Join-Path -path $userChefDir -childPath 'client.rb'
 
 # Set HOME to be c:\users\<username> so cookbook gem installs are on the c:\
 # drive.
