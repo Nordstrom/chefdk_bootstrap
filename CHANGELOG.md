@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.0.0
+* Added Mac bootstrap functionality.
+
 ## 0.3.0
 * Add ability to set `http_proxy`, `https_proxy`, and `no_proxy` env vars.
 

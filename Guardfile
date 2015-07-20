@@ -13,18 +13,6 @@ guard :foodcritic, cookbook_paths: '.', cli: '-f any -X spec -X test -X features
   watch(%r{^metadata\.rb$})
 end
 
-# automatically runs Tailor
-guard :rake, all_on_start: true, task: :tailor do
-  watch(%r{^spec/recipes/.+_spec\.rb$})
-  watch(%r{^spec/spec_helper\.rb$})
-  watch(%r{^attributes/.+\.rb$})
-  watch(%r{^resources/.+\.rb$})
-  watch(%r{^providers/.+\.rb$})
-  watch(%r{^libraries/.+\.rb$})
-  watch(%r{^recipes/.+\.rb$})
-  watch(%r{^metadata\.rb$})
-end
-
 # automatically runs Rubocop
 guard :rubocop, all_on_start: true, cli: ['-f', 'p', '-D'] do
   watch(%r{^attributes/.+\.rb$})

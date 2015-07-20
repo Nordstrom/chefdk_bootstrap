@@ -7,9 +7,16 @@ RSpec.describe 'chefdk_bootstrap::default' do
       )
     end
 
-    it 'converges successfully' do
+    before do
       windows_node.converge(described_recipe)
+    end
+
+    it 'converges successfully' do
       expect(windows_node).to include_recipe(described_recipe)
+    end
+
+    it 'includes the platform specific entry point recipe' do
+      expect(windows_node).to include_recipe('chefdk_bootstrap::windows')
     end
   end
 
@@ -21,9 +28,17 @@ RSpec.describe 'chefdk_bootstrap::default' do
       )
     end
 
-    it 'converges successfully' do
+    before do
+      stub_command('which git')
       mac_os_x_node.converge(described_recipe)
+    end
+
+    it 'converges successfully' do
       expect(mac_os_x_node).to include_recipe(described_recipe)
+    end
+
+    it 'includes the platform specific entry point recipe' do
+      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::mac_os_x')
     end
   end
 end

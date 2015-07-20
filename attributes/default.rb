@@ -6,14 +6,25 @@ default['chefdk_bootstrap']['atom']['source_url'] =
     'windows' => 'https://atom.io/download/windows'
   )
 
-# What to install
+# common things to install
 default['chefdk_bootstrap']['package'].tap do |install|
   install['atom'] = true
-  install['kdiff3'] = true
   install['virtualbox'] = true
   install['vagrant'] = true
   install['git'] = true
-  install['gitextensions'] = true
+end
+
+# windows specific
+case node['platform_family']
+when 'windows'
+  default['chefdk_bootstrap']['package'].tap do |install|
+    install['kdiff3'] = true
+    install['gitextensions'] = true
+  end
+when 'mac_os_x'
+  default['chefdk_bootstrap']['package'].tap do |install|
+    install['iterm2'] = true
+  end
 end
 
 # whether to mess with PowerShell settings
