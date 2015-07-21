@@ -6,25 +6,21 @@ for Chef cookbook development in about **20 minutes**.
 
 ## Quickstart - Windows
 
-Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
-script on your workstation.
+### If you're behind a proxy...
 
-```PowerShell
-$script = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content
-$script | Invoke-Expression
-```
-
-### If you're behind a proxy, run this instead...
-If you need to go through a proxy server use this version:
-
+If you need to go through a proxy server, export these environment variables before you run the commands below.
 ```PowerShell
 $env:http_proxy='http://myproxy.example.com:8080'
 $env:https_proxy=$env:http_proxy
 ```
 
+Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
+script on your workstation.
+
 ```PowerShell
  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
 ```
+
 
 ## Quickstart - Mac
 
