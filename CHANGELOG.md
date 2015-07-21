@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.0.1
+* Clarified Windows bootstrap instructions.
+
 ## 1.0.0
 * Added Mac bootstrap functionality.
 
