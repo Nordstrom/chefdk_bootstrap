@@ -417,6 +417,3 @@ DEPENDENCIES
   ruby_gntp (~> 0.3)
   test-kitchen (~> 1.4)
   winrm-transport (~> 1.0)
-
-BUNDLED WITH
-   1.10.5
