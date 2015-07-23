@@ -9,6 +9,7 @@ for Chef cookbook development in about **20 minutes**.
 ### If you're behind a proxy...
 
 If you need to go through a proxy server, export these environment variables before you run the commands below.
+
 ```PowerShell
 $env:http_proxy='http://myproxy.example.com:8080'
 $env:https_proxy=$env:http_proxy
