@@ -9,6 +9,8 @@ when 'windows'
 
   windows_package 'Atom' do
     source atom_setup
+    installer_type :custom
+    options '/silent'
   end
 when 'mac_os_x'
   homebrew_cask 'atom'
