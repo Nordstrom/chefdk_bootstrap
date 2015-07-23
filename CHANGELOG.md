@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.0.2
+* Edited the README to make the markdown for Chef Supermaket consistent.
+
 ## 1.0.1
 * Clarified Windows bootstrap instructions.
 
