@@ -15,7 +15,7 @@ supports 'mac_os_x'
 
 depends 'windows', '~> 1.37'
 depends 'chocolatey', '~> 0.4'
-depends 'git', '~> 4.2'
+depends 'git', '~> 4.3'
 depends 'homebrew', '~> 1.13'
 
 source_url 'https://github.com/Nordstrom/chefdk_bootstrap'

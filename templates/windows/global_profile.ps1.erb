@@ -4,17 +4,13 @@
 # See https://github.com/chef/chef-dk/issues/374
 $env:HOME = $env:USERPROFILE
 
-<%= render 'powershell_proxy', variables: { } if @proxy.http %>
-
-$env:http_proxy = '<%= @proxy['http'] %>'
+<% if node['chefdk_bootstrap']['proxy']['http'] -%>
+$env:http_proxy = '<%= node['chefdk_bootstrap']['proxy']['http'] %>'
 $env:https_proxy = $env:http_proxy
-<% if @proxy['no_proxy'] -%>
-$env:no_proxy = '<%= @proxy['no_proxy'] %>'
+  <% if node['chefdk_bootstrap']['proxy']['no_proxy'] -%>
+$env:no_proxy = '<%= node['chefdk_bootstrap']['proxy']['no_proxy'] %>'
+  <% end -%>
 <% end -%>
-
-# proxy env vars for Stove (https://github.com/sethvargo/stove)
-$env:CHEF_API_PROXY_ADDRESS = '<%= @proxy_host %>'
-$env:CHEF_API_PROXY_PORT = <%= @proxy_port %>
 
 # let ChefDK set up our environment variables properly
 chef shell-init powershell | Invoke-Expression
