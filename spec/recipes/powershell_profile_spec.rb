@@ -1,9 +1,16 @@
 RSpec.describe 'chefdk_bootstrap::powershell_profile' do
+  before do
+    allow_any_instance_of(Chef::Recipe)
+    .to receive(:locate_sysnative_cmd)
+    .with('WindowsPowerShell\v1.0')
+    .and_return('C:\WINDOWS\sysnative\WindowsPowerShell\v1.0')
+  end
+
   context 'When cookbook proxy attributes are not set' do
     cached(:windows_node) do
       ChefSpec::ServerRunner.new(
-        platform: 'windows',
-        version: '2012R2'
+      platform: 'windows',
+      version: '2012R2'
       ).converge(described_recipe)
     end
 
