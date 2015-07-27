@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 1.1.0
+* Set proxy environment variables in powershell_profile.
+* This enables command-line tools like git, curl, and Test Kitchen to work behind a proxy.
+
 ## 1.0.3
 * Fix bug in Atom setup for Windows
 
