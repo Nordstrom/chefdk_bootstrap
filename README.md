@@ -6,6 +6,10 @@ for Chef cookbook development in about **20 minutes**.
 
 ## Quickstart - Windows
 
+### Prerequisites
+
+* [PowerShell 3.0](https://www.microsoft.com/en-us/download/details.aspx?id=34595)
+
 ### If you're behind a proxy...
 
 If you need to go through a proxy server, export these environment variables before you run the commands below.
@@ -32,6 +36,7 @@ If you need to go through a proxy server, export these environment variables bef
 export http_proxy=http://myproxy.example.com:1234
 export https_proxy=$http_proxy
 ```
+*To make these changes permanent, export these environment variables from your bash or zsh profile.*
 
 Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh) script on your workstation.
 

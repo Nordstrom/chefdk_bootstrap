@@ -8,7 +8,7 @@ DEPENDENCIES
 GRAPH
   build-essential (2.2.3)
   chef_handler (1.2.0)
-  chefdk_bootstrap (1.0.3)
+  chefdk_bootstrap (1.1.0)
     chocolatey (~> 0.4)
     git (~> 4.3)
     homebrew (~> 1.13)
@@ -18,7 +18,7 @@ GRAPH
   chocolatey (0.4.0)
     windows (~> 1.31)
   dmg (2.2.2)
-  git (4.3.1)
+  git (4.3.3)
     build-essential (>= 0.0.0)
     dmg (>= 0.0.0)
     windows (>= 0.0.0)
