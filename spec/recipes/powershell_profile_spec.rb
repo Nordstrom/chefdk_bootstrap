@@ -1,4 +1,15 @@
 RSpec.describe 'chefdk_bootstrap::powershell_profile' do
+  # turn off verify_partial_doubles
+  # Windows::Helpers#locate_sysnative_cmd is included at Chef run time
+  # and is not available when we mock it.
+  RSpec.configure do |config|
+    config.before(:example) do
+      config.mock_with :rspec do |mocks|
+        mocks.verify_partial_doubles = false
+      end
+    end
+  end
+
   before do
     allow_any_instance_of(Chef::Recipe)
     .to receive(:locate_sysnative_cmd)
