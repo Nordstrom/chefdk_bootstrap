@@ -1,5 +1,7 @@
 # Revision History for chefdk_bootstrap
 
+## 1.1.1
+* Add instructions for no_proxy environment variable in the README.
 ## 1.1.0
 * Set proxy environment variables in powershell_profile.
 * This enables command-line tools like git, curl, and Test Kitchen to work behind a proxy.

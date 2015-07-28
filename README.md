@@ -17,6 +17,9 @@ If you need to go through a proxy server, export these environment variables bef
 ```PowerShell
 $env:http_proxy='http://myproxy.example.com:8080'
 $env:https_proxy=$env:http_proxy
+
+# don't go through the proxy for these addresses.
+$env:no_proxy='127.0.0.1,localhost,example.com'
 ```
 
 Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
