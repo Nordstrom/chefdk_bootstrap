@@ -15,9 +15,13 @@ for Chef cookbook development in about **20 minutes**.
 If you need to go through a proxy server, export these environment variables before you run the commands below.
 
 ```PowerShell
-$env:http_proxy='http://myproxy.example.com:8080'
+# change these values to your proxy address
+$env:http_proxy='http://myproxy.example.com:1234'
+```
+```PowerShell
 $env:https_proxy=$env:http_proxy
-
+```
+```PowerShell
 # don't go through the proxy for these addresses.
 $env:no_proxy='127.0.0.1,localhost,example.com'
 ```
@@ -36,7 +40,10 @@ script on your workstation.
 If you need to go through a proxy server, export these environment variables before you run the commands below:
 
 ```bash
+# change these values to your proxy address
 export http_proxy=http://myproxy.example.com:1234
+```
+```bash
 export https_proxy=$http_proxy
 ```
 *To make these changes permanent, export these environment variables from your bash or zsh profile.*
