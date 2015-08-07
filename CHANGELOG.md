@@ -1,7 +1,10 @@
 # Revision History for chefdk_bootstrap
 
+## 1.1.3
+* Add guards around file deletions.
+
 ## 1.1.2
-* Edit README to clarify proxy instructions
+* Edit README to clarify proxy instructions.
 
 ## 1.1.1
 * Add instructions for no_proxy environment variable in the README.
