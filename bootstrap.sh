@@ -56,8 +56,19 @@ berks vendor
 # run chef-client (installed by ChefDK) to bootstrap this machine
 sudo -E chef-client -z -l error -c "$userChefDir/client.rb" -o "$bootstrapCookbook"
 
-#cleanup
-rm "$userChefDir/berksfile"
-rm "$userChefDir/Berksfile.lock"
-rm "$userChefDir/client.rb"
-rm -r berks-cookbooks
+# cleanup
+if [[ -f "$userChefDir/berksfile" ]]; then
+  rm "$userChefDir/berksfile"
+fi
+
+if [[ -f "$userChefDir/Berksfile.lock" ]]; then
+  rm "$userChefDir/Berksfile.lock"
+fi
+
+if [[ -f "$userChefDir/client.rb" ]]; then
+  rm "$userChefDir/client.rb"
+fi
+
+if [[ -d berks-cookbooks ]]; then
+  rm -r berks-cookbooks
+fi

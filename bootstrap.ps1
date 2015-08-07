@@ -59,8 +59,22 @@ berks vendor
 chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
 
 # Cleanup
-rm $berksfilePath
-rm "$berksfilePath.lock"
-rm $chefConfigPath
-rm -Recurse nodes
-rm -Recurse berks-cookbooks
+if (Test-Path $berksfilePath){
+  Remove-Item $berksfilePath
+}
+
+if (Test-Path "$berksfilePath.lock"){
+  Remove-Item "$berksfilePath.lock"
+}
+
+if (Test-Path $chefConfigPath){
+  Remove-Item $chefConfigPath
+}
+
+if (Test-Path nodes){
+  Remove-Item -Recurse nodes
+}
+
+if (Test-Path berks-cookbooks){
+  Remove-Item -Recurse berks-cookbooks
+}
