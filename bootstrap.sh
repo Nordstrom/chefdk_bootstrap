@@ -1,19 +1,26 @@
 #!/usr/bin/env bash
 
-# define berksfile
-read -d '' berksfile << EOF
-source 'https://supermarket.chef.io'
+cookbook_name=$1
+private_supermarket=$2
 
-cookbook 'chefdk_bootstrap'
-EOF
+if [[ ! -z "$private_supermarket" ]]; then
+  private_source="source '$private_supermarket'"
+fi
 
-# define chefConfig
-read -d '' chefConfig << EOF
-cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
-EOF
+if [[ -z "$cookbook_name" ]]; then
+ cookbook='chefdk_bootstrap'
+else
+ cookbook=$cookbook_name
+fi
+
+# define bootstrapCookbook
+bootstrapCookbook='chefdk_bootstrap'
+
+# make userChefDir variable
+userChefDir=~/chef
 
 # introduction
-read -d '' intro << EOF
+cat <<EOF
 This script will:
 
 1. Install the latest ChefDK package via Homebrew
@@ -22,25 +29,24 @@ This script will:
 4. Run 'chef-client' to install the rest of the tools you will need
 EOF
 
-# make userChefDir variable
-userChefDir=~/chef
-
-# define bootstrapCookbook
-bootstrapCookbook='chefdk_bootstrap'
-
-echo "$intro"
-
-# create the chef directory
+# creating a Chef directory for Chef development
 if [[ ! -d "$userChefDir" ]]; then
   mkdir "$userChefDir"
   echo 'I am creating the ~/chef directory'
 fi
 
-cd "$userChefDir"
+# create Berksfile so that we can install the correct cookbook dependencies
+cat > $userChefDir/Berksfile <<EOF
+source 'https://supermarket.chef.io'
+$private_source
 
-echo "$berksfile" > $userChefDir/Berksfile
+cookbook '$cookbook'
+EOF
 
-echo "$chefConfig" > $userChefDir/client.rb
+# create client.rb file so that Chef client can find its dependant cookbooks
+cat > $userChefDir/client.rb <<EOF
+cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
+EOF
 
 # install Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -51,6 +57,8 @@ brew install caskroom/cask/brew-cask
 # install chefDK
 brew cask install chefdk
 
+# making sure that we are vendor cookbooks into a sub directory of the userChefDir
+cd "$userChefDir"
 berks vendor
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
