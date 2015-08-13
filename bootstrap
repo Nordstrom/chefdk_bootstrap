@@ -1,26 +1,15 @@
 #!/usr/bin/env bash
 
-cookbook_name=$1
-private_supermarket=$2
+set -o errexit -o nounset -o pipefail
 
-if [[ ! -z "$private_supermarket" ]]; then
-  private_source="source '$private_supermarket'"
-fi
-
-if [[ -z "$cookbook_name" ]]; then
- cookbook='chefdk_bootstrap'
-else
- cookbook=$cookbook_name
-fi
-
-# define bootstrapCookbook
-bootstrapCookbook='chefdk_bootstrap'
+bootstrapCookbook=${1:-chefdk_bootstrap}
+private_source=${2:+source '$2'}
 
 # make userChefDir variable
 userChefDir=~/chef
 
 # introduction
-cat <<EOF
+cat <<EOF;
 This script will:
 
 1. Install the latest ChefDK package via Homebrew
@@ -30,21 +19,20 @@ This script will:
 EOF
 
 # creating a Chef directory for Chef development
-if [[ ! -d "$userChefDir" ]]; then
-  mkdir "$userChefDir"
-  echo 'I am creating the ~/chef directory'
+if [[ ! -d "${userChefDir}" ]]; then
+  mkdir "${userChefDir}"
 fi
 
 # create Berksfile so that we can install the correct cookbook dependencies
-cat > $userChefDir/Berksfile <<EOF
+cat > "${userChefDir}/Berksfile" <<EOF;
 source 'https://supermarket.chef.io'
-$private_source
+"${private_source}"
 
-cookbook '$cookbook'
+cookbook '${bootstrapCookbook}'
 EOF
 
 # create client.rb file so that Chef client can find its dependant cookbooks
-cat > $userChefDir/client.rb <<EOF
+cat > "${userChefDir}/client.rb" <<EOF;
 cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
 EOF
 
@@ -58,23 +46,26 @@ brew install caskroom/cask/brew-cask
 brew cask install chefdk
 
 # making sure that we are vendor cookbooks into a sub directory of the userChefDir
-cd "$userChefDir"
+cd "${userChefDir}"
 berks vendor
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
-sudo -E chef-client -z -l error -c "$userChefDir/client.rb" -o "$bootstrapCookbook"
+sudo -E chef-client -z -l error -c "${userChefDir}/client.rb" -o "$bootstrapCookbook"
 
 # cleanup
-if [[ -f "$userChefDir/berksfile" ]]; then
-  rm "$userChefDir/berksfile"
+# do we need to clean up ./nodes dir?
+if [[ -f "${userChefDir}/berksfile" ]]; then
+  rm "${userChefDir}/berksfile"
 fi
 
-if [[ -f "$userChefDir/Berksfile.lock" ]]; then
-  rm "$userChefDir/Berksfile.lock"
+[[ -f "${userChefDir}/berksfile" ]] && rm "${userChefDir}/berksfile"
+
+if [[ -f "${userChefDir}/Berksfile.lock" ]]; then
+  rm "${userChefDir}/Berksfile.lock"
 fi
 
-if [[ -f "$userChefDir/client.rb" ]]; then
-  rm "$userChefDir/client.rb"
+if [[ -f "${userChefDir}/client.rb" ]]; then
+  rm "${userChefDir}/client.rb"
 fi
 
 if [[ -d berks-cookbooks ]]; then
