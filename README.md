@@ -8,7 +8,7 @@ for Chef cookbook development in about **20 minutes**.
 * If you are on a Windows machine, you will need [PowerShell 3.0](https://www.microsoft.com/en-us/download/details.aspx?id=34595).
 * If you are behind a proxy, you will need to export [these environment variables](#if-you-are-behind-a-proxy) first.
 
-## Quickstart - Windows
+## Quickstart Windows
 
 Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
 script on your workstation.
@@ -17,7 +17,7 @@ script on your workstation.
  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
 ```
 
-## Quickstart - Mac
+## Quickstart Mac
 
 Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh) script on your workstation.
 
@@ -30,7 +30,7 @@ Follow the instructions in the [ChefDK README](https://github.com/chef/chef-dk#u
 
 ## If you are behind a proxy
 ### Windows
-Export these environment variables before you run the Quickstart for Windows.
+Copy/paste these environment variables into your terminal.
 
 ```PowerShell
 # change these values to your proxy address
@@ -43,8 +43,9 @@ $env:https_proxy=$env:http_proxy
 # don't go through the proxy for these addresses.
 $env:no_proxy='127.0.0.1,localhost,example.com'
 ```
+Now run the [Quickstart for Windows](#quickstart-windows)
 ### Mac
-Export these environment variables before you run the Quickstart for Mac:
+Copy/paste these environment variables into your terminal.
 
 ```bash
 # change these values to your proxy address
@@ -54,6 +55,8 @@ export http_proxy=http://myproxy.example.com:1234
 export https_proxy=$http_proxy
 ```
 *To make these changes permanent, export these environment variables from your bash or zsh profile.*
+
+Now run the [Quickstart for Mac](#quickstart-mac)
 
 ## What does it do?
 This cookbook installs these tools:
