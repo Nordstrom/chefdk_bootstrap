@@ -1,16 +1,26 @@
-$chefDkSource = 'https://www.chef.io/chef/download-chefdk?p=windows&pv=2008r2&m=x86_64&v=latest'
 $bootstrapCookbook = 'chefdk_bootstrap'
+
+if ($args[0]) {
+  $bootstrapCookbook = $args[0]
+}
+
+if ($args[1]) {
+  $privateSource = "source '$args[1]'"
+}
+
+$chefDkSource = 'https://www.chef.io/chef/download-chefdk?p=windows&pv=2008r2&m=x86_64&v=latest'
 
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
 $berksfilePath = Join-Path -path $userChefDir -childPath 'Berksfile'
 $chefConfigPath = Join-Path -path $userChefDir -childPath 'client.rb'
 
 # Set HOME to be c:\users\<username> so cookbook gem installs are on the c:\
-# drive.
+# drive
 $env:HOME = $env:USERPROFILE
 
 $berksfile = @"
 source 'https://supermarket.chef.io'
+$privateSource
 
 cookbook '$bootstrapCookbook'
 "@
@@ -59,22 +69,25 @@ berks vendor
 chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
 
 # Cleanup
-if (Test-Path $berksfilePath){
+if (Test-Path $berksfilePath) {
   Remove-Item $berksfilePath
 }
 
-if (Test-Path "$berksfilePath.lock"){
+if (Test-Path "$berksfilePath.lock") {
   Remove-Item "$berksfilePath.lock"
 }
 
-if (Test-Path $chefConfigPath){
+if (Test-Path $chefConfigPath) {
   Remove-Item $chefConfigPath
 }
 
-if (Test-Path nodes){
+if (Test-Path nodes) {
   Remove-Item -Recurse nodes
 }
 
-if (Test-Path berks-cookbooks){
+if (Test-Path berks-cookbooks) {
   Remove-Item -Recurse berks-cookbooks
 }
+
+#End message to indicate completion of setup
+Write-Host 'Congrats!!! Your workstation is now set up for Chef Development!'

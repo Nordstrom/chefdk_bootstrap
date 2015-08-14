@@ -4,15 +4,33 @@
 Run one simple command to easily setup your Windows or Mac machine
 for Chef cookbook development in about **20 minutes**.
 
-## Quickstart - Windows
+## Before You Begin
+* If you are on a Windows machine, you will need [PowerShell 3.0](https://www.microsoft.com/en-us/download/details.aspx?id=34595).
+* If you are behind a proxy, you will need to export [these environment variables](#if-you-are-behind-a-proxy) first.
 
-### Prerequisites
+## Quickstart Windows
 
-* [PowerShell 3.0](https://www.microsoft.com/en-us/download/details.aspx?id=34595)
+Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
+script on your workstation.
 
-### If you're behind a proxy...
+```PowerShell
+ (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
+```
 
-If you need to go through a proxy server, export these environment variables before you run the commands below.
+## Quickstart Mac
+
+Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh) script on your workstation.
+
+```bash
+curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash
+```
+
+### ChefDK profile setup
+Follow the instructions in the [ChefDK README](https://github.com/chef/chef-dk#using-chefdk-as-your-primary-development-environment) to complete the Chef workstation setup.
+
+## If you are behind a proxy
+### Windows
+Copy/paste these environment variables into your terminal.
 
 ```PowerShell
 # change these values to your proxy address
@@ -25,19 +43,9 @@ $env:https_proxy=$env:http_proxy
 # don't go through the proxy for these addresses.
 $env:no_proxy='127.0.0.1,localhost,example.com'
 ```
-
-Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
-script on your workstation.
-
-```PowerShell
- (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
-```
-
-
-## Quickstart - Mac
-
-### If you're behind a proxy...
-If you need to go through a proxy server, export these environment variables before you run the commands below:
+Now run the [Quickstart for Windows](#quickstart-windows)
+### Mac
+Copy/paste these environment variables into your terminal.
 
 ```bash
 # change these values to your proxy address
@@ -48,14 +56,24 @@ export https_proxy=$http_proxy
 ```
 *To make these changes permanent, export these environment variables from your bash or zsh profile.*
 
-Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh) script on your workstation.
+Now run the [Quickstart for Mac](#quickstart-mac)
 
-```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash
+## Customization
+If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#quickstart-windows) (examples included below).
+
+### Windows
+
+```PowerShell
+$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+
+"$install <your cookbook name> <your private supermarket url>" | Invoke-Expression
 ```
 
-### ChefDK profile setup
-Follow the instructions in the [ChefDK README](https://github.com/chef/chef-dk#using-chefdk-as-your-primary-development-environment) to complete the Chef workstation setup.
+### Mac
+
+```bash
+curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash -s -- <your cookbook name> <your private supermarket url>
+```
 
 ## What does it do?
 This cookbook installs these tools:

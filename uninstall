@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit -o nounset -o pipefail
+
 brew cask uninstall iterm2
 brew uninstall git
 brew cask uninstall atom
