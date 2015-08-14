@@ -2,10 +2,10 @@
 
 set -o errexit -o nounset -o pipefail
 
-# If the user has not passed in a cookbook name use 'chefdk_bootstrap' for the cookbook.
+# If the user has not passed in a cookbook name use 'chefdk_bootstrap' for the cookbook
 bootstrapCookbook=${1:-chefdk_bootstrap}
 
-# If the user has passed in a private supermarket url then add it to the Berksfile.
+# If the user has passed in a private supermarket url then add it to the Berksfile
 private_source=${2:+source '$2'}
 
 # make userChefDir variable
@@ -58,3 +58,8 @@ sudo -E chef-client -z -l error -c "${userChefDir}/client.rb" -o "$bootstrapCook
 [[ -f "${userChefDir}/Berksfile.lock" ]] && rm "${userChefDir}/Berksfile.lock"
 [[ -f "${userChefDir}/client.rb" ]] && rm "${userChefDir}/client.rb"
 [[ -d berks-cookbooks ]] && rm -r berks-cookbooks
+
+#End message to direct Mac users to last step in set up
+cat <<EOF;
+You're almost done!!! Go back to the ChefDK_Bootstrap README to complete your Chef workstation setup.
+EOF

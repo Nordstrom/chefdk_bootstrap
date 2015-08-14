@@ -2,6 +2,7 @@
 
 ## 1.2.0
 * Update bootstrap script to take a private source and cookbook name and add it to the Berksfile.
+* Update README.
 
 ## 1.1.3
 * Add guards around file deletions.

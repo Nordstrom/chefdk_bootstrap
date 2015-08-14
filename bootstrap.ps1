@@ -15,7 +15,7 @@ $berksfilePath = Join-Path -path $userChefDir -childPath 'Berksfile'
 $chefConfigPath = Join-Path -path $userChefDir -childPath 'client.rb'
 
 # Set HOME to be c:\users\<username> so cookbook gem installs are on the c:\
-# drive.
+# drive
 $env:HOME = $env:USERPROFILE
 
 $berksfile = @"
@@ -88,3 +88,6 @@ if (Test-Path nodes) {
 if (Test-Path berks-cookbooks) {
   Remove-Item -Recurse berks-cookbooks
 }
+
+#End message to indicate completion of setup
+Write-Host 'Congrats!!! Your workstation is now set up for Chef Development!'

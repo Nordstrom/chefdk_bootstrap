@@ -10,7 +10,7 @@ for Chef cookbook development in about **20 minutes**.
 
 ## Quickstart Windows
 
-Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
+Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
 script on your workstation.
 
 ```PowerShell
@@ -57,6 +57,23 @@ export https_proxy=$http_proxy
 *To make these changes permanent, export these environment variables from your bash or zsh profile.*
 
 Now run the [Quickstart for Mac](#quickstart-mac)
+
+## Customization
+If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#quickstart-windows) (examples included below).
+
+### Windows
+
+```PowerShell
+$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+
+"$install <your cookbook name> <your private supermarket url>" | Invoke-Expression
+```
+
+### Mac
+
+```bash
+curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash -s -- <your cookbook name> <your private supermarket url>
+```
 
 ## What does it do?
 This cookbook installs these tools:
