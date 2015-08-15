@@ -15,14 +15,17 @@ group :development do
   gem 'pry-stack_explorer', '~> 0.4'
 end
 
+group :integration do
+  gem 'test-kitchen', '~> 1.4'
+  gem 'kitchen-vagrant', '~> 0.17'
+  gem 'winrm-transport', '~> 1.0'
+end
+
 group :test do
   gem 'rake', '~> 10.3'
   gem 'foodcritic', '~> 4.0'
   gem 'chefspec', '~> 4.2'
   gem 'ci_reporter_rspec', '~> 1.0'
-  gem 'test-kitchen', '~> 1.4'
-  gem 'kitchen-vagrant', '~> 0.17'
-  gem 'winrm-transport', '~> 1.0'
   gem 'berkshelf', '~> 3.3'
   gem 'berkshelf-api-client', '~> 1.3'
   gem 'rubocop', '~> 0.33'

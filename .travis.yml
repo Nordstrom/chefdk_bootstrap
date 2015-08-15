@@ -1,7 +1,7 @@
 language: ruby
 rvm:
   - 2.1
-bundler_args: --without development
+bundler_args: --without development --without integration
 script:
 - bundle exec rake style
 - bundle exec rake spec
