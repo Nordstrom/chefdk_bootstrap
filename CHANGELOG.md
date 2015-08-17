@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.2.2
+* Add Apache 2.0 license header.
+
 ## 1.2.1
 * Add [Travis CI](https://travis-ci.org/) support to run style and unit tests
 * Recommend PowerShell 4.0 instead of PowerShell 3.0 because 4.0 supports DSC.
