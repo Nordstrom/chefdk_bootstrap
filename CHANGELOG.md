@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 1.2.1
+* Add [Travis CI](https://travis-ci.org/) support to run style and unit tests
+* Recommend PowerShell 4.0 instead of PowerShell 3.0 because 4.0 supports DSC.
+
 ## 1.2.0
 * Update bootstrap script to take a private source and cookbook name and add it to the Berksfile.
 * Update README.

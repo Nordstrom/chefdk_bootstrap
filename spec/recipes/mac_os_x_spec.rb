@@ -31,39 +31,25 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
     )
   end
 
-  # TODO: refactor to loop over the collection of recipes
   context 'foo' do
     before do
-      stub_command('which git')
       mac_os_x_node.converge(described_recipe)
     end
 
-    it 'includes the homebrew default recipe' do
-      expect(mac_os_x_node).to include_recipe('homebrew')
-    end
+    recipes = %w(
+      homebrew
+      homebrew::cask
+      chefdk_bootstrap::virtualbox
+      chefdk_bootstrap::vagrant
+      chefdk_bootstrap::atom
+      chefdk_bootstrap::git
+      chefdk_bootstrap::iterm2
+    )
 
-    it 'includes the homebrew cask recipe' do
-      expect(mac_os_x_node).to include_recipe('homebrew::cask')
-    end
-
-    it 'includes the virtualbox recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::virtualbox')
-    end
-
-    it 'includes the vagrant recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::vagrant')
-    end
-
-    it 'includes the atom recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::atom')
-    end
-
-    it 'includes the git recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::git')
-    end
-
-    it 'includes the iterm2 recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::iterm2')
+    recipes.each do |recipe|
+      it "includes the #{recipe} recipe" do
+        expect(mac_os_x_node).to include_recipe(recipe)
+      end
     end
   end
 end

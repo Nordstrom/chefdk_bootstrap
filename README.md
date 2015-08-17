@@ -1,11 +1,13 @@
-# ChefDK_Bootstrap
+# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg)](https://travis-ci.org/Nordstrom/chefdk_bootstrap)
+
 ## Setup your laptop for Chef development in minutes
 
 Run one simple command to easily setup your Windows or Mac machine
 for Chef cookbook development in about **20 minutes**.
 
 ## Before You Begin
-* If you are on a Windows machine, you will need [PowerShell 3.0](https://www.microsoft.com/en-us/download/details.aspx?id=34595).
+* If you are on a Windows machine, you will need at least PowerShell 3.0. We recommend [PowerShell 4.0](http://www.microsoft.com/en-us/download/details.aspx?id=40855) because it supports [Microsoft DSC](https://technet.microsoft.com/en-us/%5Clibrary/Dn249912.aspx).
+
 * If you are behind a proxy, you will need to export [these environment variables](#if-you-are-behind-a-proxy) first.
 
 ## Quickstart Windows
@@ -19,10 +21,10 @@ script on your workstation.
 
 ## Quickstart Mac
 
-Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh) script on your workstation.
+Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap) script on your workstation.
 
 ```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash
+curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash
 ```
 
 ### ChefDK profile setup
@@ -41,7 +43,7 @@ $env:https_proxy=$env:http_proxy
 ```
 ```PowerShell
 # don't go through the proxy for these addresses.
-$env:no_proxy='127.0.0.1,localhost,example.com'
+$env:no_proxy='localhost,127.0.0.1,example.com'
 ```
 Now run the [Quickstart for Windows](#quickstart-windows)
 ### Mac
@@ -54,6 +56,11 @@ export http_proxy=http://myproxy.example.com:1234
 ```bash
 export https_proxy=$http_proxy
 ```
+
+```bash
+export no_proxy='localhost,127.0.0.1,example.com'
+```
+
 *To make these changes permanent, export these environment variables from your bash or zsh profile.*
 
 Now run the [Quickstart for Mac](#quickstart-mac)
@@ -72,7 +79,7 @@ $install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/c
 ### Mac
 
 ```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.sh | bash -s -- <your cookbook name> <your private supermarket url>
+curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash -s -- <your cookbook name> <your private supermarket url>
 ```
 
 ## What does it do?

@@ -32,6 +32,6 @@ default['chefdk_bootstrap']['powershell']['configure'] = true
 
 # Enable cmd line tools like git, curl, Stove to work through a proxy server.
 # Override these to set http_proxy, https_proxy, and no_proxy env vars
-default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy']  # 'http://myproxy.example.com:1234'
+default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy'] # 'http://myproxy.example.com:1234'
 # Skip the proxy for these domains and IPs. This should be a comma-separated string
-default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy']  # 'example.com,localhost,127.0.0.1'
+default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.com,localhost,127.0.0.1'

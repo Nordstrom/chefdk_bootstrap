@@ -2,7 +2,6 @@ require 'foodcritic'
 require 'foodcritic/rake_task'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
-require 'kitchen/rake_tasks'
 
 # Style tests (Foodcritic)
 FoodCritic::Rake::LintTask.new
@@ -39,9 +38,10 @@ end
 
 # Test Kitchen
 begin
+  require 'kitchen/rake_tasks'
   Kitchen::RakeTasks.new
 rescue LoadError
-  puts 'test-kitchen initialization failed; disabling kitchen tasks'
+  warn 'test-kitchen initialization failed; disabling kitchen tasks'
 end
 
 # if we are running inside the CI pipeline, turn on
