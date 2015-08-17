@@ -1,4 +1,4 @@
-::Chef::Recipe.send(:include, Windows::Helper)
+extend Windows::Helper
 
 powershell_profile = File.join(locate_sysnative_cmd('WindowsPowerShell\v1.0'), 'profile.ps1')
 
