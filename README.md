@@ -8,7 +8,7 @@ for Chef cookbook development in about **20 minutes**.
 ## Before You Begin
 * If you are on a Windows machine, you will need at least PowerShell 3.0. We recommend [PowerShell 4.0](http://www.microsoft.com/en-us/download/details.aspx?id=40855) because it supports [Microsoft DSC](https://technet.microsoft.com/en-us/%5Clibrary/Dn249912.aspx).
 
-* If you are behind a proxy, you will need to export [these environment variables](#if-you-are-behind-a-proxy) first.
+* If you are behind a proxy, you will need to export these [proxy environment variables](#if-you-are-behind-a-proxy) first.
 
 ## Quickstart Windows
 
