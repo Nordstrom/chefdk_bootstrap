@@ -3,11 +3,10 @@ rvm:
   - 2.1
 bundler_args: --without development --without integration
 script:
-- bundle exec rake style
-- bundle exec rake spec
+- rake style
+- rake spec
 env:
   - CHEF_VERSION=12.4.1
-  - CHEF_VERSION=12.4.0
   - CHEF_VERSION=12.3.0
 matrix:
   fast_finish: true
