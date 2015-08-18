@@ -26,6 +26,8 @@ private_source=${2:+source '$2'}
 # make userChefDir variable
 userChefDir=~/chef
 
+clear
+
 # introduction
 cat <<EOF;
 This script will:

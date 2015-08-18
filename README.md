@@ -12,16 +12,16 @@ for Chef cookbook development in about **20 minutes**.
 
 ## Quickstart Windows
 
-Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
+Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
 script on your workstation.
 
 ```PowerShell
- (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
+ (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
 ```
 
 ## Quickstart Mac
 
-Copy the command below and paste it into a terminal. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap) script on your workstation.
+Copy the command below and paste it into a terminal. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap) script on your workstation.
 
 ```bash
 curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash
@@ -32,20 +32,33 @@ Follow the instructions in the [ChefDK README](https://github.com/chef/chef-dk#u
 
 ## If you are behind a proxy
 ### Windows
+
+#### Set Proxy Environment Vars
 Copy/paste these environment variables into your terminal.
 
 ```PowerShell
 # change these values to your proxy address
 $env:http_proxy='http://myproxy.example.com:1234'
 ```
+
 ```PowerShell
 $env:https_proxy=$env:http_proxy
 ```
+
 ```PowerShell
 # don't go through the proxy for these addresses.
+# change example.com to your corporate DNS domain
 $env:no_proxy='localhost,127.0.0.1,example.com'
 ```
-Now run the [Quickstart for Windows](#quickstart-windows)
+
+#### Use this proxy-aware bootstrap script
+Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will execute the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
+script on your workstation.
+
+```PowerShell
+ (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
+```
+
 ### Mac
 Copy/paste these environment variables into your terminal.
 
@@ -53,11 +66,14 @@ Copy/paste these environment variables into your terminal.
 # change these values to your proxy address
 export http_proxy=http://myproxy.example.com:1234
 ```
+
 ```bash
 export https_proxy=$http_proxy
 ```
 
 ```bash
+# don't go through the proxy for these addresses.
+# change example.com to your corporate DNS domain
 export no_proxy='localhost,127.0.0.1,example.com'
 ```
 

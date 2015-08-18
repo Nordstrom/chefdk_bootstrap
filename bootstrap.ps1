@@ -55,6 +55,8 @@ $introduction = @"
 
 "@
 
+Clear-Host
+
 Write-Host $introduction
 
 # create the chef directory
@@ -73,7 +75,7 @@ Write-Host 'Installing ChefDK...'
 Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
 
 # Add ChefDK to the path
-$env:Path += ";c:\opscode\chefdk\bin"
+$env:Path += ";C:\opscode\chefdk\bin"
 
 Set-Location $userChefDir
 
@@ -104,5 +106,5 @@ if (Test-Path berks-cookbooks) {
   Remove-Item -Recurse berks-cookbooks
 }
 
-#End message to indicate completion of setup
-Write-Host 'Congrats!!! Your workstation is now set up for Chef Development!'
+# End message to indicate completion of setup
+Write-Host "`n`nCongrats!!! Your workstation is now set up for Chef Development!"

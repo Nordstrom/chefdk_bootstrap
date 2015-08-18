@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 1.2.3
+* Make non-proxy README instructions work for Windows. Fixes #35
+* Clear screen as first step in bootstrap script. Fixes #34
+
 ## 1.2.2
 * Add Apache 2.0 license header.
 
