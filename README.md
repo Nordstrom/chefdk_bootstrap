@@ -10,7 +10,7 @@ for Chef cookbook development in about **20 minutes**.
 
 * If you are behind a proxy, you will need to export these [proxy environment variables](#if-you-are-behind-a-proxy) first.
 
-## Quickstart Windows
+## Windows Quickstart
 
 Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
 script on your workstation.
@@ -19,7 +19,7 @@ script on your workstation.
  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
 ```
 
-## Quickstart Mac
+## Mac Quickstart
 
 Copy the command below and paste it into a terminal. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap) script on your workstation.
 
@@ -27,9 +27,10 @@ Copy the command below and paste it into a terminal. This will download and run 
 curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash
 ```
 
-### ChefDK profile setup
+### Mac ChefDK profile setup
 Follow the instructions in the [ChefDK README](https://github.com/chef/chef-dk#using-chefdk-as-your-primary-development-environment) to complete the Chef workstation setup.
 
+---
 ## If you are behind a proxy
 ### Windows
 
