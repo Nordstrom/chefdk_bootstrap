@@ -1,5 +1,13 @@
 # Revision History for chefdk_bootstrap
 
+## 1.3.0
+* Depend on chocolatey 0.5.0 to improve installation behind a proxy
+* Install Git v2.5.1 instead of v1.9.5
+
+### Dev environment changes
+* Travis CI builds use ChefDK built-in gems instead of Gemfile + bundler
+* Rakefile defines default task of :style, :spec
+
 ## 1.2.4
 * Minor edits to README for clarity
 

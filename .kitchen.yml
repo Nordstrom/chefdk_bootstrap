@@ -22,13 +22,12 @@ provisioner:
   name: chef_zero
   chef_omnibus_install_options: -P chefdk
   chef_omnibus_root: c:/opscode/chefdk
-  client_rb:
-<% %w(http_proxy https_proxy no_proxy).each do |envvar| %>
-<% if ENV.key?(envvar) %>
-    <%= envvar %>: '<%= ENV[envvar] %>'
-<% end %>
-<% end %>
-
+#   client_rb:
+# <% %w(http_proxy https_proxy no_proxy).each do |envvar| %>
+# <% if ENV.key?(envvar) %>
+#     <%= envvar %>: '<%= ENV[envvar] %>'
+# <% end %>
+# <% end %>
 
 platforms:
   - name: win81x64-enterprise
