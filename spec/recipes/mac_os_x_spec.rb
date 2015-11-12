@@ -15,7 +15,7 @@
 
 RSpec.describe 'chefdk_bootstrap::mac_os_x' do
   let(:mac_os_x_node) do
-    ChefSpec::ServerRunner.new(
+    ChefSpec::SoloRunner.new(
       platform: 'mac_os_x',
       version: '10.10'
     )

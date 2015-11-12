@@ -14,9 +14,29 @@
 #
 
 RSpec.describe 'chefdk_bootstrap::windows' do
+  before do
+    RSpec.configure do |config|
+      config.mock_with :rspec do |mocks|
+        @vpd_setting = mocks.verify_partial_doubles?
+        mocks.verify_partial_doubles = false
+      end
+    end
+
+    allow_any_instance_of(Chef::Resource::RemoteFile).to receive(
+      :chocolatey_installed?).and_return(false)
+  end
+
+  after do
+    RSpec.configure do |config|
+      config.mock_with :rspec do |mocks|
+        mocks.verify_partial_doubles = @vpd_setting
+      end
+    end
+  end
+
   context 'default attributes' do
     cached(:windows_node) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'windows',
         version: '2012R2'
       ).converge(described_recipe)
@@ -53,7 +73,7 @@ RSpec.describe 'chefdk_bootstrap::windows' do
 
   context 'with attribute overrides' do
     cached(:windows_node) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'windows',
         version: '2012R2'
       ) do |node|

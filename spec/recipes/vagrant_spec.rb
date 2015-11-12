@@ -1,7 +1,7 @@
 RSpec.describe 'chefdk_bootstrap::vagrant' do
   context 'on a Windows 2012R2 node' do
     cached(:windows_chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'windows',
         version: '2012R2'
       ).converge(described_recipe)
@@ -14,7 +14,7 @@ RSpec.describe 'chefdk_bootstrap::vagrant' do
 
   context 'on a Mac' do
     cached(:mac_os_x_chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'mac_os_x',
         version: '10.10'
       ).converge(described_recipe)
