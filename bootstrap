@@ -71,7 +71,7 @@ berks vendor
 sudo -E chef-client -z -l error -c "${userChefDir}/client.rb" -o "$bootstrapCookbook"
 
 # cleanup
-[[ -f "${userChefDir}/berksfile" ]] && rm "${userChefDir}/berksfile"
+[[ -f "${userChefDir}/berksfile" ]] && rm "${userChefDir}/Berksfile"
 [[ -f "${userChefDir}/Berksfile.lock" ]] && rm "${userChefDir}/Berksfile.lock"
 [[ -f "${userChefDir}/client.rb" ]] && rm "${userChefDir}/client.rb"
 [[ -d berks-cookbooks ]] && rm -r berks-cookbooks

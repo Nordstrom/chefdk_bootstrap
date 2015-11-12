@@ -13,7 +13,19 @@
 # limitations under the License.
 #
 
-default['chocolatey']['upgrade'] = false
+default['vagrant']['version'] = '1.7.4'
+default['vagrant']['msi_version'] = '1.7.4'
+default['vagrant']['url'] = value_for_platform_family(
+  'mac_os_x' => 'https://releases.hashicorp.com/vagrant/1.7.4/vagrant_1.7.4.dmg',
+  'windows' => 'https://releases.hashicorp.com/vagrant/1.7.4/vagrant_1.7.4.msi'
+)
+
+default['vagrant']['checksum'] = value_for_platform_family(
+  'mac_os_x' => '3d2e680cc206ac1d480726052e42e193eabce56ed65fc79b91bc85e4c7d2deb8',
+  'windows' => 'a1ca7d99f162e001c826452a724341f421adfaef3e1366ee504b73ad19e3574f'
+)
+
+default['vagrant']['user'] = ENV['USER'] || ENV['USERNAME']
 
 default['chefdk_bootstrap']['atom']['source_url'] =
   value_for_platform_family(

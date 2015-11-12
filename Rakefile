@@ -45,6 +45,8 @@ task style: [:foodcritic, :rubocop]
 # ChefSpec (RSpec)
 RSpec::Core::RakeTask.new
 
+task default: [:style, :spec]
+
 desc 'Generate ChefSpec coverage report'
 task :coverage do
   ENV['COVERAGE'] = 'true'

@@ -42,7 +42,7 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile' do
 
   context 'When cookbook proxy attributes are not set' do
     cached(:windows_node) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'windows', version: '2012R2'
       ).converge(described_recipe)
     end
@@ -68,12 +68,11 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile' do
 
   context 'When cookbook proxy `http` and `no_proxy` attributes are set' do
     cached(:windows_node) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'windows', version: '2012R2'
-      ) do |node, server|
+      ) do |node|
         node.set['chefdk_bootstrap']['proxy']['http'] = 'http://myproxy.example.com:1234'
         node.set['chefdk_bootstrap']['proxy']['no_proxy'] = 'example.com,localhost,127.0.0.1'
-        server.update_node(node)
       end.converge(described_recipe)
     end
 
