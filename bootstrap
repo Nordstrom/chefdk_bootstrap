@@ -113,6 +113,7 @@ echo "Running chef-client (installed by ChefDK) to bootstrap this machine"
 sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapCookbook" || prompt_continue
 
 # cleanup
+cd -
 rm -f "$tempInstallDir/Berksfile"
 rm -f "$tempInstallDir/Berksfile.lock"
 rm -f "$tempInstallDir/client.rb"
