@@ -113,7 +113,11 @@ echo "Running chef-client (installed by ChefDK) to bootstrap this machine"
 sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapCookbook" || prompt_continue
 
 # cleanup
-sudo rm -rf "$tempInstallDir"
+rm -f "$tempInstallDir/Berksfile"
+rm -f "$tempInstallDir/Berksfile.lock"
+rm -f "$tempInstallDir/client.rb"
+rm -rf "$tempInstallDir/berks-cookbooks"
+rmdir "$tempInstallDir"
 
 #End message to direct Mac users to last step in set up
 cat <<EOF;
