@@ -65,7 +65,7 @@ EOF
 # create Berksfile so that we can install the correct cookbook dependencies
 cat > "${tempInstallDir}/Berksfile" <<EOF;
 source 'https://supermarket.chef.io'
-'$private_source'
+$private_source
 
 cookbook '$bootstrapCookbook'
 EOF
