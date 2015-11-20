@@ -1,5 +1,11 @@
 # Revision History for chefdk_bootstrap
 
+## 1.3.1
+* Switch from brew-cask to omnitruck chefdk installation for mac osx
+* Make bootstrap incrementally more robust on mac osx
+* fixes #33, #45
+* fixes #56 on mac osx, still an issue on windows
+
 ## 1.3.0
 * Depend on chocolatey 0.5.0 to improve installation behind a proxy
 * Install Git v2.5.1 instead of v1.9.5

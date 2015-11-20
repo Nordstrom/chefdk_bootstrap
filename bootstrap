@@ -15,7 +15,22 @@
 # limitations under the License.
 #
 
-set -o errexit -o nounset -o pipefail
+set -o nounset -o pipefail
+
+CHEFDK_TARGET_VERSION=0.10.0
+
+function prompt_continue () {
+  echo ""
+  echo "chefdk_bootstrap encountered an error in the previous step."
+  read -p "Ignore the error and contine with installation? [yN] " </dev/tty
+  case "$REPLY" in
+    [yY]*) return
+      ;;
+    *) echo "Not cleaning up $tempInstallDir; exiting."
+      exit 2
+      ;;
+  esac
+}
 
 # If the user has not passed in a cookbook name use 'chefdk_bootstrap' for the cookbook
 bootstrapCookbook=${1:-chefdk_bootstrap}
@@ -23,8 +38,9 @@ bootstrapCookbook=${1:-chefdk_bootstrap}
 # If the user has passed in a private supermarket url then add it to the Berksfile
 private_source=${2:+source '$2'}
 
-# make userChefDir variable
-userChefDir=~/chef
+# make temp installation directory variable
+tempInstallDir="/tmp/chefdk_bootstrap_$$"
+[[ ! -d "$tempInstallDir" ]] && mkdir "$tempInstallDir"
 
 clear
 
@@ -32,51 +48,81 @@ clear
 cat <<EOF;
 This script will:
 
-1. Install the latest ChefDK package via Homebrew
-2. Create a 'chef' directory in your user profile (home) directory
+1. Install the latest ChefDK package
+2. Create some chef directories in your user profile (home) directory
+    ~/.chef
+    ~/chef
+    ~/chef/cookbooks
 3. Download the 'chefdk_bootstrap' cookbook via Berkshelf
 4. Run 'chef-client' to install the rest of the tools you will need
 EOF
 
-# creating a Chef directory for Chef development
-[[ ! -d "${userChefDir}" ]] && mkdir "${userChefDir}"
+#NOTE: this should be moved into the mac_os_x recipe, issue #43
+[[ ! -d ~/.chef ]] && mkdir ~/.chef
+[[ ! -d ~/chef ]] && mkdir ~/chef
+[[ ! -d ~/chef/cookbooks ]] && mkdir ~/chef/cookbooks
 
 # create Berksfile so that we can install the correct cookbook dependencies
-cat > "${userChefDir}/Berksfile" <<EOF;
+cat > "${tempInstallDir}/Berksfile" <<EOF;
 source 'https://supermarket.chef.io'
-"${private_source}"
+$private_source
 
-cookbook '${bootstrapCookbook}'
+cookbook '$bootstrapCookbook'
 EOF
 
 # create client.rb file so that Chef client can find its dependant cookbooks
-cat > "${userChefDir}/client.rb" <<EOF;
+cat > "${tempInstallDir}/client.rb" <<EOF;
 cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
+Ohai::Config[:disabled_plugins] = [:Passwd]
 EOF
 
-# install Homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+cat <<EOF;
 
-# install brew-cask
-brew install caskroom/cask/brew-cask
+** Installing ChefDK
 
-# install chefDK
-brew cask install chefdk
+EOF
 
-# making sure that we are vendor cookbooks into a sub directory of the userChefDir
-cd "${userChefDir}"
-berks vendor
+chefdk_installed_version=$(chef --version 2>/dev/null |awk '/Chef Development Kit Version:/ {print $NF}')
+case "$chefdk_installed_version" in
+  "$CHEFDK_TARGET_VERSION")
+    echo "ChefDK ${CHEFDK_TARGET_VERSION} is already installed, skipping"
+    INSTALL_CHEFDK=0;;
+  "")
+    # ChefDK is not installed
+    INSTALL_CHEFDK=1;;
+  *)
+    echo "Replacing ChefDK ${chefdk_installed_version} with ${CHEFDK_TARGET_VERSION}" 
+    echo "Uninstalling ChefDK ${chefdk_installed_version}..." 
+    sudo rm -rf /opt/chefdk
+    sudo find /usr/bin /usr/local/bin -lname '/opt/chefdk/*' -delete
+    rm -rf ~/.chefdk
+    INSTALL_CHEFDK=1;;
+esac
+if [[ "$INSTALL_CHEFDK" -eq 1 ]]
+then
+  echo "Installing ChefDK ${CHEFDK_TARGET_VERSION}"
+  curl https://omnitruck.chef.io/install.sh | \
+    sudo -E bash -s -- -c stable -P chefdk -v ${CHEFDK_TARGET_VERSION} || prompt_continue
+fi
 
-# run chef-client (installed by ChefDK) to bootstrap this machine
-sudo -E chef-client -z -l error -c "${userChefDir}/client.rb" -o "$bootstrapCookbook"
+echo "Downloading cookbook dependencies with Berkshelf"
+cd "$tempInstallDir"
+chef exec berks vendor || prompt_continue
+
+echo "Running chef-client (installed by ChefDK) to bootstrap this machine"
+sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapCookbook" || prompt_continue
 
 # cleanup
-[[ -f "${userChefDir}/berksfile" ]] && rm "${userChefDir}/Berksfile"
-[[ -f "${userChefDir}/Berksfile.lock" ]] && rm "${userChefDir}/Berksfile.lock"
-[[ -f "${userChefDir}/client.rb" ]] && rm "${userChefDir}/client.rb"
-[[ -d berks-cookbooks ]] && rm -r berks-cookbooks
+cd -
+rm -f "$tempInstallDir/Berksfile"
+rm -f "$tempInstallDir/Berksfile.lock"
+rm -f "$tempInstallDir/client.rb"
+rm -rf "$tempInstallDir/berks-cookbooks"
+rmdir "$tempInstallDir"
 
 #End message to direct Mac users to last step in set up
 cat <<EOF;
-You're almost done!!! Go back to the ChefDK_Bootstrap README to complete your Chef workstation setup.
+You're almost done!!! You just need to edit your shell startup script to set up
+chefdk environment variables for each login. See this page:
+https://github.com/chef/chef-dk#using-chefdk-as-your-primary-development-environment
 EOF
