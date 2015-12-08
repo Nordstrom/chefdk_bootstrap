@@ -44,7 +44,7 @@ if ($args[1]) {
 }
 
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
-$dotChefDKDir = Join-Path -path $env:USERPROFILE -childPath '.chefdk'
+$dotChefDKDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chefdk'
 $tempInstallDir = Join-Path -path $env:TEMP -childpath 'chefdk_bootstrap'
 $berksfilePath = Join-Path -path $tempInstallDir -childPath 'Berksfile'
 $chefConfigPath = Join-Path -path $tempInstallDir -childPath 'client.rb'
