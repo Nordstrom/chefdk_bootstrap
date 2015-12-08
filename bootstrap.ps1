@@ -11,9 +11,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
+if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+  [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Warning "You do not have Administrator rights to run this script!`nPlease re-run this script as an Administrator!"
+    Break
+}
+
+$targetChefDk = '0.10.0'
 $bootstrapCookbook = 'chefdk_bootstrap'
+
+function promptContinue {
+  param ($msg="Chefdk_bootstrap encountered an error")
+  $yn = Read-Host "$Msg. Continue? [y|N]"
+  if ( $yn -NotLike 'y*' ) {
+    Break
+  }
+}
+
+function die {
+  param ($msg="Chefdk_bootstrap encountered an error. Exiting")
+  Write-host "$msg."
+  Break
+}
 
 if ($args[0]) {
   $bootstrapCookbook = $args[0]
@@ -23,11 +43,12 @@ if ($args[1]) {
   $privateSource = "source '$args[1]'"
 }
 
-$chefDkSource = 'https://www.chef.io/chef/download-chefdk?p=windows&pv=2008r2&m=x86_64&v=latest'
-
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
-$berksfilePath = Join-Path -path $userChefDir -childPath 'Berksfile'
-$chefConfigPath = Join-Path -path $userChefDir -childPath 'client.rb'
+$dotChefDKDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chefdk'
+$tempInstallDir = Join-Path -path $env:TEMP -childpath 'chefdk_bootstrap'
+$berksfilePath = Join-Path -path $tempInstallDir -childPath 'Berksfile'
+$chefConfigPath = Join-Path -path $tempInstallDir -childPath 'client.rb'
+$omniUrl = "https://omnitruck.chef.io/install.ps1"
 
 # Set HOME to be c:\users\<username> so cookbook gem installs are on the c:\
 # drive
@@ -48,10 +69,9 @@ $introduction = @"
 
 ### This bootstrap script will:
 
-1. Install the latest ChefDK package.
-2. Create a `chef` directory in your user profile (home) directory.
-3. Download the `chefdk_bootstrap` cookbook via Berkshelf
-4. Run `chef-client` to install the rest of the tools you'll need.
+1. Install the ChefDK version $targetChefDk.
+2. Download the chefdk_bootstrap cookbook via Berkshelf
+3. Run chef-client to install the rest of the tools you'll need.
 
 "@
 
@@ -59,9 +79,9 @@ Clear-Host
 
 Write-Host $introduction
 
-# create the chef directory
-if (!(Test-Path $userChefDir -pathType container)) {
-  New-Item -ItemType 'directory' -path $userChefDir
+# create the temporary installation directory
+if (!(Test-Path $tempInstallDir -pathType container)) {
+  New-Item -ItemType 'directory' -path $tempInstallDir
 }
 
 # Write out a local Berksfile for Berkshelf to use
@@ -70,20 +90,51 @@ $berksfile | Out-File -FilePath $berksfilePath -Encoding ASCII
 # Write out minimal chef-client config file
 $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 
-# Install ChefDK .msi package from Chef
-Write-Host 'Installing ChefDK...'
-Start-Process -Wait -FilePath msiexec.exe -ArgumentList /qb, /i, $chefDkSource
+# Install ChefDK from chef omnitruck, unless installed already
+Write-host "Checking for installed ChefDK version"
+$app = Get-CimInstance -classname win32_product -filter "Name like 'chef development kit%'"
+$version = $app.Version
+if ( $version -like "$targetChefDk*" ) {
+  Write-Host "The ChefDK version $version is already installed."
+} else {
+  if ( $version -eq $null ) {
+    Write-Host "No ChefDK found. Installing the ChefDK version $targetChefDk"
+  } else {
+    Write-Host "Upgrading the ChefDK from $version to $targetChefDk"
+    Write-Host "Uninstalling ChefDK version $version. This might take a while..."
+    Invoke-CimMethod -InputObject $app -MethodName Uninstall
+    if ( -not $? ) { promptContinue "Error uninstalling ChefDK version $version" }
+    if (Test-Path $dotChefDKDir) {
+      Remove-Item -Recurse $dotChefDKDir
+    }
+  }
+  if ( $env:http_proxy ) {
+    $installScript = Invoke-WebRequest -UseBasicParsing $omniUrl -Proxy $env:http_proxy -ProxyUseDefaultCredentials
+    if ( -not $? ) { die "Error downloading $omniUrl using proxy $env:http_proxy." }
+  } else {
+    $installScript = Invoke-WebRequest -UseBasicParsing $omniUrl
+    if ( -not $? ) { die "Error downloading $omniUrl. Do you need to set `$env:http_proxy ?" }
+  }
+  $installScript | Invoke-Expression
+  if ( -not $? ) { die "Error running installation script" }
+  Write-Host "Installing ChefDK version $targetChefDk. This might take a while..."
+  install -channel stable -project chefdk -version $targetChefDk
+  if ( -not $? ) { die "Error installing the ChefDK version $targetChefDk" }
+}
 
 # Add ChefDK to the path
 $env:Path += ";C:\opscode\chefdk\bin"
 
-Set-Location $userChefDir
+Push-Location $tempInstallDir
 
 # Install the bootstrap cookbooks using Berkshelf
+$env:BERKSHELF_CHEF_CONFIG = $chefConfigPath
 berks vendor
+if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks." }
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
 chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
+if ( -not $? ) { Pop-Location;  die "Error running chef-client." }
 
 # Cleanup
 if (Test-Path $berksfilePath) {
@@ -105,6 +156,8 @@ if (Test-Path nodes) {
 if (Test-Path berks-cookbooks) {
   Remove-Item -Recurse berks-cookbooks
 }
+
+Pop-Location 
 
 # End message to indicate completion of setup
 Write-Host "`n`nCongrats!!! Your workstation is now set up for Chef Development!"
