@@ -128,7 +128,9 @@ $env:Path += ";C:\opscode\chefdk\bin"
 Push-Location $tempInstallDir
 
 # Install the bootstrap cookbooks using Berkshelf
+$env:BERKSHELF_CHEF_CONFIG = $chefConfigPath
 berks vendor
+if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks." }
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
 chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
