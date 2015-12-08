@@ -1,5 +1,14 @@
 # Revision History for chefdk_bootstrap
 
+## 1.3.2
+* Windows: Check for Admin rights or exit
+* Windows: Use omnitruck ChefDK installation, selecting specific version
+* Windows: Check installed ChefDK version, do the right thing.
+* Windows: Check for error status after various commands
+* fixes #56
+* fixes #49
+* fixes #33
+
 ## 1.3.1
 * Switch from brew-cask to omnitruck chefdk installation for mac osx
 * Make bootstrap incrementally more robust on mac osx
