@@ -23,7 +23,7 @@ $bootstrapCookbook = 'chefdk_bootstrap'
 
 function promptContinue {
   param ($msg="Chefdk_bootstrap encountered an error")
-  $yn = Read-Host "${Msg}. Continue? [y|N]"
+  $yn = Read-Host "$Msg. Continue? [y|N]"
   if ( $yn -NotLike 'y*' ) {
     Break
   }
@@ -44,7 +44,7 @@ if ($args[1]) {
 }
 
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
-$dotChefDir = Join-Path -path $env:USERPROFILE -childPath '.chef'
+$dotChefDKDir = Join-Path -path $env:USERPROFILE -childPath '.chefdk'
 $tempInstallDir = Join-Path -path $env:TEMP -childpath 'chefdk_bootstrap'
 $berksfilePath = Join-Path -path $tempInstallDir -childPath 'Berksfile'
 $chefConfigPath = Join-Path -path $tempInstallDir -childPath 'client.rb'
@@ -69,9 +69,9 @@ $introduction = @"
 
 ### This bootstrap script will:
 
-1. Install the latest ChefDK package.
-2. Download the `chefdk_bootstrap` cookbook via Berkshelf
-3. Run `chef-client` to install the rest of the tools you'll need.
+1. Install the ChefDK version $targetChefDk.
+2. Download the chefdk_bootstrap cookbook via Berkshelf
+3. Run chef-client to install the rest of the tools you'll need.
 
 "@
 
@@ -94,18 +94,18 @@ $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 Write-host "Checking for installed ChefDK version"
 $app = Get-CimInstance -classname win32_product -filter "Name like 'chef development kit%'"
 $version = $app.Version
-if ( $version -like "${targetChefDk}*" ) {
+if ( $version -like "$targetChefDk*" ) {
   Write-Host "The ChefDK version $version is already installed."
 } else {
   if ( $version -eq $null ) {
     Write-Host "No ChefDK found. Installing the ChefDK version $targetChefDk"
   } else {
     Write-Host "Upgrading the ChefDK from $version to $targetChefDk"
-    Write-Host "Uninstalling ChefDK version ${version}. This might take a while..."
+    Write-Host "Uninstalling ChefDK version $version. This might take a while..."
     Invoke-CimMethod -InputObject $app -MethodName Uninstall
     if ( -not $? ) { promptContinue "Error uninstalling ChefDK version $version" }
-    if (Test-Path dotChefDir) {
-      Remove-Item -Recurse dotChefDir
+    if (Test-Path $dotChefDKDir) {
+      Remove-Item -Recurse $dotChefDKDir
     }
   }
   if ( $env:http_proxy ) {
