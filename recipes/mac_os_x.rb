@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-['/usr/local', '/opt/homebrew-cask/Caskroom'].each do |dir|
+['/usr/local', '/opt/homebrew-cask', '/opt/homebrew-cask/Caskroom'].each do |dir|
   directory dir do
     owner ENV['SUDO_USER'] || ENV['USER']
   end
