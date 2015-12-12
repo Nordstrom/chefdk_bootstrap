@@ -36,7 +36,7 @@ function prompt_continue () {
 bootstrapCookbook=${1:-chefdk_bootstrap}
 
 # If the user has passed in a private supermarket url then add it to the Berksfile
-private_source=${2:+source '$2'}
+private_source=${2:+source \'$2\'}
 
 # make temp installation directory variable
 tempInstallDir="/tmp/chefdk_bootstrap_$$"

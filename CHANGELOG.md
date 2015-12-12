@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 1.3.3
+* Mac OS X: create /opt/homebrew-cask directory
+* fixes #60
+
 ## 1.3.2
 * Windows: Check for Admin rights or exit
 * Windows: Use omnitruck ChefDK installation, selecting specific version
