@@ -72,16 +72,15 @@ RSpec.describe 'chefdk_bootstrap::windows' do
       expect(windows_node).to include_recipe('chefdk_bootstrap::gitextensions')
     end
 
-    %w{
+    %w(
       C:/Users/bobbie/.chef
       C:/Users/bobbie/chef
       C:/Users/bobbie/chef/cookbooks
-    }.each do |directory|
+    ).each do |directory|
       it "creates directory #{directory}" do
         expect(windows_node).to create_directory(directory)
       end
     end
-
   end
 
   context 'with attribute overrides' do

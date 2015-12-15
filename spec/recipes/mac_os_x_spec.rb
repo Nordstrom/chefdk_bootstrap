@@ -48,14 +48,14 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
     )
   end
 
-  %w{
+  %w(
     /usr/local
     /opt/homebrew-cask
     /opt/homebrew-cask/Caskroom
     /Users/doug/.chef
     /Users/doug/chef
     /Users/doug/chef/cookbooks
-  }.each do |directory|
+  ).each do |directory|
     it "creates directory #{directory}" do
       mac_os_x_node.converge(described_recipe)
       expect(mac_os_x_node).to create_directory(directory)
