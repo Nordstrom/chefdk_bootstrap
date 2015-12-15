@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 1.4.0
+* create ~/.chef, ~/chef, ~/chef/cookbooks
+* fixes #43
+
 ## 1.3.3
 * Mac OS X: create /opt/homebrew-cask directory
 * fixes #60
