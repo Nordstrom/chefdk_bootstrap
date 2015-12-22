@@ -24,6 +24,8 @@ RSpec.describe 'chefdk_bootstrap::windows' do
 
     allow_any_instance_of(Chef::Resource::RemoteFile).to receive(
       :chocolatey_installed?).and_return(false)
+
+    allow(Dir).to receive(:home).and_return('C:/Users/bobbie')
   end
 
   after do
@@ -68,6 +70,16 @@ RSpec.describe 'chefdk_bootstrap::windows' do
 
     it 'includes gitextensions recipe' do
       expect(windows_node).to include_recipe('chefdk_bootstrap::gitextensions')
+    end
+
+    %w(
+      C:/Users/bobbie/.chef
+      C:/Users/bobbie/chef
+      C:/Users/bobbie/chef/cookbooks
+    ).each do |directory|
+      it "creates directory #{directory}" do
+        expect(windows_node).to create_directory(directory)
+      end
     end
   end
 

@@ -22,12 +22,15 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
   end
 
   before do
+    allow(Dir).to receive(:home).and_return('/Users/doug')
+    allow(ENV).to receive(:[]).with('SUDO_USER').and_return('doug')
+    allow(ENV).to receive(:[]).with('USER').and_return('doug')
+    allow(ENV).to receive(:[]).and_call_original
     stub_command('which git')
   end
 
   it 'creates /usr/local and sets the owner to SUDO_USER when specified' do
     # use call original as per http://www.relishapp.com/rspec/rspec-mocks/v/3-3/docs/configuring-responses/calling-the-original-implementation#%60and-call-original%60-can-configure-a-default-response-that-can-be-overriden-for-specific-args
-    allow(ENV).to receive(:[]).and_call_original
     allow(ENV).to receive(:[]).with('SUDO_USER').and_return('serena')
     mac_os_x_node.converge(described_recipe)
     expect(mac_os_x_node).to create_directory('/usr/local').with(
@@ -37,13 +40,26 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
 
   it 'creates /usr/local and sets the owner to USER when SUDO_USER is not specified' do
     # use call original as per http://www.relishapp.com/rspec/rspec-mocks/v/3-3/docs/configuring-responses/calling-the-original-implementation#%60and-call-original%60-can-configure-a-default-response-that-can-be-overriden-for-specific-args
-    allow(ENV).to receive(:[]).and_call_original
     allow(ENV).to receive(:[]).with('SUDO_USER').and_return(nil)
     allow(ENV).to receive(:[]).with('USER').and_return('doug')
     mac_os_x_node.converge(described_recipe)
     expect(mac_os_x_node).to create_directory('/usr/local').with(
       owner: 'doug'
     )
+  end
+
+  %w(
+    /usr/local
+    /opt/homebrew-cask
+    /opt/homebrew-cask/Caskroom
+    /Users/doug/.chef
+    /Users/doug/chef
+    /Users/doug/chef/cookbooks
+  ).each do |directory|
+    it "creates directory #{directory}" do
+      mac_os_x_node.converge(described_recipe)
+      expect(mac_os_x_node).to create_directory(directory)
+    end
   end
 
   context 'foo' do

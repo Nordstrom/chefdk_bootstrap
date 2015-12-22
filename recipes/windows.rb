@@ -15,6 +15,15 @@
 
 include_recipe 'chocolatey'
 
+home = Dir.home
+%W(
+  #{home}/.chef
+  #{home}/chef
+  #{home}/chef/cookbooks
+).each do |directory|
+  directory directory
+end
+
 packages = node['chefdk_bootstrap']['package']
 
 packages.each do |pkg, install|
