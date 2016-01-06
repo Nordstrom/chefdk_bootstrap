@@ -15,7 +15,7 @@
 
 case node['platform_family']
 when 'windows'
-  chocolatey 'vagrant'
+  include_recipe 'vagrant'
 when 'mac_os_x'
-  homebrew_cask 'vagrant'
+  include_recipe 'vagrant'
 end

@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.4.1
+* Install Vagrant via community Vagrant cookbook
+
 ## 1.4.0
 * create ~/.chef, ~/chef, ~/chef/cookbooks
 * fixes #43
