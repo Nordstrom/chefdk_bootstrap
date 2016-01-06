@@ -15,6 +15,9 @@
 
 require 'spec_helper'
 
+# FIXME: ServerSpec fails when "Installing Busser plugins: busser-serverspec"
+# because Test-kitchen assumes chef-client is installed instead of ChefDK
+# and expects ruby.exe to be in the location where chef-client installs it.
 describe command('vagrant -v') do
   its(:exit_status) { should eq(0) }
 end
