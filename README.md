@@ -1,4 +1,4 @@
-# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg)](https://travis-ci.org/Nordstrom/chefdk_bootstrap)
+# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk_bootstrap)
 
 [![Join the chat at https://gitter.im/Nordstrom/chefdk_bootstrap](https://badges.gitter.im/Nordstrom/chefdk_bootstrap.svg)](https://gitter.im/Nordstrom/chefdk_bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
