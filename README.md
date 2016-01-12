@@ -4,11 +4,11 @@
 
 ## Setup your laptop for Chef development in minutes
 
-Run one simple command to easily setup your Windows or Mac machine
+Run one simple command to easily set up your Windows or Mac machine
 for Chef cookbook development in about **20 minutes**.
 
 ## Before You Begin
-* If you are on a Windows machine, you will need at least PowerShell 3.0. We recommend [PowerShell 4.0](http://www.microsoft.com/en-us/download/details.aspx?id=40855) because it supports [Microsoft DSC](https://technet.microsoft.com/en-us/%5Clibrary/Dn249912.aspx).
+* If you are on a Windows machine, you will need at least PowerShell 3.0. We recommend [PowerShell 4.0](http://www.microsoft.com/en-us/download/details.aspx?id=40855) because it supports [Microsoft DSC](https://msdn.microsoft.com/en-us/PowerShell/DSC/overview).
 
 * If you are behind a proxy, you will need to export these [proxy environment variables](#if-you-are-behind-a-proxy) first.
 
