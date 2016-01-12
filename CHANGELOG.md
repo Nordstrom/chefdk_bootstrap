@@ -1,5 +1,10 @@
 # Revision History for chefdk_bootstrap
 
+## 1.5.0
+* Install 64-bit git 2.7
+* Install [Git Credential Manager for Windows](https://github.com/Microsoft/Git-Credential-Manager-for-Windows),
+which replaces the deprecated git-credential-winstore.
+
 ## 1.4.1
 * Install Vagrant via community Vagrant cookbook
 

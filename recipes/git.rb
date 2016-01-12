@@ -15,14 +15,8 @@
 
 case node['platform_family']
 when 'windows'
-  git_client node['git']['display_name'] do
-    windows_display_name node['git']['display_name']
-    windows_package_url node['git']['url']
-    windows_package_checksum node['git']['checksum']
-    action :install
-  end
-
-  chocolatey 'git-credential-winstore'
+  chocolatey 'git'
+  chocolatey 'git-credential-manager-for-windows'
   chocolatey 'poshgit'
 when 'mac_os_x'
   package 'git'
