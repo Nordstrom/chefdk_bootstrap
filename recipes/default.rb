@@ -14,3 +14,4 @@
 #
 
 include_recipe "#{cookbook_name}::#{node['platform_family']}"
+include_recipe "#{cookbook_name}::chefdk_julia"

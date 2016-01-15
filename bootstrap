@@ -91,8 +91,8 @@ case "$chefdk_installed_version" in
     # ChefDK is not installed
     INSTALL_CHEFDK=1;;
   *)
-    echo "Replacing ChefDK ${chefdk_installed_version} with ${CHEFDK_TARGET_VERSION}" 
-    echo "Uninstalling ChefDK ${chefdk_installed_version}..." 
+    echo "Replacing ChefDK ${chefdk_installed_version} with ${CHEFDK_TARGET_VERSION}"
+    echo "Uninstalling ChefDK ${chefdk_installed_version}..."
     sudo rm -rf /opt/chefdk
     sudo find /usr/bin /usr/local/bin -lname '/opt/chefdk/*' -delete
     rm -rf ~/.chefdk
@@ -109,8 +109,15 @@ echo "Downloading cookbook dependencies with Berkshelf"
 cd "$tempInstallDir"
 chef exec berks vendor || prompt_continue
 
+# Pass optional attributes to chef-client
+# This is a temporary interface and will change in 2.0 when we support named parameters (Issue #74)
+if [ -n "${CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES:-}" ]
+then
+  attributeParameter=" --json-attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES"
+fi
+
 echo "Running chef-client (installed by ChefDK) to bootstrap this machine"
-sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapCookbook" || prompt_continue
+sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapCookbook" ${attributeParameter:-} || prompt_continue
 
 # cleanup
 cd -
