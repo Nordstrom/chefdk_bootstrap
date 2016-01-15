@@ -68,8 +68,8 @@ http://serverspec.org for detail on how to create tests.
 Use test kitchen to spin up a new VM:
     kitchen create
 
-Then you can test your updated bootstrap.ps1:
-1. run powershell
+Then you can test your updated bootstrap.ps1 in the guest VM:
+1. Run PowerShell as Admin
 2. `notepad bootstrap.ps1` to make a new file
 3. Copy + paste your updated code.
 4. You may want to add proxy environment variables at the top, plus the script below to copy them to the system. (Currently chocolatey doesn't honor proxy settings in environment variables.)
