@@ -62,9 +62,15 @@ RSpec.configure do |config|
   # to individual examples or groups you care about by tagging them with
   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
   # get run.
-  config.filter_run :focus
-  config.run_all_when_everything_filtered = true
-
+  if ENV['CI']
+    config.before(:example, :focus) do
+      fail ArgumentError,
+           'Failing the CI build because you have focused specs. See https://github.com/rspec/rspec-core/issues/1747.'
+    end
+  else
+    config.filter_run :focus
+    config.run_all_when_everything_filtered = true
+  end
   # Limits the available syntax to the non-monkey patched syntax that is recommended.
   # For more details, see:
   #   - http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax

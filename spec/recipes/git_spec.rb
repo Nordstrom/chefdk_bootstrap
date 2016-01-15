@@ -1,5 +1,5 @@
 RSpec.describe 'chefdk_bootstrap::git' do
-  context 'On a Windows machine', focus: true do
+  context 'On a Windows machine' do
     cached(:windows_node) do
       ChefSpec::SoloRunner.new(
         platform: 'windows',

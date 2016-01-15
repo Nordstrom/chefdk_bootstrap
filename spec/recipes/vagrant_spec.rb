@@ -1,4 +1,4 @@
-RSpec.describe 'chefdk_bootstrap::vagrant', focus: true do
+RSpec.describe 'chefdk_bootstrap::vagrant' do
   context 'on a Windows 2012R2 node' do
     cached(:windows_chef_run) do
       ChefSpec::SoloRunner.new(
