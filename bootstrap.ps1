@@ -93,7 +93,7 @@ $berksfile | Out-File -FilePath $berksfilePath -Encoding ASCII
 $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 
 # Install ChefDK from chef omnitruck, unless installed already
-Write-host "Checking for installed ChefDK version"
+Write-Host "Checking for installed ChefDK version"
 $app = Get-CimInstance -classname win32_product -filter "Name like 'chef development kit%'"
 $version = $app.Version
 if ( $version -like "$targetChefDk*" ) {
@@ -134,8 +134,14 @@ $env:BERKSHELF_CHEF_CONFIG = $chefConfigPath
 berks vendor
 if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks." }
 
+# Pass optional attributes to chef-client
+# This is a temporary interface and will change in 2.0 when we support named parameters (Issue #74)
+if ($env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES) {
+  $attributeParameter = "--json-attributes ${$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES}"
+}
+
 # run chef-client (installed by ChefDK) to bootstrap this machine
-chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
+chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook $attributeParameter
 if ( -not $? ) { Pop-Location;  die "Error running chef-client." }
 
 # Cleanup
@@ -159,7 +165,7 @@ if (Test-Path berks-cookbooks) {
   Remove-Item -Recurse berks-cookbooks
 }
 
-Pop-Location 
+Pop-Location
 
 # End message to indicate completion of setup
 Write-Host "`n`nCongrats!!! Your workstation is now set up for Chef Development!"

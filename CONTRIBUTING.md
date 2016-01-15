@@ -53,6 +53,8 @@ DISABLE_PRY_RESCUE before running guard:
 ### Integration Tests
 
 #### Windows
+
+##### Testing the cookbook
     bundle exec rake kitchen:all
 
 Will run the test kitchen integration tests.  These tests use Vagrant
@@ -61,6 +63,45 @@ and Virtualbox, which must be installed for the tests to execute.
 After converging in a virtual machine, ServerSpec tests are executed.
 This skeleton comes with a very basic ServerSpec test; refer to
 http://serverspec.org for detail on how to create tests.
+
+##### Testing bootstrap.ps1
+Use test kitchen to spin up a new VM:
+    kitchen create
+
+Then you can test your updated bootstrap.ps1:
+1. run powershell
+2. `notepad bootstrap.ps1` to make a new file
+3. Copy + paste your updated code.
+4. You may want to add proxy environment variables at the top, plus the script below to copy them to the system. (Currently chocolatey doesn't honor proxy settings in environment variables.)
+5. Run `bootstrap.ps1`
+
+##### Applying Proxy settings
+This will copy `http_proxy`, `https_proxy`, and `no_proxy` environment variable settings into the registry and tell the system to reload the settings.
+
+```PowerShell
+# This applies settings system-wide based on http_proxy/https_proxy/no_proxy env variables
+# See http://blogs.msdn.com/b/aymerics_blog/archive/2013/05/18/scripting-toggle-proxy-server-in-ie-settings-with-powershell.aspx
+
+$internetSettingsRegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
+Set-ItemProperty -path $internetSettingsRegistryPath ProxyEnable -value 1
+Set-ItemProperty -path $internetSettingsRegistryPath ProxyServer -value "http=$env:http_proxy;https=$env:https_proxy"
+Set-ItemProperty -path $internetSettingsRegistryPath ProxyOverride -value $env:no_proxy.Replace(",", ";")
+
+# Wrap a native call to a DLL function for wininet
+# See https://msdn.microsoft.com/en-us/library/windows/desktop/aa385114(v=vs.85).aspx
+$wininetConnector=@"
+[DllImport("wininet.dll")]
+public static extern bool InternetSetOption(int hInternet, int dwOption, int lpBuffer, int dwBufferLength);
+"@
+
+# Wrap the above code so PowerShell can call it
+$wininet = Add-Type -memberDefinition $wininetConnector -passthru -name InternetSettings
+
+# See https://msdn.microsoft.com/en-us/library/windows/desktop/aa385328(v=vs.85).aspx
+$INTERNET_OPTION_PROXY_SETTINGS_CHANGED = 95
+$wininet::InternetSetOption([IntPtr]::Zero, $INTERNET_OPTION_PROXY_SETTINGS_CHANGED, [IntPtr]::Zero, 0)|out-null
+
+```
 
 #### Mac
 

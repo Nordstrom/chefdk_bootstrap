@@ -49,6 +49,10 @@ RSpec.describe 'chefdk_bootstrap::default' do
     it 'includes the platform specific entry point recipe' do
       expect(windows_node).to include_recipe('chefdk_bootstrap::windows')
     end
+
+    it 'includes the chefdk-julia recipe' do
+      expect(windows_node).to include_recipe('chefdk_bootstrap::chefdk_julia')
+    end
   end
 
   context 'On a Mac OS X machine' do
@@ -69,6 +73,10 @@ RSpec.describe 'chefdk_bootstrap::default' do
 
     it 'includes the platform specific entry point recipe' do
       expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::mac_os_x')
+    end
+
+    it 'includes the chefdk-julia recipe' do
+      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::chefdk_julia')
     end
   end
 end

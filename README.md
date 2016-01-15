@@ -87,7 +87,20 @@ Now run the [Quickstart for Mac](#quickstart-mac)
 ## Customization
 If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#quickstart-windows) (examples included below).
 
-### Windows
+### JSON attributes
+You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). Right now we're passing this in via the `CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES` environment variable, but in a future version, we'll likely make it a named parameter of the bootstrap script.
+
+#### Windows
+```PowerShell
+$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
+```
+#### Mac
+```bash
+export CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="http://server/attributes.json"
+```
+
+### Custom cookbook
+#### Windows
 
 ```PowerShell
 $install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
@@ -95,7 +108,7 @@ $install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/c
 "$install <your cookbook name> <your private supermarket url>" | Invoke-Expression
 ```
 
-### Mac
+#### Mac
 
 ```bash
 curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash -s -- <your cookbook name> <your private supermarket url>
