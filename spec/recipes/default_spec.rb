@@ -16,10 +16,7 @@
 RSpec.describe 'chefdk_bootstrap::default' do
   context 'On a Windows machine' do
     include_context 'windows_2012'
-
-    it 'converges successfully' do
-      expect(windows_chef_run).to include_recipe(described_recipe)
-    end
+    include_context 'mock_chocolatey_installed'
 
     it 'includes the platform specific entry point recipe' do
       expect(windows_chef_run).to include_recipe('chefdk_bootstrap::windows')
