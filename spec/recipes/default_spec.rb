@@ -15,68 +15,41 @@
 
 RSpec.describe 'chefdk_bootstrap::default' do
   context 'On a Windows machine' do
-    cached(:windows_node) do
-      ChefSpec::SoloRunner.new(
-        platform: 'windows',
-        version: '2012R2'
-      ).converge(described_recipe)
-    end
-
-    before do
-      RSpec.configure do |config|
-        config.mock_with :rspec do |mocks|
-          @vpd_setting = mocks.verify_partial_doubles?
-          mocks.verify_partial_doubles = false
-        end
-      end
-
-      allow_any_instance_of(Chef::Resource::RemoteFile).to receive(
-        :chocolatey_installed?).and_return(false)
-    end
-
-    after do
-      RSpec.configure do |config|
-        config.mock_with :rspec do |mocks|
-          mocks.verify_partial_doubles = @vpd_setting
-        end
-      end
-    end
+    include_context 'windows_2012'
 
     it 'converges successfully' do
-      expect(windows_node).to include_recipe(described_recipe)
+      expect(windows_chef_run).to include_recipe(described_recipe)
     end
 
     it 'includes the platform specific entry point recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::windows')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::windows')
     end
 
     it 'includes the chefdk-julia recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::chefdk_julia')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::chefdk_julia')
     end
   end
 
   context 'On a Mac OS X machine' do
-    cached(:mac_os_x_node) do
-      ChefSpec::SoloRunner.new(
-        platform: 'mac_os_x',
-        version: '10.10'
-      ).converge(described_recipe)
-    end
+    include_context 'mac_os_x'
 
     before do
+      allow(Dir).to receive(:home).and_return('/Users/doug')
+      allow(ENV).to receive(:[]).with('USER').and_return('doug')
+      allow(ENV).to receive(:[]).and_call_original
       stub_command('which git')
     end
 
     it 'converges successfully' do
-      expect(mac_os_x_node).to include_recipe(described_recipe)
+      expect(mac_os_x_chef_run).to include_recipe(described_recipe)
     end
 
     it 'includes the platform specific entry point recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::mac_os_x')
+      expect(mac_os_x_chef_run).to include_recipe('chefdk_bootstrap::mac_os_x')
     end
 
     it 'includes the chefdk-julia recipe' do
-      expect(mac_os_x_node).to include_recipe('chefdk_bootstrap::chefdk_julia')
+      expect(mac_os_x_chef_run).to include_recipe('chefdk_bootstrap::chefdk_julia')
     end
   end
 end

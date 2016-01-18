@@ -13,9 +13,4 @@
 # limitations under the License.
 #
 
-case node['platform_family']
-when 'windows'
-  include_recipe 'vagrant'
-when 'mac_os_x'
-  include_recipe 'vagrant'
-end
+include_recipe 'vagrant'
