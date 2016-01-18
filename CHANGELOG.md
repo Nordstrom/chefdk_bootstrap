@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.5.1
+* Fix the chefdk_julia install attribute to match others and document it
+
 ## 1.5.0
 * Install 64-bit git 2.7
 * Install [Git Credential Manager for Windows](https://github.com/Microsoft/Git-Credential-Manager-for-Windows),

@@ -185,6 +185,7 @@ Attribute | Description | Type   | Default
 ['package']['git'] | Whether to install git and related packages or not | boolean | true
 ['package']['gitextensions'] | Whether to install gitextensions or not | boolean | true
 ['package']['iterm2'] | Whether to install iterm2 or not | boolean | true
+['package']['chefdk_julia'] | Whether to install chefdk_julia or not | boolean | false
 
 ## Author
 
