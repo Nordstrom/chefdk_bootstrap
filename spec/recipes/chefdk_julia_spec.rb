@@ -24,10 +24,10 @@ RSpec.describe 'chefdk_bootstrap::chefdk_julia' do
     end
   end
 
-  context 'when the [\'chefdk_bootstrap\'][\'install_chefdk_julia\'] attribute is true' do
+  context 'when the [\'chefdk_bootstrap\'][\'package\'][\'chefdk_julia\'] attribute is true' do
     cached(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
-        node.set['chefdk_bootstrap']['install_chefdk_julia'] = true
+        node.set['chefdk_bootstrap']['package']['chefdk_julia'] = true
       end.converge(described_recipe)
     end
 

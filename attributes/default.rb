@@ -25,6 +25,7 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['virtualbox'] = true
   install['vagrant'] = true
   install['git'] = true
+  install['chefdk_julia'] = false
 end
 
 # windows specific
@@ -48,6 +49,3 @@ default['chefdk_bootstrap']['powershell']['configure'] = true
 default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy'] # 'http://myproxy.example.com:1234'
 # Skip the proxy for these domains and IPs. This should be a comma-separated string
 default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.com,localhost,127.0.0.1'
-
-# Optionally install chefdk-julia - set the attribute to true to install
-default['chefdk_bootstrap']['install_chefdk_julia'] = false
