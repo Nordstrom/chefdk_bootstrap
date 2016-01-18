@@ -14,11 +14,14 @@
 #
 
 RSpec.describe 'chefdk_bootstrap::mac_os_x' do
-  let(:mac_os_x_node) do
+  # TODO: move this into the shared_nodes shared context
+  let(:mac_os_x_chef_run) do
     ChefSpec::SoloRunner.new(
       platform: 'mac_os_x',
       version: '10.10'
-    )
+    ) do |node|
+      node.set['vagrant']['checksum'] = 'abc123'
+    end
   end
 
   before do
@@ -32,8 +35,8 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
   it 'creates /usr/local and sets the owner to SUDO_USER when specified' do
     # use call original as per http://www.relishapp.com/rspec/rspec-mocks/v/3-3/docs/configuring-responses/calling-the-original-implementation#%60and-call-original%60-can-configure-a-default-response-that-can-be-overriden-for-specific-args
     allow(ENV).to receive(:[]).with('SUDO_USER').and_return('serena')
-    mac_os_x_node.converge(described_recipe)
-    expect(mac_os_x_node).to create_directory('/usr/local').with(
+    mac_os_x_chef_run.converge(described_recipe)
+    expect(mac_os_x_chef_run).to create_directory('/usr/local').with(
       owner: 'serena'
     )
   end
@@ -42,8 +45,8 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
     # use call original as per http://www.relishapp.com/rspec/rspec-mocks/v/3-3/docs/configuring-responses/calling-the-original-implementation#%60and-call-original%60-can-configure-a-default-response-that-can-be-overriden-for-specific-args
     allow(ENV).to receive(:[]).with('SUDO_USER').and_return(nil)
     allow(ENV).to receive(:[]).with('USER').and_return('doug')
-    mac_os_x_node.converge(described_recipe)
-    expect(mac_os_x_node).to create_directory('/usr/local').with(
+    mac_os_x_chef_run.converge(described_recipe)
+    expect(mac_os_x_chef_run).to create_directory('/usr/local').with(
       owner: 'doug'
     )
   end
@@ -57,14 +60,14 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
     /Users/doug/chef/cookbooks
   ).each do |directory|
     it "creates directory #{directory}" do
-      mac_os_x_node.converge(described_recipe)
-      expect(mac_os_x_node).to create_directory(directory)
+      mac_os_x_chef_run.converge(described_recipe)
+      expect(mac_os_x_chef_run).to create_directory(directory)
     end
   end
 
-  context 'foo' do
+  context 'includes recipes' do
     before do
-      mac_os_x_node.converge(described_recipe)
+      mac_os_x_chef_run.converge(described_recipe)
     end
 
     recipes = %w(
@@ -79,7 +82,7 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
 
     recipes.each do |recipe|
       it "includes the #{recipe} recipe" do
-        expect(mac_os_x_node).to include_recipe(recipe)
+        expect(mac_os_x_chef_run).to include_recipe(recipe)
       end
     end
   end

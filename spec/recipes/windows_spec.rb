@@ -14,62 +14,41 @@
 #
 
 RSpec.describe 'chefdk_bootstrap::windows' do
+  include_context 'mock_chocolatey_installed'
+
   before do
-    RSpec.configure do |config|
-      config.mock_with :rspec do |mocks|
-        @vpd_setting = mocks.verify_partial_doubles?
-        mocks.verify_partial_doubles = false
-      end
-    end
-
-    allow_any_instance_of(Chef::Resource::RemoteFile).to receive(
-      :chocolatey_installed?).and_return(false)
-
     allow(Dir).to receive(:home).and_return('C:/Users/bobbie')
   end
 
-  after do
-    RSpec.configure do |config|
-      config.mock_with :rspec do |mocks|
-        mocks.verify_partial_doubles = @vpd_setting
-      end
-    end
-  end
-
   context 'default attributes' do
-    cached(:windows_node) do
-      ChefSpec::SoloRunner.new(
-        platform: 'windows',
-        version: '2012R2'
-      ).converge(described_recipe)
-    end
+    include_context 'windows_2012'
 
     it 'includes the chocolatey recipe' do
-      expect(windows_node).to include_recipe('chocolatey')
+      expect(windows_chef_run).to include_recipe('chocolatey')
     end
 
     it 'includes atom recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::atom')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::atom')
     end
 
     it 'includes virtualbox recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::virtualbox')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::virtualbox')
     end
 
     it 'includes vagrant recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::vagrant')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::vagrant')
     end
 
     it 'includes git recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::git')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::git')
     end
 
     it 'includes kdiff3 recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::kdiff3')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::kdiff3')
     end
 
     it 'includes gitextensions recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::gitextensions')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::gitextensions')
     end
 
     %w(
@@ -78,36 +57,39 @@ RSpec.describe 'chefdk_bootstrap::windows' do
       C:/Users/bobbie/chef/cookbooks
     ).each do |directory|
       it "creates directory #{directory}" do
-        expect(windows_node).to create_directory(directory)
+        expect(windows_chef_run).to create_directory(directory)
       end
     end
   end
 
   context 'with attribute overrides' do
-    cached(:windows_node) do
+    # TODO: move this into the shared_nodes shared context
+    cached(:windows_chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'windows',
         version: '2012R2'
       ) do |node|
+        node.set['vagrant']['checksum'] = 'abc123'
+
         node.set['chefdk_bootstrap']['package']['atom'] = false
         node.set['chefdk_bootstrap']['package']['gitextensions'] = false
       end.converge(described_recipe)
     end
 
     it 'does not include atom recipe' do
-      expect(windows_node).to_not include_recipe('chefdk_bootstrap::atom')
+      expect(windows_chef_run).to_not include_recipe('chefdk_bootstrap::atom')
     end
 
     it 'does not include gitextensions recipe' do
-      expect(windows_node).to_not include_recipe('chefdk_bootstrap::gitextensions')
+      expect(windows_chef_run).to_not include_recipe('chefdk_bootstrap::gitextensions')
     end
 
     it 'includes virtualbox recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::virtualbox')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::virtualbox')
     end
 
     it 'includes kdiff3 recipe' do
-      expect(windows_node).to include_recipe('chefdk_bootstrap::kdiff3')
+      expect(windows_chef_run).to include_recipe('chefdk_bootstrap::kdiff3')
     end
   end
 end
