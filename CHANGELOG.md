@@ -1,5 +1,11 @@
 # Revision History for chefdk_bootstrap
 
+## 1.5.2
+* Bump homebrew dependency to ~> 2.0 because Homebrew cookbook v2.0.4 fixes
+chef-cookbooks/homebrew#87. This will fix the bootstrap for Mac users.
+
+* Update Windows cookbook dependency
+
 ## 1.5.1
 * Fix the chefdk_julia install attribute to match others and document it
 
