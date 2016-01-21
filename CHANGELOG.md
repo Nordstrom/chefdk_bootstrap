@@ -1,6 +1,7 @@
 # Revision History for chefdk_bootstrap
 
-## Unreleased
+## 1.5.3
+* Mac: Don't create directories which homebrew cookbook already creates
 * Bootstrap: create temporary directory using `mktemp -d`
 * Stop creating ~/.chef, ~/chef, and ~/chef/cookbooks directories in bootstrap script
 since creating these directories has been moved to the cookbook.
