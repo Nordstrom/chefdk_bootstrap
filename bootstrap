@@ -38,10 +38,6 @@ bootstrapCookbook=${1:-chefdk_bootstrap}
 # If the user has passed in a private supermarket url then add it to the Berksfile
 private_source=${2:+source \'$2\'}
 
-# make temp installation directory variable
-tempInstallDir="/tmp/chefdk_bootstrap_$$"
-[[ ! -d "$tempInstallDir" ]] && mkdir "$tempInstallDir"
-
 clear
 
 # introduction
@@ -49,18 +45,11 @@ cat <<EOF;
 This script will:
 
 1. Install the latest ChefDK package
-2. Create some chef directories in your user profile (home) directory
-    ~/.chef
-    ~/chef
-    ~/chef/cookbooks
-3. Download the 'chefdk_bootstrap' cookbook via Berkshelf
-4. Run 'chef-client' to install the rest of the tools you will need
+2. Download the 'chefdk_bootstrap' cookbook via Berkshelf
+3. Run 'chef-client' to install the rest of the tools you will need
 EOF
 
-#NOTE: this should be moved into the mac_os_x recipe, issue #43
-[[ ! -d ~/.chef ]] && mkdir ~/.chef
-[[ ! -d ~/chef ]] && mkdir ~/chef
-[[ ! -d ~/chef/cookbooks ]] && mkdir ~/chef/cookbooks
+tempInstallDir=`mktemp -d -t chefdk_bootstrap`
 
 # create Berksfile so that we can install the correct cookbook dependencies
 cat > "${tempInstallDir}/Berksfile" <<EOF;
@@ -121,13 +110,9 @@ sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapC
 
 # cleanup
 cd -
-rm -f "$tempInstallDir/Berksfile"
-rm -f "$tempInstallDir/Berksfile.lock"
-rm -f "$tempInstallDir/client.rb"
-rm -rf "$tempInstallDir/berks-cookbooks"
-rmdir "$tempInstallDir"
+rm -rf "$tempInstallDir"
 
-#End message to direct Mac users to last step in set up
+# End message to direct Mac users to last step in set up
 cat <<EOF;
 You're almost done!!! You just need to edit your shell startup script to set up
 chefdk environment variables for each login. See this page:
