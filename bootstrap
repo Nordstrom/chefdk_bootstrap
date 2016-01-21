@@ -112,7 +112,7 @@ sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapC
 cd -
 rm -rf "$tempInstallDir"
 
-#End message to direct Mac users to last step in set up
+# End message to direct Mac users to last step in set up
 cat <<EOF;
 You're almost done!!! You just need to edit your shell startup script to set up
 chefdk environment variables for each login. See this page:
