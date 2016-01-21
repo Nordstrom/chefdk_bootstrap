@@ -82,10 +82,10 @@ export no_proxy='localhost,127.0.0.1,example.com'
 
 *To make these changes permanent, export these environment variables from your bash or zsh profile.*
 
-Now run the [Quickstart for Mac](#quickstart-mac)
+Now run the [Quickstart for Mac](#mac-quickstart)
 
 ## Customization
-If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#quickstart-windows) (examples included below).
+If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#windows-quickstart) (examples included below).
 
 ### JSON attributes
 You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). Right now we're passing this in via the `CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES` environment variable, but in a future version, we'll likely make it a named parameter of the bootstrap script.

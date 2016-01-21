@@ -52,9 +52,6 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
   end
 
   %w(
-    /usr/local
-    /opt/homebrew-cask
-    /opt/homebrew-cask/Caskroom
     /Users/doug/.chef
     /Users/doug/chef
     /Users/doug/chef/cookbooks

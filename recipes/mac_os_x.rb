@@ -19,8 +19,6 @@ home = Dir.home(ENV['SUDO_USER'] || ENV['USER'])
   #{home}/chef
   #{home}/chef/cookbooks
   /usr/local
-  /opt/homebrew-cask
-  /opt/homebrew-cask/Caskroom
 ).each do |dir|
   directory dir do
     owner ENV['SUDO_USER'] || ENV['USER']
