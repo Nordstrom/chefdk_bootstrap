@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## Unreleased
+* Switch .kitchen.yml to use @mwrockx's Windows2012R2 Atlas Vagrant box.
+
 ## 1.5.3
 * Mac: Don't create directories which homebrew cookbook already creates
 * Bootstrap: create temporary directory using `mktemp -d`
