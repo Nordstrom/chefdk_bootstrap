@@ -137,7 +137,7 @@ if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks."
 # Pass optional attributes to chef-client
 # This is a temporary interface and will change in 2.0 when we support named parameters (Issue #74)
 if ($env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES) {
-  $attributeParameter = "--json-attributes ${$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES}"
+  $attributeParameter = '--json-attributes "$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES"'
 }
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
