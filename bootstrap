@@ -110,7 +110,7 @@ sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapC
 
 # cleanup
 cd -
-rm -rf "$tempInstallDir"
+sudo rm -rf "$tempInstallDir"
 
 # End message to direct Mac users to last step in set up
 cat <<EOF;
