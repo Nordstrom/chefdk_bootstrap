@@ -134,14 +134,16 @@ $env:BERKSHELF_CHEF_CONFIG = $chefConfigPath
 berks vendor
 if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks." }
 
+# run chef-client (installed by ChefDK) to bootstrap this machine
 # Pass optional attributes to chef-client
 # This is a temporary interface and will change in 2.0 when we support named parameters (Issue #74)
 if ($env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES) {
-  $attributeParameter = '--json-attributes "$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES"'
+  chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES
+}
+else {
+  chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
 }
 
-# run chef-client (installed by ChefDK) to bootstrap this machine
-chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook $attributeParameter
 if ( -not $? ) { Pop-Location;  die "Error running chef-client." }
 
 # Cleanup
