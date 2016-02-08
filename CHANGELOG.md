@@ -4,6 +4,7 @@
 * Use sudo to remove temporary directory
 * Switch .kitchen.yml to use @mwrockx's Windows2012R2 Atlas Vagrant box.
 * Mac: Fix #81 by hiding script download progress from curl
+* Improve spec coverage from 46% to 87%
 
 ## 1.5.3
 * Mac: Don't create directories which homebrew cookbook already creates

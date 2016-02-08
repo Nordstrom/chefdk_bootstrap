@@ -14,4 +14,12 @@ RSpec.describe 'chefdk_bootstrap::git' do
       expect(windows_chef_run).to install_chocolatey('poshgit')
     end
   end
+
+  context 'On a Mac' do
+    include_context 'mac_os_x'
+
+    it 'installs the latest git package' do
+      expect(mac_os_x_chef_run).to install_package('git')
+    end
+  end
 end

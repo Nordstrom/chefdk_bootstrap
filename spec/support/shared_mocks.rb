@@ -1,4 +1,4 @@
-RSpec.shared_context 'mock_chocolatey_installed' do
+RSpec.shared_context 'windows_mocks' do
   before(:example) do
     RSpec.configure do |config|
       config.mock_with :rspec do |mocks|
@@ -9,6 +9,11 @@ RSpec.shared_context 'mock_chocolatey_installed' do
 
     allow_any_instance_of(Chef::Resource::RemoteFile).to receive(
       :chocolatey_installed?).and_return(true)
+
+    allow_any_instance_of(Chef::Recipe)
+      .to receive(:locate_sysnative_cmd)
+      .with('WindowsPowerShell\v1.0')
+      .and_return('C:\WINDOWS\sysnative\WindowsPowerShell\v1.0')
   end
 
   after do
