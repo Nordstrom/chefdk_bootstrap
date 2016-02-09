@@ -14,7 +14,7 @@
 #
 
 RSpec.describe 'chefdk_bootstrap::windows' do
-  include_context 'mock_chocolatey_installed'
+  include_context 'windows_mocks'
 
   before do
     allow(Dir).to receive(:home).and_return('C:/Users/bobbie')

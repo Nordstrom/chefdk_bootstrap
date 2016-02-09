@@ -2,7 +2,7 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
 
-Style/SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Exclude:
     - '**/Berksfile'
     - '**/metadata.rb'

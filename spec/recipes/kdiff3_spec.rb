@@ -1,0 +1,7 @@
+RSpec.describe 'chefdk_bootstrap::kdiff3' do
+  include_context 'windows_2012'
+
+  it 'installs the kdiff3 visual diff tool' do
+    expect(windows_chef_run).to install_chocolatey('kdiff3')
+  end
+end
