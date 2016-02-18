@@ -18,14 +18,14 @@ maintainer       'Nordstrom, Inc.'
 maintainer_email 'techcheftm@nordstrom.com'
 license          'Apache 2.0'
 description      'Bootstrap a developer workstation for local Chef development using the ChefDK'
-version          '1.5.3'
+version          '1.5.4'
 
 supports 'windows'
 supports 'mac_os_x'
 
 depends 'chocolatey', '~> 0.6'
 depends 'homebrew', '~> 2.0'
-depends 'vagrant', '~> 0.4'
+depends 'vagrant', '~> 0.5'
 depends 'windows', '~> 1.39'
 
 source_url 'https://github.com/Nordstrom/chefdk_bootstrap'

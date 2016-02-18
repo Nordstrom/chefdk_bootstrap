@@ -68,8 +68,8 @@ RSpec.configure do |config|
   # get run.
   if ENV['CI']
     config.before(:example, :focus) do
-      fail ArgumentError,
-           'Failing the CI build because you have focused specs. See https://github.com/rspec/rspec-core/issues/1747.'
+      raise ArgumentError,
+            'Failing the CI build because you have focused specs. See https://github.com/rspec/rspec-core/issues/1747.'
     end
   else
     config.filter_run :focus
