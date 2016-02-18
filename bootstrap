@@ -62,7 +62,7 @@ EOF
 # create client.rb file so that Chef client can find its dependant cookbooks
 cat > "${tempInstallDir}/client.rb" <<EOF;
 cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
-Ohai::Config[:disabled_plugins] = [:Passwd]
+ohai.disabled_plugins = [:Passwd]
 EOF
 
 cat <<EOF;
