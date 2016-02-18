@@ -72,7 +72,7 @@ tmp
 
 # Cookbooks #
 #############
-CONTRIBUTING
+CONTRIBUTING.md
 
 # Strainer #
 ############
@@ -102,4 +102,5 @@ vendor/*
 
 # bootstrap scripts #
 #####################
+bootstrap
 bootstrap.ps1
