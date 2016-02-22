@@ -13,4 +13,4 @@
 # limitations under the License.
 #
 
-chocolatey 'gitextensions'
+chocolatey_package 'gitextensions'

@@ -94,7 +94,7 @@ then
 fi
 
 echo "Downloading cookbook dependencies with Berkshelf"
-cd "$tempInstallDir"
+cd "$tempInstallDir" || prompt_continue
 chef exec berks vendor || prompt_continue
 
 # Pass optional attributes to chef-client
@@ -108,7 +108,7 @@ echo "Running chef-client (installed by ChefDK) to bootstrap this machine"
 sudo -E chef-client -z -l error -c "${tempInstallDir}/client.rb" -o "$bootstrapCookbook" ${attributeParameter:-} || prompt_continue
 
 # cleanup
-cd -
+cd - || prompt_continue
 sudo rm -rf "$tempInstallDir"
 
 # End message to direct Mac users to last step in set up

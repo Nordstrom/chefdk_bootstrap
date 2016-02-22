@@ -16,16 +16,12 @@ RSpec.describe 'chefdk_bootstrap::atom' do
   context 'On a Windows machine' do
     include_context 'windows_2012'
 
-    it "downloads the Atom setup package to Chef's file_cache_path" do
-      expect(windows_chef_run).to create_remote_file(
-        'c:/chef/cache/AtomSetup.exe').with(
-          source: 'https://atom.io/download/windows',
-          backup: false
-        )
-    end
-
     it 'installs the downloaded package' do
-      expect(windows_chef_run).to install_windows_package('Atom').with(
+      expect(windows_chef_run).to install_package('Atom').with(
+        source: 'https://atom.io/download/windows',
+        remote_file_attributes: {
+          backup: false
+        },
         installer_type: :custom,
         options: '/silent'
       )

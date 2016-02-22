@@ -13,4 +13,4 @@
 # limitations under the License.
 #
 
-chocolatey 'kdiff3'
+chocolatey_package 'kdiff3'

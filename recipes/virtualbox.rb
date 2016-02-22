@@ -15,7 +15,7 @@
 
 case node['platform_family']
 when 'windows'
-  chocolatey 'virtualbox'
+  chocolatey_package 'virtualbox'
 when 'mac_os_x'
   homebrew_cask 'virtualbox'
 end

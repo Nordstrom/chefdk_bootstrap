@@ -3,7 +3,8 @@ RSpec.describe 'chefdk_bootstrap::virtualbox' do
     include_context 'windows_2012'
 
     it 'installs Virtualbox via Chocolatey' do
-      expect(windows_chef_run).to install_chocolatey('virtualbox')
+      pending('Waiting on chocolatey_package matchers in ChefSpec 4.6')
+      expect(windows_chef_run).to install_chocolatey_package('virtualbox')
     end
   end
 
