@@ -65,7 +65,6 @@ cookbook '$bootstrapCookbook'
 
 $chefConfig = @"
 cookbook_path File.join(Dir.pwd, 'berks-cookbooks')
-ohai.disabled_plugins = [:Passwd]
 "@
 
 $introduction = @"
