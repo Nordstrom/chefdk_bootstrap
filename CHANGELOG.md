@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## Unreleased
+* Switch from chocolatey resource in Chocolatey cookbook to chocolatey_package
+  resource in Chef 12.7
+  
 ## 1.5.4
 * Use sudo to remove temporary directory
 * Switch .kitchen.yml to use @mwrockx's Windows2012R2 Atlas Vagrant box.

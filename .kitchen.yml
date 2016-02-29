@@ -15,3 +15,6 @@ suites:
   - name: default
     run_list:
       - recipe[chefdk_bootstrap]
+
+verifier:
+  name: inspec
