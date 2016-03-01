@@ -15,6 +15,7 @@
 
 extend Windows::Helper
 
+# PowerShell AllUsersAllHosts profile
 powershell_profile = File.join(locate_sysnative_cmd('WindowsPowerShell\v1.0'), 'profile.ps1')
 
 template powershell_profile do

@@ -15,7 +15,7 @@
 
 case node['platform_family']
 when 'windows'
-  package 'Atom' do
+  windows_package 'Atom' do
     source node['chefdk_bootstrap']['atom']['source_url']
     remote_file_attributes(
       backup: false

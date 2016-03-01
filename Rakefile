@@ -34,7 +34,6 @@ RuboCop::RakeTask.new do |t|
     test/**/*.rb
     ./metadata.rb
     ./Berksfile
-    ./Gemfile
     ./Rakefile
   )
 end

@@ -17,7 +17,7 @@ RSpec.describe 'chefdk_bootstrap::atom' do
     include_context 'windows_2012'
 
     it 'installs the downloaded package' do
-      expect(windows_chef_run).to install_package('Atom').with(
+      expect(windows_chef_run).to install_windows_package('Atom').with(
         source: 'https://atom.io/download/windows',
         remote_file_attributes: {
           backup: false

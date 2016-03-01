@@ -17,5 +17,9 @@ case node['platform_family']
 when 'windows'
   chocolatey_package 'virtualbox'
 when 'mac_os_x'
-  homebrew_cask 'virtualbox'
+  dmg_package 'Virtualbox' do
+    source node['chefdk_bootstrap']['virtualbox']['source']
+    checksum node['chefdk_bootstrap']['virtualbox']['checksum']
+    type 'pkg'
+  end
 end

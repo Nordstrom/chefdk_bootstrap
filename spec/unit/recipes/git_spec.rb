@@ -3,17 +3,17 @@ RSpec.describe 'chefdk_bootstrap::git' do
     include_context 'windows_2012'
 
     it 'installs the correct version of Git' do
-      pending('Waiting on chocolatey_package matchers in ChefSpec 4.6')
+      skip('Waiting on chocolatey_package matchers in ChefSpec 4.6')
       expect(windows_chef_run).to install_chocolatey_package('git')
     end
 
     it 'installs the Git credential helper' do
-      pending('Waiting on chocolatey_package matchers in ChefSpec 4.6')
+      skip('Waiting on chocolatey_package matchers in ChefSpec 4.6')
       expect(windows_chef_run).to install_chocolatey_package('git-credential-manager-for-windows')
     end
 
     it 'installs poshgit' do
-      pending('Waiting on chocolatey_package matchers in ChefSpec 4.6')
+      skip('Waiting on chocolatey_package matchers in ChefSpec 4.6')
       expect(windows_chef_run).to install_chocolatey_package('poshgit')
     end
   end
