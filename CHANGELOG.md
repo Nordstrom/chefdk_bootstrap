@@ -1,13 +1,14 @@
 # Revision History for chefdk_bootstrap
 
-## Unreleased
+## 1.6.0
 * Switch from chocolatey resource in Chocolatey cookbook to chocolatey_package
   resource in Chef 12.7
-  
+* Install Virtualbox on Mac via [`dmg_package`](https://github.com/chef-cookbooks/dmg#dmg_package) resource instead of homebrew. Fixes [#97](https://github.com/Nordstrom/chefdk_bootstrap/issues/97).
+
 ## 1.5.4
 * Use sudo to remove temporary directory
 * Switch .kitchen.yml to use @mwrockx's Windows2012R2 Atlas Vagrant box.
-* Mac: Fix #81 by hiding script download progress from curl
+* Mac: Fix [#81](https://github.com/Nordstrom/chefdk_bootstrap/issues/81) by hiding script download progress from cURL
 * Improve spec coverage from 46% to 87%
 * Bootstrap now writes correct Ohai disabled_plugins syntax to remove deprecation warning.
 
@@ -19,8 +20,7 @@ since creating these directories has been moved to the cookbook.
 
 ## 1.5.2
 * Bump homebrew dependency to ~> 2.0 because Homebrew cookbook v2.0.4 fixes
-chef-cookbooks/homebrew#87. This will fix the bootstrap for Mac users.
-
+[chef-cookbooks/homebrew#87](https://github.com/chef-cookbooks/homebrew/issues/87). This will fix the bootstrap for Mac users.
 * Update Windows cookbook dependency
 
 ## 1.5.1
@@ -39,26 +39,28 @@ tests by setting `node['vagrant']['checksum']` attribute in Chef runs.
 
 ## 1.4.0
 * create ~/.chef, ~/chef, ~/chef/cookbooks
-* fixes #43
+* fixes [#43](https://github.com/Nordstrom/chefdk_bootstrap/issues/43)
 
 ## 1.3.3
 * Mac OS X: create /opt/homebrew-cask directory
-* fixes #60
+* fixes [#60](https://github.com/Nordstrom/chefdk_bootstrap/issues/60)
 
 ## 1.3.2
 * Windows: Check for Admin rights or exit
 * Windows: Use omnitruck ChefDK installation, selecting specific version
 * Windows: Check installed ChefDK version, do the right thing.
 * Windows: Check for error status after various commands
-* fixes #56
-* fixes #49
-* fixes #33
+* fixes [#56](https://github.com/Nordstrom/chefdk_bootstrap/issues/56)
+* fixes [#49](https://github.com/Nordstrom/chefdk_bootstrap/issues/49)
+* fixes [#33](https://github.com/Nordstrom/chefdk_bootstrap/issues/33)
 
 ## 1.3.1
-* Switch from brew-cask to omnitruck chefdk installation for mac osx
-* Make bootstrap incrementally more robust on mac osx
-* fixes #33, #45
-* fixes #56 on mac osx, still an issue on windows
+* Switch from brew-cask to omnitruck chefdk installation for Mac OS X
+* Make bootstrap incrementally more robust on Mac OS X
+* fixes [#33](https://github.com/Nordstrom/chefdk_bootstrap/issues/33)
+* Fixes [#45](https://github.com/Nordstrom/chefdk_bootstrap/issues/45)
+* fixes [#56](https://github.com/Nordstrom/chefdk_bootstrap/issues/56) on mac osx,
+  still an issue on windows
 
 ## 1.3.0
 * Depend on chocolatey 0.5.0 to improve installation behind a proxy
@@ -72,8 +74,8 @@ tests by setting `node['vagrant']['checksum']` attribute in Chef runs.
 * Minor edits to README for clarity
 
 ## 1.2.3
-* Make non-proxy README instructions work for Windows. Fixes #35
-* Clear screen as first step in bootstrap script. Fixes #34
+* Make non-proxy README instructions work for Windows. Fixes [#35](https://github.com/Nordstrom/chefdk_bootstrap/issues/35)
+* Clear screen as first step in bootstrap script. Fixes [#34](https://github.com/Nordstrom/chefdk_bootstrap/issues/34)
 
 ## 1.2.2
 * Add Apache 2.0 license header.
@@ -97,7 +99,7 @@ tests by setting `node['vagrant']['checksum']` attribute in Chef runs.
 
 ## 1.1.0
 * Set proxy environment variables in powershell_profile.
-* This enables command-line tools like git, curl, and Test Kitchen to work behind a proxy.
+* This enables command-line tools like git, cURL, and Test Kitchen to work behind a proxy.
 
 ## 1.0.3
 * Fix bug in Atom setup for Windows

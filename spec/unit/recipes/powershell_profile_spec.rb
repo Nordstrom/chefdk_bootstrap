@@ -16,6 +16,8 @@
 RSpec.describe 'chefdk_bootstrap::powershell_profile' do
   include_context 'windows_mocks'
 
+  let(:ps_all_users_profile) { 'C:\WINDOWS\sysnative\WindowsPowerShell\v1.0/profile.ps1'.freeze }
+
   context 'When cookbook proxy attributes are not set' do
     include_context 'windows_2012'
 
@@ -26,12 +28,12 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile' do
     end
 
     it 'creates the PowerShell AllUsersAllHosts profile if missing' do
-      expect(windows_chef_run).to create_template_if_missing('C:\WINDOWS\sysnative\WindowsPowerShell\v1.0/profile.ps1')
+      expect(windows_chef_run).to create_template_if_missing(ps_all_users_profile)
     end
 
     it "the rendered profile doesn't contain proxy env vars" do
       expect(windows_chef_run)
-        .to render_file('C:\WINDOWS\sysnative\WindowsPowerShell\v1.0/profile.ps1')
+        .to render_file(ps_all_users_profile)
           .with_content { |content|
             expect(content).to_not include('$env:http_proxy')
           }
@@ -49,23 +51,21 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile' do
       end.converge(described_recipe)
     end
 
-    let(:all_users_profile) { 'C:\WINDOWS\sysnative\WindowsPowerShell\v1.0/profile.ps1' }
-
     it 'the rendered profile sets the http_proxy env var' do
       expect(windows_chef_run)
-        .to render_file(all_users_profile)
+        .to render_file(ps_all_users_profile)
         .with_content("$env:http_proxy = 'http://myproxy.example.com:1234'")
     end
 
     it 'the rendered profile sets the https_proxy env var' do
       expect(windows_chef_run)
-        .to render_file(all_users_profile)
+        .to render_file(ps_all_users_profile)
         .with_content('$env:https_proxy = $env:http_proxy')
     end
 
     it 'the rendered profile sets the no_proxy env var' do
       expect(windows_chef_run)
-        .to render_file(all_users_profile)
+        .to render_file(ps_all_users_profile)
         .with_content("$env:no_proxy = 'example.com,localhost,127.0.0.1'")
     end
   end
