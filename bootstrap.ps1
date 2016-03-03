@@ -20,7 +20,7 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Break
 }
 
-$targetChefDk = '0.11.0'
+$targetChefDk = '0.11.2'
 $bootstrapCookbook = 'chefdk_bootstrap'
 
 function promptContinue {
