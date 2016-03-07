@@ -1,7 +1,7 @@
 # Revision History for chefdk_bootstrap
 
 ## 1.6.1
-* Fix Atom install on Windows. Fixes [#109](https://github.com/Nordstrom/chefdk_bootstrap/issues/97).
+* Fix Atom install on Windows. Fixes [#109](https://github.com/Nordstrom/chefdk_bootstrap/issues/109).
 
 ## 1.6.0
 * Switch from chocolatey resource in Chocolatey cookbook to chocolatey_package
