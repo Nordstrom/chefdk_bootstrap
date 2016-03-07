@@ -1,0 +1,7 @@
+name 'win_proxy'
+maintainer 'Nordstrom, Inc.'
+maintainer_email 'techcheftm@nordstrom.com'
+license 'Apache 2.0'
+description 'Installs/Configures win_proxy'
+long_description 'Installs/Configures win_proxy'
+version '0.1.0'

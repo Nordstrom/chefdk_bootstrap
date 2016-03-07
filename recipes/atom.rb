@@ -18,7 +18,7 @@ when 'windows'
   windows_package 'Atom' do
     source node['chefdk_bootstrap']['atom']['source_url']
     remote_file_attributes(
-      backup: false
+      path: File.join(Chef::Config[:file_cache_path], 'AtomSetup.exe')
     )
     installer_type :custom
     options '/silent'

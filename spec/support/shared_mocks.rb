@@ -7,7 +7,7 @@ RSpec.shared_context 'windows_mocks' do
       end
     end
 
-    allow_any_instance_of(Chef::Resource::RemoteFile).to receive(
+    allow_any_instance_of(Chef::Resource::Template).to receive(
       :chocolatey_installed?).and_return(true)
 
     allow_any_instance_of(Chef::Recipe)

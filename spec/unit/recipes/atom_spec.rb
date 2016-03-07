@@ -20,7 +20,7 @@ RSpec.describe 'chefdk_bootstrap::atom' do
       expect(windows_chef_run).to install_windows_package('Atom').with(
         source: 'https://atom.io/download/windows',
         remote_file_attributes: {
-          backup: false
+          path: 'c:/chef/cache/AtomSetup.exe'
         },
         installer_type: :custom,
         options: '/silent'
