@@ -7,7 +7,7 @@ addons:
       - chefdk
 
 # Don't `bundle install`
-install: echo "skip bundle install"
+install: echo 'skipping bundle install'
 
 # Ensure we make ChefDK's Ruby the default
 before_script:
@@ -17,9 +17,11 @@ before_script:
 script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/rubocop --version
-  - /opt/chefdk/embedded/bin/rubocop
   - /opt/chefdk/embedded/bin/foodcritic --version
+  # print out ChefSpec version
+  - /opt/chefdk/embedded/bin/chef gem list chefspec
+  - /opt/chefdk/embedded/bin/rubocop
   - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
-  - /opt/chefdk/embedded/bin/rspec spec
+  - /opt/chefdk/embedded/bin/rspec spec -f doc
 matrix:
   fast_finish: true
