@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 1.6.2
+* Use atom cookbook to install Atom
+
 ## 1.6.1
 * Fix Atom install on Windows. Fixes [#109](https://github.com/Nordstrom/chefdk_bootstrap/issues/109).
 
