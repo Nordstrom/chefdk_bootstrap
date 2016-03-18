@@ -1,4 +1,7 @@
-# Copyright 2015 Nordstrom, Inc.
+# Cookbook Name:: chefdk_bootstrap
+# Rakefile
+
+# Copyright 2016 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,40 +14,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-require 'foodcritic'
-require 'foodcritic/rake_task'
-require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
+require 'foodcritic'
+require 'rspec/core/rake_task'
 
-# Style tests (Foodcritic)
-FoodCritic::Rake::LintTask.new
-
-RuboCop::RakeTask.new do |t|
-  t.formatters = ['progress']
-  t.options = ['-D']
-  t.patterns = %w(
-    attributes/*.rb
-    recipes/*.rb
-    libraries/**/*.rb
-    resources/*.rb
-    providers/*.rb
-    spec/**/*.rb
-    test/**/*.rb
-    ./metadata.rb
-    ./Berksfile
-    ./Rakefile
-  )
+RuboCop::RakeTask.new do |rubocop|
+  rubocop.options = ['-D']
 end
 
-desc 'Run Style Tests'
-task style: [:foodcritic, :rubocop]
+FoodCritic::Rake::LintTask.new
 
-# ChefSpec (RSpec)
 RSpec::Core::RakeTask.new
 
-task default: [:style, :spec]
+desc 'Run Rubocop and Foodcritic style checks'
+task style: [:rubocop, :foodcritic]
+
+desc 'Run all style checks and unit tests'
+task test: [:style, :spec]
+
+task default: :test
 
 desc 'Generate ChefSpec coverage report'
 task :coverage do
@@ -52,17 +41,15 @@ task :coverage do
   Rake::Task[:spec].invoke
 end
 
-# Test Kitchen
 begin
-  require 'kitchen/rake_tasks'
-  Kitchen::RakeTasks.new
+  require 'stove/rake_task'
+  Stove::RakeTask.new
 rescue LoadError
-  warn 'test-kitchen initialization failed; disabling kitchen tasks'
+  puts '>>>>> Stove gem not installed' unless ENV['CI']
 end
 
-# if we are running inside the CI pipeline, turn on
-# xUnit-style test reports
-if ENV.key?('CI_BUILD')
-  require 'ci/reporter/rake/rspec'
-  task spec: 'ci:setup:rspec'
+# don't require kitchen rake tasks in Travis-CI
+unless ENV['CI']
+  require 'kitchen/rake_tasks'
+  Kitchen::RakeTasks.new
 end
