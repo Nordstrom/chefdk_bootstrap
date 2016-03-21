@@ -16,23 +16,16 @@ RSpec.describe 'chefdk_bootstrap::atom' do
   context 'On a Windows machine' do
     include_context 'windows_2012'
 
-    it 'installs the downloaded package' do
-      expect(windows_chef_run).to install_windows_package('Atom').with(
-        source: 'https://atom.io/download/windows',
-        remote_file_attributes: {
-          path: 'c:/chef/cache/AtomSetup.exe'
-        },
-        installer_type: :custom,
-        options: '/silent'
-      )
+    it 'installs Atom via the Atom cookbook' do
+      expect(windows_chef_run).to include_recipe('atom')
     end
   end
 
   context 'On a Mac' do
     include_context 'mac_os_x'
 
-    it 'installs Atom via homebrew_cask' do
-      expect(mac_os_x_chef_run).to install_homebrew_cask('atom')
+    it 'installs Atom via the Atom cookbook' do
+      expect(mac_os_x_chef_run).to include_recipe('atom')
     end
   end
 end

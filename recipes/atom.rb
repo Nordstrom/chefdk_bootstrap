@@ -13,16 +13,4 @@
 # limitations under the License.
 #
 
-case node['platform_family']
-when 'windows'
-  windows_package 'Atom' do
-    source node['chefdk_bootstrap']['atom']['source_url']
-    remote_file_attributes(
-      path: File.join(Chef::Config[:file_cache_path], 'AtomSetup.exe')
-    )
-    installer_type :custom
-    options '/silent'
-  end
-when 'mac_os_x'
-  homebrew_cask 'atom'
-end
+include_recipe 'atom'
