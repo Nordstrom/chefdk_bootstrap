@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## Unreleased
+* Install ChefDK 0.12 via bootstrap script
+
 ## 1.6.2
 * Use atom cookbook to install Atom
 
