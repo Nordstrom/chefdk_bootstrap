@@ -20,7 +20,7 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Break
 }
 
-$targetChefDk = '0.11.2'
+$targetChefDk = '0.12.0'
 $bootstrapCookbook = 'chefdk_bootstrap'
 
 function promptContinue {
@@ -94,7 +94,7 @@ $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 
 # Install ChefDK from chef omnitruck, unless installed already
 Write-Host "Checking for installed ChefDK version"
-$app = Get-CimInstance -classname win32_product -filter "Name like 'chef development kit%'"
+$app = Get-CimInstance -classname win32_product -filter "Name like 'Chef Development Kit%'"
 $version = $app.Version
 if ( $version -like "$targetChefDk*" ) {
   Write-Host "The ChefDK version $version is already installed."
