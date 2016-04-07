@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright 2016 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,13 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-describe command('atom -v') do
-  its(:exit_status) { should eq 0 }
-  its(:stderr) { should eq '' }
-end
-
-describe command('vagrant -v') do
-  its(:exit_status) { should eq(0) }
+describe file('C:\Program Files (x86)\GitExtensions\GitExtensions.exe') do
+  it { should be_file }
 end
