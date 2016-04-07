@@ -2,9 +2,11 @@
 
 ## Unreleased
 * Install ChefDK 0.12 via bootstrap script
+* Add InSpec integration tests for each (Windows) component
+* Recommend PowerShell 5.0 instead of 4.0 in README
 
 ## 1.6.2
-* Use atom cookbook to install Atom
+* Use [atom cookbook](https://supermarket.chef.io/cookbooks/atom) to install Atom
 
 ## 1.6.1
 * Fix Atom install on Windows. Fixes [#109](https://github.com/Nordstrom/chefdk_bootstrap/issues/109).
