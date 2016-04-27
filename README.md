@@ -144,6 +144,9 @@ for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 ### atom
 * Installs the Atom editor
 
+### conemu
+* On Windows, installs [ConEmu](https://conemu.github.io/) (a console replacement)
+
 ### git
 * Installs git.
 * On Windows, installs git-credential-winstore, and posh-git.

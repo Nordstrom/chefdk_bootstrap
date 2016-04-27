@@ -28,12 +28,13 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['chefdk_julia'] = false
 end
 
-# windows specific
+# platform specific
 case node['platform_family']
 when 'windows'
   default['chefdk_bootstrap']['package'].tap do |install|
     install['kdiff3'] = true
     install['gitextensions'] = true
+    install['conemu'] = true
   end
 when 'mac_os_x'
   default['chefdk_bootstrap']['package'].tap do |install|

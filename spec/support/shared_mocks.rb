@@ -14,6 +14,9 @@ RSpec.shared_context 'windows_mocks' do
       .to receive(:locate_sysnative_cmd)
       .with('WindowsPowerShell\v1.0')
       .and_return('C:\WINDOWS\sysnative\WindowsPowerShell\v1.0')
+
+    stub_command('(& "C:\Program Files\ConEmu\ConEmu\ConEmuC.exe" /IsConEmu); $LASTEXITCODE -eq 1')
+      .and_return(false)
   end
 
   after do
