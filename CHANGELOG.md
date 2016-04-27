@@ -1,7 +1,7 @@
 # Revision History for chefdk_bootstrap
 
-## Unreleased
-* Install ChefDK 0.12 via bootstrap script
+## 1.7.0
+* Install ChefDK 0.13.21 via bootstrap script
 * Add InSpec integration tests for each (Windows) component
 * Recommend PowerShell 5.0 instead of 4.0 in README
 * Add ConEmu on Windows (Issue #115)
