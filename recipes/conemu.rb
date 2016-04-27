@@ -14,7 +14,8 @@
 #
 
 chocolatey_package 'conemu' do
-  # If conemu was installed outside chocolatey, there's a good chance
-  # that it's being used to run this script - avoid upgrading a running program
-  not_if { Dir.exist?('C:\Program Files\ConEmu') }
+  # If conemu was installed outside chocolatey, it could be running this
+  # installation script and we don't want to touch it
+  not_if '(& "C:\Program Files\ConEmu\ConEmu\ConEmuC.exe" /IsConEmu); $LASTEXITCODE -eq 1'
+  guard_interpreter :powershell_script
 end

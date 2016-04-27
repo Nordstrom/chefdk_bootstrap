@@ -15,9 +15,9 @@
 RSpec.describe 'chefdk_bootstrap::conemu' do
   context 'On a Windows machine' do
     include_context 'windows_2012'
+    include_context 'windows_mocks'
 
-    it 'installs ConEmu via chocolatey when it has not been previously installed' do
-      allow(Dir).to receive(:exist?).with('C:\Program Files\ConEmu').and_return(false)
+    it 'installs ConEmu via chocolatey when the recipe is not running inside ConEmu' do
       expect(windows_chef_run).to install_chocolatey_package('conemu')
     end
   end

@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-describe file('C:\Program Files\ConEmu') do
-  it { should be_directory }
+describe command('C:\Program Files\ConEmu\ConEmu\ConEmuC.exe') do
+  its(:stderr) { should match(/ConEmu/) }
 end
