@@ -4,6 +4,7 @@
 * Install ChefDK 0.12 via bootstrap script
 * Add InSpec integration tests for each (Windows) component
 * Recommend PowerShell 5.0 instead of 4.0 in README
+* Add ConEmu on Windows (Issue #115)
 
 ## 1.6.2
 * Use [atom cookbook](https://supermarket.chef.io/cookbooks/atom) to install Atom
