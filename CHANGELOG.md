@@ -5,6 +5,7 @@
 * Add InSpec integration tests for each (Windows) component
 * Recommend PowerShell 5.0 instead of 4.0 in README
 * Add ConEmu on Windows (Issue #115)
+* Fix PowerShell color contrast issues (Issues #40, #117)
 
 ## 1.6.2
 * Use [atom cookbook](https://supermarket.chef.io/cookbooks/atom) to install Atom
