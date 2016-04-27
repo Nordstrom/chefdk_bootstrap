@@ -29,3 +29,15 @@ $env:no_proxy = '<%= node['chefdk_bootstrap']['proxy']['no_proxy'] %>'
 
 # let ChefDK set up our environment variables properly
 chef shell-init powershell | Invoke-Expression
+
+
+# Powershell Color settings
+# Set the default foreground color to white so that colored messages from rspec,
+# test kitchen and others show up "bright" for readability.
+
+$using_default_colors = ($Host.UI.RawUI.ForegroundColor -eq 'DarkYellow' -and $Host.UI.RawUI.BackgroundColor -eq 'DarkMagenta')
+
+# Only change the colors if they have been left in a default state
+if ($using_default_colors) {
+  $Host.UI.RawUI.ForegroundColor = 'White'
+}
