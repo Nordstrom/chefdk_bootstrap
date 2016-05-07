@@ -1,0 +1,57 @@
+# Copyright 2016 Nordstrom, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+<% if node['chefdk_bootstrap']['proxy']['http'] -%>
+<#
+ .Synopsis
+  Sets proxy environment variables used by ChefDK command-line tools, e.g.
+  curl, chef-client, Berkshelf, etc.
+
+ .Description
+  Sets proxy environment variables used by ChefDK command-line tools, e.g.
+  curl, chef-client, Berkshelf, etc.
+
+#>
+function Set-Proxy {
+  $env:http_proxy = '<%= node['chefdk_bootstrap']['proxy']['http'] %>'
+  $env:https_proxy = $env:http_proxy
+
+  <% if node['chefdk_bootstrap']['proxy']['no_proxy'] -%>
+  $env:no_proxy = '<%= node['chefdk_bootstrap']['proxy']['no_proxy'] %>'
+  <% end -%>
+}
+
+function Remove-Proxy {
+  Remove-Item Env:\http_proxy
+  Remove-Item Env:\https_proxy
+  Remove-Item Env:\no_proxy
+}
+<% end -%>
+
+function Set-PSColors {
+  # Powershell Color settings
+  # Set the default PS console foreground color to White so that
+  # colored messages from RSpec, Test Kitchen and friends
+  # show up "bright" for readability.
+  #
+  # Default PS console (i.e. blue background, white text) colors are really
+  # DarkYellow and DarkMagenta for some reason.
+  $using_default_colors = ($Host.UI.RawUI.ForegroundColor -eq 'DarkYellow' -and
+    $Host.UI.RawUI.BackgroundColor -eq 'DarkMagenta')
+
+  # Only change the colors if they have been left in a default state
+  if ($using_default_colors) {
+    $Host.UI.RawUI.ForegroundColor = 'White'
+  }
+}

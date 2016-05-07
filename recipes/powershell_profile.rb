@@ -13,12 +13,30 @@
 # limitations under the License.
 #
 
-extend Windows::Helper
+directory 'C:\opscode\chefdk\modules\chefdk_bootstrap'
 
-# PowerShell AllUsersAllHosts profile
-powershell_profile = File.join(locate_sysnative_cmd('WindowsPowerShell\v1.0'), 'profile.ps1')
+template 'C:\opscode\chefdk\modules\chefdk_bootstrap\chefdk_bootstrap.psm1' do
+  source 'chefdk_bootstrap.psm1.erb'
+end
 
-template powershell_profile do
+current_user_all_hosts_profile = win_friendly_path(File.join(Dir.home, 'Documents\WindowsPowerShell\Profile.ps1'))
+
+file current_user_all_hosts_profile do
   action :create_if_missing
-  source 'global_profile.ps1.erb'
+end
+
+append_if_no_line 'Setup ChefDK environment for PowerShell' do
+  path lazy { current_user_all_hosts_profile }
+  line 'chef shell-init powershell | Invoke-Expression'
+end
+
+append_if_no_line 'Set-PSColors' do
+  path lazy { current_user_all_hosts_profile }
+  line 'Set-PSColors'
+end
+
+append_if_no_line 'Set proxy env vars in Current User profile' do
+  path lazy { current_user_all_hosts_profile }
+  line 'Set-Proxy'
+  only_if { node['chefdk_bootstrap']['proxy']['http'] }
 end

@@ -13,6 +13,14 @@
 # limitations under the License.
 
 # PowerShell profile
-describe file('C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1') do
-  its('content') { should match(/chef shell-init powershell/) }
+describe file('C:/Users/Vagrant/Documents/WindowsPowerShell/Profile.ps1') do
+  its('content') { should match(/chef shell-init powershell\s*\|\s*Invoke-Expression/i) }
+  its('content') { should match(/Set-PSColors/i) }
+  its('content') { should_not match(/Import-Module chef/i) }
+
+  if ENV['http_proxy']
+    its('content') { should match(/Set-Proxy/) }
+  else
+    its('content') { should_not match(/Set-Proxy/) }
+  end
 end
