@@ -23,7 +23,7 @@
   curl, chef-client, Berkshelf, etc.
 
 #>
-function Set-Proxy {
+function Add-Proxy {
   $env:http_proxy = '<%= node['chefdk_bootstrap']['proxy']['http'] %>'
   $env:https_proxy = $env:http_proxy
 
@@ -54,4 +54,10 @@ function Set-PSColors {
   if ($using_default_colors) {
     $Host.UI.RawUI.ForegroundColor = 'White'
   }
+}
+
+function Enable-ChefDKBootstrap {
+  chef shell-init powershell | Invoke-Expression
+
+  Set-PSColors
 }

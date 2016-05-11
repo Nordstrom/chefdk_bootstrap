@@ -19,11 +19,3 @@ suites:
     run_list:
       - recipe[win_proxy]
       - recipe[chefdk_bootstrap]
-    attributes:
-      chefdk_bootstrap:
-        package:
-          atom: false
-          git: false
-          kdiff3: false
-          virtualbox: false
-          vagrant: false

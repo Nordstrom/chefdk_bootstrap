@@ -43,22 +43,15 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile' do
       expect(windows_chef_run).to create_file_if_missing(current_user_all_hosts_profile)
     end
 
+    it "doesn't setup proxy env vars" do
+      expect(windows_chef_run).to_not edit_append_if_no_line('Set proxy env vars in Current User profile')
+    end
+
     it "sets up the ChefDK environment via 'chef shell-init'" do
       expect(windows_chef_run).to edit_append_if_no_line('Setup ChefDK environment for PowerShell').with(
         path: current_user_all_hosts_profile,
-        line: 'chef shell-init powershell | Invoke-Expression'
+        line: 'Enable-ChefDKBootstrap'
       )
-    end
-
-    it 'calls the Set-PSColors function' do
-      expect(windows_chef_run).to edit_append_if_no_line('Set-PSColors').with(
-        path: current_user_all_hosts_profile,
-        line: 'Set-PSColors'
-      )
-    end
-
-    it "doesn't setup proxy env vars" do
-      expect(windows_chef_run).to_not edit_append_if_no_line('Set proxy env vars in Current User profile')
     end
   end
 
@@ -76,7 +69,7 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile' do
     it 'the rendered profile sets the http_proxy env var' do
       expect(windows_chef_run).to edit_append_if_no_line('Set proxy env vars in Current User profile').with(
         path: current_user_all_hosts_profile,
-        line: 'Set-Proxy'
+        line: 'Add-Proxy'
       )
     end
   end

@@ -14,13 +14,11 @@
 
 # PowerShell profile
 describe file('C:/Users/Vagrant/Documents/WindowsPowerShell/Profile.ps1') do
-  its('content') { should match(/chef shell-init powershell\s*\|\s*Invoke-Expression/i) }
-  its('content') { should match(/Set-PSColors/i) }
-  its('content') { should_not match(/Import-Module chef/i) }
+  its('content') { should match(/Enable-ChefDKBootstrap/i) }
 
   if ENV['http_proxy']
-    its('content') { should match(/Set-Proxy/) }
+    its('content') { should match(/Add-Proxy/) }
   else
-    its('content') { should_not match(/Set-Proxy/) }
+    its('content') { should_not match(/Add-Proxy/) }
   end
 end
