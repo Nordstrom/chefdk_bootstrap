@@ -11,11 +11,11 @@ platforms:
     driver_config:
       box: mwrock/Windows2012R2
 
+verifier:
+  name: inspec
+
 suites:
   - name: default
     run_list:
       - recipe[win_proxy]
       - recipe[chefdk_bootstrap]
-
-verifier:
-  name: inspec

@@ -1,5 +1,17 @@
 # Revision History for chefdk_bootstrap
 
+## 1.8.0
+* Fix [#130](https://github.com/Nordstrom/chefdk_bootstrap/issues/130):
+  Move PowerShell Profile customizations to a PowerShell module on the $env:PSModulePath
+
+* Fix [#75](https://github.com/Nordstrom/chefdk_bootstrap/issues/75):
+  Write PowerShell profile customizations to $Profile.CurrentUserAllHosts
+
+### Upgrading from 1.7
+This cookbook no longer writes C:\WINDOWS\System32\WindowsPowerShell\v1.0\profile.ps1.
+If you are upgrading from 1.7 or earlier you will need to remove [the lines added by the chefdk_bootstrap in v1.7.0](https://github.com/Nordstrom/chefdk_bootstrap/blob/v1.7.0/templates/windows/global_profile.ps1.erb)
+or delete the file.
+
 ## 1.7.0
 * Install ChefDK 0.13.21 via bootstrap script
 * Add InSpec integration tests for each (Windows) component
