@@ -167,6 +167,8 @@ if (Test-Path berks-cookbooks) {
   Remove-Item -Recurse berks-cookbooks
 }
 
+Remove-Item env:BERKSHELF_CHEF_CONFIG
+
 Pop-Location
 
 # End message to indicate completion of setup

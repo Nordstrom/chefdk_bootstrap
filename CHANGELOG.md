@@ -1,6 +1,8 @@
 # Revision History for chefdk_bootstrap
 
 ## Unreleased
+* Fex [#133](https://github.com/Nordstrom/chefdk_bootstrap/issues/133):
+  Clean up berkshelf environment variable from Windows bootstrap
 * Fix [#47](https://github.com/Nordstrom/chefdk_bootstrap/issues/47):
   Add kitchen config.yml file to pass through proxy settings (when needed)
 
