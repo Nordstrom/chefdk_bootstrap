@@ -26,6 +26,7 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['vagrant'] = true
   install['git'] = true
   install['chefdk_julia'] = false
+  install['kitchen_proxy'] = true
 end
 
 # platform specific
