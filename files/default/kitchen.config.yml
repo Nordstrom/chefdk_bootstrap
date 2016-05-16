@@ -1,0 +1,19 @@
+<%
+  proxy_vars = {}
+  %w(http_proxy https_proxy no_proxy).each do |envvar|
+     if ENV.key?(envvar)
+       proxy_vars[envvar] = ENV[envvar]
+     end
+  end
+%>
+---
+driver:
+  name: vagrant
+
+<% unless proxy_vars.empty? %>
+driver_config:
+<% proxy_vars.each do |envvar, value| %>
+  <%= envvar %>: '<%= value %>'
+<% end %>
+
+<% end %>

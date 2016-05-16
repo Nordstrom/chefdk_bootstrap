@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## Unreleased
+* Fix [#47](https://github.com/Nordstrom/chefdk_bootstrap/issues/47):
+  Add kitchen config.yml file to pass through proxy settings (when needed)
+
 ## 1.8.0
 * Fix [#130](https://github.com/Nordstrom/chefdk_bootstrap/issues/130):
   Move PowerShell Profile customizations to a PowerShell module on the $env:PSModulePath
