@@ -1,10 +1,10 @@
 # Revision History for chefdk_bootstrap
 
 ## Unreleased
-* Fix [#134](https://github.com/Nordstrom/chefdk_bootstrap/issues/132):
+* Fix [#134](https://github.com/Nordstrom/chefdk_bootstrap/issues/134):
   Put SSH on the path so `kitchen login` works
 * Fix [#132](https://github.com/Nordstrom/chefdk_bootstrap/issues/132):
-  Add comments to CurrentUserAllHosts
+  Add comments to $Profile.CurrentUserAllHosts PowerShell profile
 * Fix [#63](https://github.com/Nordstrom/chefdk_bootstrap/issues/63):
   Dry up the cleanup in the Windows bootstrap
 * Fix [#133](https://github.com/Nordstrom/chefdk_bootstrap/issues/133):
