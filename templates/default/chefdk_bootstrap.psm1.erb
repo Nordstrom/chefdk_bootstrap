@@ -14,11 +14,12 @@
 
 <% if node['chefdk_bootstrap']['proxy']['http'] -%>
 <#
- .Synopsis
+
+ .SYNOPSIS
   Sets proxy environment variables used by ChefDK command-line tools, e.g.
   curl, chef-client, Berkshelf, etc.
 
- .Description
+ .DESCRIPTION
   Sets proxy environment variables used by ChefDK command-line tools, e.g.
   curl, chef-client, Berkshelf, etc.
 
@@ -39,12 +40,20 @@ function Remove-Proxy {
 }
 <% end -%>
 
+<#
+
+.SYNOPSIS
+Fix Test-Kitchen and RSpec text color in default PowerShell console.
+
+.DESCRIPTION
+Set the default PS console foreground color to White so that
+colored messages from RSpec, Test Kitchen and friends
+show up "bright" for readability.
+
+#>
 function Set-PSColors {
   # Powershell Color settings
-  # Set the default PS console foreground color to White so that
-  # colored messages from RSpec, Test Kitchen and friends
-  # show up "bright" for readability.
-  #
+
   # Default PS console (i.e. blue background, white text) colors are really
   # DarkYellow and DarkMagenta for some reason.
   $using_default_colors = ($Host.UI.RawUI.ForegroundColor -eq 'DarkYellow' -and
@@ -56,11 +65,28 @@ function Set-PSColors {
   }
 }
 
-# Adds SSH and other tools that come with git to the path (see #)
+<#
+
+.SYNOPSIS
+Adds SSH and other tools that come with Git to the Path
+
+.DESCRIPTION
+Make ssh.exe available on the Path. This fixes `kitchen login` for *nix guests.
+
+.NOTES
+See https://github.com/Nordstrom/chefdk_bootstrap/issues/134 for more info
+
+#>
 function Add-GitToolsToPath {
   $env:PATH += ";$(Join-Path $env:ProgramFiles 'Git\usr\bin')"
 }
 
+<#
+
+.SYNOPSIS
+Setup PowerShell for Chef development with sane defaults.
+
+#>
 function Enable-ChefDKBootstrap {
   chef shell-init powershell | Invoke-Expression
 
