@@ -28,6 +28,11 @@ file current_user_all_hosts_profile do
   action :create_if_missing
 end
 
+append_if_no_line 'Show leading comment to help user' do
+  path lazy { current_user_all_hosts_profile }
+  line '# See chefdk_bootstrap PowerShell Module in C:\opscode\chefdk\modules\chefdk_bootstrap'
+end
+
 append_if_no_line 'Set proxy env vars in Current User profile' do
   path lazy { current_user_all_hosts_profile }
   line 'Add-Proxy'

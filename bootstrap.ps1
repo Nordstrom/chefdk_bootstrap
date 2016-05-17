@@ -147,25 +147,11 @@ else {
 if ( -not $? ) { Pop-Location;  die "Error running chef-client." }
 
 # Cleanup
-if (Test-Path $berksfilePath) {
-  Remove-Item $berksfilePath
+if (Test-Path $tempInstallDir) {
+  Remove-Item -Recurse $tempInstallDir
 }
 
-if (Test-Path "$berksfilePath.lock") {
-  Remove-Item "$berksfilePath.lock"
-}
-
-if (Test-Path $chefConfigPath) {
-  Remove-Item $chefConfigPath
-}
-
-if (Test-Path nodes) {
-  Remove-Item -Recurse nodes
-}
-
-if (Test-Path berks-cookbooks) {
-  Remove-Item -Recurse berks-cookbooks
-}
+Remove-Item env:BERKSHELF_CHEF_CONFIG
 
 Pop-Location
 
