@@ -1,6 +1,8 @@
 # Revision History for chefdk_bootstrap
 
 ## Unreleased
+* Fix [#132](https://github.com/Nordstrom/chefdk_bootstrap/issues/133):
+  Add comments to CurrentUserAllHosts
 * Fix [#63](https://github.com/Nordstrom/chefdk_bootstrap/issues/63):
   Dry up the cleanup in the Windows bootstrap
 * Fix [#133](https://github.com/Nordstrom/chefdk_bootstrap/issues/133):

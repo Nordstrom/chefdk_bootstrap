@@ -14,7 +14,8 @@
 
 # PowerShell profile
 describe file('C:/Users/Vagrant/Documents/WindowsPowerShell/Profile.ps1') do
-  its('content') { should match(/Enable-ChefDKBootstrap/i) }
+  its('content') { should match(/# See chefdk_bootstrap PowerShell Module/) }
+  its('content') { should match(/Enable-ChefDKBootstrap/) }
 
   if ENV['http_proxy']
     its('content') { should match(/Add-Proxy/) }
