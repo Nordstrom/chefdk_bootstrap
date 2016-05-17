@@ -19,6 +19,7 @@ when 'windows'
   chocolatey_package 'git'
   chocolatey_package 'git-credential-manager-for-windows'
   chocolatey_package 'poshgit'
+  windows_path 'C:\Program Files\Git\usr\bin'
 when 'mac_os_x'
   package 'git'
 end
