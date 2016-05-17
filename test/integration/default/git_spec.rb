@@ -37,8 +37,3 @@ end
 describe powershell('test-path Function:\PoshGitPrompt') do
   its(:stdout) { should match(/^True\R/) }
 end
-
-# Make sure ssh is on the path
-describe command('ssh') do
-  it { should exist }
-end

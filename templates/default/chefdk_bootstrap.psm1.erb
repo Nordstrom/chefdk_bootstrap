@@ -56,8 +56,14 @@ function Set-PSColors {
   }
 }
 
+# Adds SSH and other tools that come with git to the path (see #)
+function Add-GitToolsToPath {
+  $env:PATH += ";$(Join-Path $env:ProgramFiles 'Git\usr\bin')"
+}
+
 function Enable-ChefDKBootstrap {
   chef shell-init powershell | Invoke-Expression
 
   Set-PSColors
+  Add-GitToolsToPath
 }

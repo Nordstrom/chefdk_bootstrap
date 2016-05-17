@@ -23,3 +23,8 @@ describe file('C:/Users/Vagrant/Documents/WindowsPowerShell/Profile.ps1') do
     its('content') { should_not match(/Add-Proxy/) }
   end
 end
+
+# Make sure ssh is on the path
+describe command('ssh') do
+  it { should exist }
+end
