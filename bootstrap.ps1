@@ -146,14 +146,14 @@ else {
 
 if ( -not $? ) { Pop-Location;  die "Error running chef-client." }
 
+Pop-Location
+
 # Cleanup
 if (Test-Path $tempInstallDir) {
   Remove-Item -Recurse $tempInstallDir
 }
 
 Remove-Item env:BERKSHELF_CHEF_CONFIG
-
-Pop-Location
 
 # End message to indicate completion of setup
 Write-Host "`n`nCongrats!!! Your workstation is now set up for Chef Development!"
