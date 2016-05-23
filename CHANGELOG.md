@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## Unreleased
+* Bump ChefDK to 0.14.25
+
 ## 1.9.0
 * Fix [#134](https://github.com/Nordstrom/chefdk_bootstrap/issues/134):
   Put SSH on the path so `kitchen login` works
