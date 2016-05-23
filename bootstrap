@@ -17,7 +17,7 @@
 
 set -o nounset -o pipefail
 
-CHEFDK_TARGET_VERSION=0.13.21
+CHEFDK_TARGET_VERSION=0.14.25
 
 function prompt_continue () {
   echo ""
