@@ -21,10 +21,10 @@ script on your workstation.
 
 ## Mac Quickstart
 
-Copy the command below and paste it into a terminal. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap) script on your workstation.
+Copy the command below and paste it into a terminal. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb) script on your workstation.
 
 ```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)"
 ```
 
 ### Mac ChefDK profile setup
@@ -86,7 +86,7 @@ Now run the [Quickstart for Mac](#mac-quickstart)
 If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#windows-quickstart) (examples included below).
 
 ### JSON attributes
-You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). Right now we're passing this in via the `CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES` environment variable, but in a future version, we'll likely make it a named parameter of the bootstrap script.
+You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). For Windows, we are passing this in via the `CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES` environment variable. For Mac, json-attributes is a named parameter of the bootstrap script.
 
 #### Windows
 ```PowerShell
@@ -94,7 +94,7 @@ $env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
 ```
 #### Mac
 ```bash
-export CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="http://server/attributes.json"
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -j http://server/attributes.json
 ```
 
 ### Custom cookbook
@@ -109,7 +109,18 @@ $install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/c
 #### Mac
 
 ```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash -s -- <your cookbook name> <your private supermarket url>
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -c <your cookbook name> -b <your supermarket url>
+```
+
+### ChefDK Version
+For Mac installs, you can specify the version of chefdk to install as a named parameter in the bootstrap script. By default, the bootstrap script will install the latest version of chefdk. The script will not re-install chefdk if the target version is already installed.
+
+#### Windows
+Not currently supported.
+
+#### Mac
+```bash
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -v 0.15.15
 ```
 
 ## What does it do?

@@ -75,6 +75,7 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
       chefdk_bootstrap::atom
       chefdk_bootstrap::git
       chefdk_bootstrap::iterm2
+      chefdk_bootstrap::bash_profile
     )
 
     recipes.each do |recipe|

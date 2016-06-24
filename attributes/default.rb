@@ -40,6 +40,7 @@ when 'windows'
 when 'mac_os_x'
   default['chefdk_bootstrap']['package'].tap do |install|
     install['iterm2'] = true
+    install['bash_profile'] = true
   end
 end
 
