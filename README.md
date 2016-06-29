@@ -78,7 +78,9 @@ export https_proxy=$http_proxy
 export no_proxy='localhost,127.0.0.1,example.com'
 ```
 
-*To make these changes permanent, export these environment variables from your bash or zsh profile.*
+If you are using Bash, the chefdk_bootstrap script will write your environment variables to your `~/.bash_profile`.
+
+*If you are using a different shell, you will need to export these environment variables in your shell startup file (e.g. `.zshrc`).*
 
 Now run the [Quickstart for Mac](#mac-quickstart)
 
