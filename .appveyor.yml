@@ -1,0 +1,38 @@
+version: "master-{build}"
+
+os: Windows Server 2012 R2
+platform:
+  - x64
+
+environment:
+  machine_user: test_user
+  machine_pass: Pass@word1
+  machine_port: 5985
+  KITCHEN_YAML: .appveyor.yml
+  SSL_CERT_FILE: c:\projects\chefdk_bootstrap\certs.pem
+
+  matrix:
+    - ruby_version: "21"
+
+clone_folder: c:\projects\chefdk_bootstrap
+clone_depth: 1
+branches:
+  only:
+    - master
+
+install:
+  - ps: net user /add $env:machine_user $env:machine_pass
+  - ps: net localgroup administrator $env:machine_user /add
+  - ps: $env:PATH="C:\Ruby$env:ruby_version\bin;$env:PATH"
+  - ps: Write-Host $env:PATH
+  - ps: ruby --version
+  - ps: gem --version
+  - ps: gem install bundler --quiet --no-ri --no-rdoc
+  - ps: Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -OutFile c:\projects\chefdk_bootstrap\certs.pem
+  - ps: bundler --version
+
+build_script:
+  -  bundle install || bundle install || bundle install
+
+test_script:
+  - bundle exec kitchen verify
