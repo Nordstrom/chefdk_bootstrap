@@ -1,3 +1,4 @@
+---
 driver:
   name: proxy
   host: localhost
