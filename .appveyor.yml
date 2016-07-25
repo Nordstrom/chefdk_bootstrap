@@ -19,10 +19,11 @@ clone_depth: 1
 branches:
   only:
     - master
+    - feature/ruby-bootstrap
 
 install:
   - ps: net user /add $env:machine_user $env:machine_pass
-  - ps: net localgroup administrator $env:machine_user /add
+  - ps: net localgroup administrators $env:machine_user /add
   - ps: $env:PATH="C:\Ruby$env:ruby_version\bin;$env:PATH"
   - ps: Write-Host $env:PATH
   - ps: ruby --version
