@@ -29,7 +29,7 @@ install:
   - ps: bundler --version
 
 build_script:
-  - bundle exec rake
+  - bundle install
 
 test_script:
   - bundle exec kitchen verify windows
