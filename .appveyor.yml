@@ -8,8 +8,8 @@ environment:
   machine_user: test_user
   machine_pass: Pass@word1
   machine_port: 5985
-  KITCHEN_YAML: .appveyor.yml
-  SSL_CERT_FILE: c:\projects\chefdk_bootstrap\certs.pem
+  KITCHEN_YAML: .kitchen.appveyor.yml
+  SSL_CERT_FILE: c:\projects\kitchen-machine\certs.pem
 
   matrix:
     - ruby_version: "21"
@@ -28,11 +28,11 @@ install:
   - ps: ruby --version
   - ps: gem --version
   - ps: gem install bundler --quiet --no-ri --no-rdoc
-  - ps: Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -OutFile c:\projects\chefdk_bootstrap\certs.pem
-  - ps: bundler --version
+  - ps: Invoke-WebRequest -Uri http://curl.haxx.se/ca/cacert.pem -OutFile c:\projects\kitchen-machine\certs.pem  - ps: bundler --version
 
 build_script:
-  -  bundle install || bundle install || bundle install
+  - bundle install || bundle install || bundle install
+  - bundle exec rake
 
 test_script:
-  - bundle exec kitchen verify
+  - bundle exec kitchen verify windows
