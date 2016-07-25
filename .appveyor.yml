@@ -8,7 +8,7 @@ environment:
   machine_user: test_user
   machine_pass: Pass@word1
   machine_port: 5985
-  KITCHEN_YAML: .kitchen.appveyor.yml
+  KITCHEN_YAML: c:\project\kitchen-machine\.kitchen.appveyor.yml
   SSL_CERT_FILE: c:\projects\kitchen-machine\certs.pem
 
   matrix:
@@ -32,7 +32,7 @@ install:
   - ps: bundler --version
 
 build_script:
-  - bundle install
+  -  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
 
 test_script:
   - bundle exec kitchen verify windows
