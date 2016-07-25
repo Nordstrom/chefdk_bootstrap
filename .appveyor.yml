@@ -19,7 +19,6 @@ clone_depth: 1
 branches:
   only:
     - master
-    - feature/ruby-bootstrap
 
 install:
   - ps: net user /add $env:machine_user $env:machine_pass
