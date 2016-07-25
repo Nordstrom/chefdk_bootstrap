@@ -32,7 +32,7 @@ install:
   - ps: bundler --version
 
 build_script:
-  -  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
+  - ps:  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
 
 test_script:
   - bundle exec kitchen verify windows
