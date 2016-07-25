@@ -14,7 +14,7 @@ environment:
   matrix:
     - ruby_version: "21"
 
-clone_folder: c:\projects\chefdk_bootstrap
+clone_folder: c:\projects\kitchen-machine
 clone_depth: 1
 branches:
   only:
@@ -28,10 +28,11 @@ install:
   - ps: ruby --version
   - ps: gem --version
   - ps: gem install bundler --quiet --no-ri --no-rdoc
-  - ps: Invoke-WebRequest -Uri http://curl.haxx.se/ca/cacert.pem -OutFile c:\projects\kitchen-machine\certs.pem  - ps: bundler --version
+  - ps: Invoke-WebRequest -Uri http://curl.haxx.se/ca/cacert.pem -OutFile c:\projects\kitchen-machine\certs.pem
+  - ps: bundler --version
 
 build_script:
-  - bundle install || bundle install || bundle install
+  - bundle install
   - bundle exec rake
 
 test_script:
