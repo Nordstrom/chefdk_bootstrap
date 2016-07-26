@@ -30,15 +30,8 @@ RSpec::Core::RakeTask.new
 desc 'Run Rubocop and Foodcritic style checks'
 task style: [:rubocop, :foodcritic]
 
-case node['platform_family']
-when 'windows'
-  desc 'Run all style checks and unit tests for windows'
+if ENV['APPVEYOR']
   task.ruby_opts = ['--bootstrapRB @skip']
-  task test: [:style, :spec]
-when 'mac_os_x'
-  desc 'Run all style checks and unit tests'
-  task test: [:style, :spec]
-end
 
 desc 'Run all style checks and unit tests'
 task test: [:style, :spec]
