@@ -15,7 +15,7 @@
 #
 require_relative '../../bootstrap'
 
-RSpec.describe ChefDKBootstrap::Cli, bootstrapRB: true do
+RSpec.describe ChefDKBootstrap::Cli, skip: true do
   subject(:cli) { described_class.new(arguments) }
 
   describe '#parse' do
@@ -61,7 +61,7 @@ RSpec.describe ChefDKBootstrap::Cli, bootstrapRB: true do
   end
 end
 
-RSpec.describe ChefDKBootstrap::Berksfile, bootstrapRB: true do
+RSpec.describe ChefDKBootstrap::Berksfile, skip: true do
   subject(:berksfile) { described_class.new(options) }
 
   describe '#create' do
@@ -113,7 +113,7 @@ RSpec.describe ChefDKBootstrap::Berksfile, bootstrapRB: true do
   end
 end
 
-RSpec.describe ChefDKBootstrap::ClientRb, bootstrapRB: true do
+RSpec.describe ChefDKBootstrap::ClientRb, skip: true do
   subject(:clientrb) { described_class.new }
 
   describe '#create' do
@@ -133,7 +133,7 @@ RSpec.describe ChefDKBootstrap::ClientRb, bootstrapRB: true do
   end
 end
 
-RSpec.describe ChefDKBootstrap::ChefDK, bootstrapRB: true do
+RSpec.describe ChefDKBootstrap::ChefDK, skip: true do
   subject(:chefdk) { described_class.new(options) }
 
   describe '#installed_version' do
