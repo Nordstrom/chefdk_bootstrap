@@ -27,7 +27,7 @@ end
 
 append_if_no_line 'Set https_proxy var in bash_profile' do
   path bash_profile
-  line "export https_proxy=$http_proxy"
+  line 'export https_proxy=$http_proxy'
   only_if { node['chefdk_bootstrap']['proxy']['http'] }
 end
 

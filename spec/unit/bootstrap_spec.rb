@@ -29,7 +29,9 @@ RSpec.describe ChefDKBootstrap::Cli do
     end
 
     context 'long options' do
-      let(:arguments) { %w(--cookbook your_cookbook --berks-source https://supermarket.chef.io --json-attributes http://server/attributes.json --version 0.14.25) }
+      let(:arguments) do
+        %w(--cookbook your_cookbook --berks-source https://supermarket.chef.io --json-attributes http://server/attributes.json --version 0.14.25)
+      end
 
       it 'all long options specified' do
         options = {
