@@ -22,6 +22,3 @@ Style/RegexpLiteral:
 Style/AlignParameters:
   Exclude:
     - '**/Gemfile'
-
-MethodLength:
-  Max: 19
