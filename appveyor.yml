@@ -30,7 +30,7 @@ install:
 
 build_script:
   - bundle install
-  - bundle exec rake
+  - bundle exec rake kitchen:all
 
 test_script:
   - bundle exec kitchen verify windows

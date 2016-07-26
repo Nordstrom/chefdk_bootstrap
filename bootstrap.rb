@@ -36,7 +36,6 @@ module ChefDKBootstrap
     #  * :cookbook [String] custom ChefDK_bootstrap wrapper cookbook name
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
-    # rubocop:disable MethodLength
     def parse
       options = { cookbook: 'chefdk_bootstrap' }
 
@@ -65,7 +64,6 @@ module ChefDKBootstrap
       options
     end
   end
-  # rubocop:enable MethodLength
 
   # Class to create and delete Berksfile.
   #
