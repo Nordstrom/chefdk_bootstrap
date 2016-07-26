@@ -25,12 +25,12 @@ end
 
 FoodCritic::Rake::LintTask.new
 
-RSpec::Core::RakeTask.new
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = '--bootstrapRB @skip' if ENV['APPVEYOR']
+end
 
 desc 'Run Rubocop and Foodcritic style checks'
 task style: [:rubocop, :foodcritic]
-
-task.rspec_opts = '--bootstrapRB @skip' if ENV['APPVEYOR']
 
 desc 'Run all style checks and unit tests'
 task test: [:style, :spec]
