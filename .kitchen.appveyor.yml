@@ -28,4 +28,4 @@ suites:
     attributes:
       chefdk_bootstrap:
         package:
-          gitposh: false
+          poshgit: false
