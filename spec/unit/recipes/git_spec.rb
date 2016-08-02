@@ -10,9 +10,9 @@ RSpec.describe 'chefdk_bootstrap::git' do
       expect(windows_chef_run).to install_chocolatey_package('git-credential-manager-for-windows')
     end
 
-    it 'installs poshgit' do
-      expect(windows_chef_run).to install_chocolatey_package('poshgit')
-    end
+    # it 'installs poshgit' do
+    #   expect(windows_chef_run).to install_chocolatey_package('poshgit')
+    # end
   end
 
   context 'On a Mac' do
