@@ -25,7 +25,8 @@ suites:
     run_list:
       - recipe[win_proxy]
       - recipe[chefdk_bootstrap]
-    attributes:
-      chefdk_bootstrap:
-        package:
-          poshgit: false
+      - recipe[chefdk_bootstrap::fix_profile]
+    # attributes:
+    #   chefdk_bootstrap:
+    #     package:
+    #       poshgit: false

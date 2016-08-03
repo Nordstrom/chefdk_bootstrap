@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# describe command('atom -v') do
-#   its(:exit_status) { should eq 0 }
-#   its(:stderr) { should eq '' }
-# end
-
-describe 'atom should be installed' do
-  it('should exit with 0') do
-    expect(command('atom -v').exit_status).to eq 0
-  end
-  it('should have no errors') do
-    expect(command('atom -v').stderr).to eq('')
-  end
+describe command('atom -v') do
+  its(:exit_status) { should eq 0 }
+  its(:stderr) { should eq '' }
 end
+
+# describe 'atom should be installed' do
+#   it('should exit with 0') do
+#     expect(command('atom -v').exit_status).to eq 0
+#   end
+#   it('should have no errors') do
+#     expect(command('atom -v').stderr).to eq('')
+#   end
+# end
