@@ -1,4 +1,4 @@
-username = ENV['APPVEYOR'] ? ENV['username'] : 'vagrant'
+username = ENV['APPVEYOR'] ? ENV['machine_user'] : 'vagrant'
 
 describe file("C:/Users/#{username}/.kitchen/config.yml") do
   if ENV['http_proxy']

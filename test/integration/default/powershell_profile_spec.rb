@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-username = ENV['APPVEYOR'] ? ENV['username'] : 'vagrant'
+username = ENV['APPVEYOR'] ? ENV['machine_user'] : 'vagrant'
 
 # PowerShell profile
 describe file("C:/Users/#{username}/Documents/WindowsPowerShell/Profile.ps1") do
