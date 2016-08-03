@@ -16,7 +16,8 @@
 case node['platform_family']
 when 'windows'
   # fix profile
-  file 'C:\Users\vagrant\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' do
+  username = ENV['machine_user'] || 'vagrant'
+  file "C:\\Users\\#{username}\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1" do
     content ''
   end
 end
