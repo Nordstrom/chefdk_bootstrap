@@ -18,6 +18,7 @@ verifier:
 suites:
   - name: default
     run_list:
+      - recipe[chefdk_bootstrap::fix_profile]
       - recipe[win_proxy]
       - recipe[chefdk_bootstrap]
     attributes:
