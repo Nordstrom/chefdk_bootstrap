@@ -31,6 +31,7 @@ git_credential_mgr = File.join(
 describe command("& \"#{git_credential_mgr}\" version") do
   its(:exit_status) { should eq(0) }
   its(:stderr) { should eq '' } unless ENV['APPVEYOR']
+  its(:stderr) { should_not include('CommandNotFound') } if ENV['APPVEYOR']
 end
 
 describe command('i should fail') do

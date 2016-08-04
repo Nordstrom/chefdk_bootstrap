@@ -15,4 +15,5 @@
 describe command('& "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" --version') do
   its(:exit_status) { should eq(0) }
   its(:stderr) { should eq '' } unless ENV['APPVEYOR']
+  its(:stderr) { should_not include('CommandNotFound') } if ENV['APPVEYOR']
 end
