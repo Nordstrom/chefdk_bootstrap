@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-username = ENV['APPVEYOR'] ? ENV['username'] : 'vagrant'
+username = ENV['username']
 
 case node['platform_family']
 when 'windows'
