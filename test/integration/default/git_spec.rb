@@ -34,6 +34,6 @@ describe command("& \"#{git_credential_mgr}\" version") do
 end
 
 # PoshGit
-# describe powershell('test-path Function:\PoshGitPrompt') do
-#   its(:stdout) { should match(/^True\R/) }
-# end
+describe powershell('test-path Function:\PoshGitPrompt') do
+  its(:stdout) { should match(/^True\R/) }
+end
