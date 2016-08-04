@@ -34,10 +34,6 @@ describe command("& \"#{git_credential_mgr}\" version") do
   its(:stderr) { should_not include('CommandNotFound') } if ENV['APPVEYOR']
 end
 
-describe command('i should fail') do
-  its(:stderr) { should eq '' }
-end
-
 # PoshGit
 # describe powershell('test-path Function:\PoshGitPrompt') do
 #   its(:stdout) { should match(/^True\R/) }
