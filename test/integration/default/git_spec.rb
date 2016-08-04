@@ -30,7 +30,7 @@ git_credential_mgr = File.join(
 
 describe command("& \"#{git_credential_mgr}\" version") do
   its(:exit_status) { should eq(0) }
-  its('stderr') { should eq '' }
+  its(:stderr) { should eq '' } unless ENV['APPVEYOR']
 end
 
 # PoshGit
