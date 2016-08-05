@@ -25,6 +25,7 @@ $targetChefDk = '0.14.25' # TODO: need to automatically determine latest version
 if ($version -ne "") {
   $targetChefDk = $version
 }
+$version = $null
 
 $bootstrapCookbook = 'chefdk_bootstrap'
 if ($cookbook -ne "") {
