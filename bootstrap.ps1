@@ -25,7 +25,6 @@ $targetChefDk = '0.14.25' # TODO: need to automatically determine latest version
 if ($version -ne "") {
   $targetChefDk = $version
 }
-$version = $null
 
 $bootstrapCookbook = 'chefdk_bootstrap'
 if ($cookbook -ne "") {
@@ -108,17 +107,17 @@ $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 # Install ChefDK from chef omnitruck, unless installed already
 Write-Host "Checking for installed ChefDK version"
 $app = Get-CimInstance -classname win32_product -filter "Name like 'Chef Development Kit%'"
-$version = $app.Version
-if ( $version -like "$targetChefDk*" ) {
-  Write-Host "The ChefDK version $version is already installed."
+$installedVersion = $app.Version
+if ( $installedVersion -like "$targetChefDk*" ) {
+  Write-Host "The ChefDK version $installedVersion is already installed."
 } else {
-  if ( $version -eq $null ) {
+  if ( $installedVersion -eq $null ) {
     Write-Host "No ChefDK found. Installing the ChefDK version $targetChefDk"
   } else {
-    Write-Host "Upgrading the ChefDK from $version to $targetChefDk"
-    Write-Host "Uninstalling ChefDK version $version. This might take a while..."
+    Write-Host "Upgrading the ChefDK from $installedVersion to $targetChefDk"
+    Write-Host "Uninstalling ChefDK version $installedVersion. This might take a while..."
     Invoke-CimMethod -InputObject $app -MethodName Uninstall
-    if ( -not $? ) { promptContinue "Error uninstalling ChefDK version $version" }
+    if ( -not $? ) { promptContinue "Error uninstalling ChefDK version $installedVersion" }
     if (Test-Path $dotChefDKDir) {
       Remove-Item -Recurse $dotChefDKDir
     }
