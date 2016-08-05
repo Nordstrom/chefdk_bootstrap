@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 #Requires -Version 3.0
+param([string]$version = "", [string]$cookbook = "", [string]$json_attributes = "", [string]$berks_source = "")
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
   [Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -20,8 +20,20 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Break
 }
 
-$targetChefDk = '0.14.25'
+# Get command line arguments set
+$targetChefDk = '0.14.25' # TODO: need to automatically determine latest version
+if ($version -ne "") {
+  $targetChefDk = $version
+}
+
 $bootstrapCookbook = 'chefdk_bootstrap'
+if ($cookbook -ne "") {
+  $bootstrapCookbook = $cookbook
+}
+
+if ($berks_source -ne "") {
+  $privateSource = "source '$berks_source'"
+}
 
 function promptContinue {
   param ($msg="Chefdk_bootstrap encountered an error")
@@ -37,13 +49,13 @@ function die {
   Break
 }
 
-if ($args[0]) {
-  $bootstrapCookbook = $args[0]
-}
-
-if ($args[1]) {
-  $privateSource = "source '$args[1]'"
-}
+#if ($args[0]) {
+#  $bootstrapCookbook = $args[0]
+#}
+#
+#if ($args[1]) {
+#  $privateSource = "source '$args[1]'"
+#}
 
 $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
 $dotChefDKDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chefdk'
@@ -135,10 +147,9 @@ berks vendor
 if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks." }
 
 # run chef-client (installed by ChefDK) to bootstrap this machine
-# Pass optional attributes to chef-client
-# This is a temporary interface and will change in 2.0 when we support named parameters (Issue #74)
-if ($env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES) {
-  chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES
+# Pass optional named parameter json_attributes to chef-client
+if ($json_attributes -ne "") {
+  chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $json_attributes
 }
 else {
   chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
