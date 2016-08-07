@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #Requires -Version 3.0
-param(
+Param(
   [string] $version,
   [string] $cookbook,
   [string] $json_attributes,
@@ -95,7 +95,10 @@ $introduction = @"
 "@
 
 Clear-Host
-Write-Host "Target is: $targetChefDk while $version is: $version"
+Write-Host $targetChefDk
+Write-Host $version
+Write-Host $cookbook
+Write-Host $berks_source
 Write-Host $introduction
 
 # create the temporary installation directory
