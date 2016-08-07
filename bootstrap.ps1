@@ -25,7 +25,6 @@ $targetChefDk = '0.14.25' # TODO: need to automatically determine latest version
 if ($version -ne "") {
   $targetChefDk = $version
 }
-Write-Host "Target is: $targetChefDk while $version is: $version"
 
 $bootstrapCookbook = 'chefdk_bootstrap'
 if ($cookbook -ne "") {
@@ -91,7 +90,7 @@ $introduction = @"
 "@
 
 Clear-Host
-
+Write-Host "Target is: $targetChefDk while $version is: $version"
 Write-Host $introduction
 
 # create the temporary installation directory
