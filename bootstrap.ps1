@@ -12,7 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #Requires -Version 3.0
-param([string]$version = "", [string]$cookbook = "", [string]$json_attributes = "", [string]$berks_source = "")
+param(
+  [string]$version,
+  [string]$cookbook,
+  [string]$json_attributes,
+  [string]$berks_source
+)
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
   [Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -22,16 +27,16 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 # Get command line arguments set
 $targetChefDk = '0.14.25' # TODO: need to automatically determine latest version
-if ($version -ne "") {
+if ($version) {
   $targetChefDk = $version
 }
 
 $bootstrapCookbook = 'chefdk_bootstrap'
-if ($cookbook -ne "") {
+if ($cookbook) {
   $bootstrapCookbook = $cookbook
 }
 
-if ($berks_source -ne "") {
+if ($berks_source) {
   $privateSource = "source '$berks_source'"
 }
 
