@@ -13,10 +13,10 @@
 # limitations under the License.
 #Requires -Version 3.0
 param(
-  [string]$version,
-  [string]$cookbook,
-  [string]$json_attributes,
-  [string]$berks_source
+  [string] $version,
+  [string] $cookbook,
+  [string] $json_attributes,
+  [string] $berks_source
 )
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
