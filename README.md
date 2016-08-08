@@ -17,7 +17,8 @@ Copy the PowerShell command below and paste them into a **PowerShell Admin** con
 script on your workstation.
 
 ```PowerShell
- (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
+ Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
+ install
 ```
 
 ## Mac Quickstart
@@ -58,7 +59,8 @@ Copy the PowerShell command below and paste them into a **PowerShell Admin** con
 script on your workstation.
 
 ```PowerShell
- (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
+ Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy | Invoke-Expression
+ install
 ```
 
 The ChefDK_bootstrap script will write your environment variables to your `Profile.ps1`.
@@ -94,11 +96,12 @@ If you want to use your own custom wrapper cookbook, add the name of your cookbo
 You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). For Windows, json_attributes is a named parameter of the bootstrap PowerShell script. For Mac, json-attributes is a named parameter of the bootstrap Ruby script.
 
 #### Windows
-```PowerShell
-$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
 
+```PowerShell
 $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
-"$install -json_attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES" | Invoke-Expression
+
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
+install -json_attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES
 ```
 
 #### Mac
@@ -110,9 +113,9 @@ ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/mas
 #### Windows
 
 ```PowerShell
-$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
 
-"$install -cookbook <your cookbook name> -berks_source <your private supermarket url>" | Invoke-Expression
+install -cookbook <your cookbook name> -berks_source <your private supermarket url>
 ```
 
 #### Mac
@@ -126,9 +129,9 @@ You can specify the version of chefdk to install as a named parameter in the boo
 
 #### Windows
 ```PowerShell
-$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
 
-"$install -version <target version>" | Invoke-Expression
+install -version <target version>
 ```
 
 #### Mac
