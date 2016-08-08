@@ -13,6 +13,7 @@
 # limitations under the License.
 #Requires -Version 3.0
 
+new-module -name ChefDKBootstrap -scriptblock {
 function promptContinue {
   param ($msg="Chefdk_bootstrap encountered an error")
   $yn = Read-Host "$Msg. Continue? [y|N]"
@@ -175,3 +176,5 @@ function Install-Project {
   Write-Host "`n`nCongrats!!! Your workstation is now set up for Chef Development!"
 }
 set alias install -value Install-Project
+export-modulemember -function 'Install-Project' -alias 'install'
+}
