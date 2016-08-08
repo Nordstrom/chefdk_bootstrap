@@ -175,6 +175,5 @@ function Install-Project {
   # End message to indicate completion of setup
   Write-Host "`n`nCongrats!!! Your workstation is now set up for Chef Development!"
 }
-set alias install -value Install-Project
 export-modulemember -function 'Install-Project' -alias 'install'
 }
