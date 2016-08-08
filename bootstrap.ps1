@@ -53,8 +53,7 @@ function Install-Project {
     if ( -not $? ) { die "Error downloading $metadataURL. Do you need to set `$env:http_proxy ?" }
   }
 
-  $latest_info = ($getMetadata | Invoke-Expression).Content
-  if ( -not $? ) { die "Error getting metadata" }
+  $latest_info = $getMetadata.Content
   $CHEFDK_LATEST_PATTERN = "version\s(\d{1,2}\.\d{1,2}\.\d{1,2})"
   $targetChefDk = [regex]::match($latest_info, $CHEFDK_LATEST_PATTERN).Groups[1].Value
 
