@@ -101,10 +101,7 @@ $introduction = @"
 "@
 
 Clear-Host
-Write-Host $targetChefDk
-Write-Host $version
-Write-Host $cookbook
-Write-Host $berks_source
+
 Write-Host $introduction
 
 # create the temporary installation directory

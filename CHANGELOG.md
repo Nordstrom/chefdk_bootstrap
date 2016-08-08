@@ -1,7 +1,18 @@
 # Revision History for chefdk_bootstrap
 
-## Unreleased
-* Bump ChefDK to 0.14.25
+## 2.0.0
+* Fix [#96](https://github.com/Nordstrom/chefdk_bootstrap/issues/96)
+  Consider rewriting bootstrap shell script in Ruby
+* Fix [#74](https://github.com/Nordstrom/chefdk_bootstrap/issues/74)
+  chefdk_bootstrap 2.0: use named parameters for <your cookbook name> <your private supermarket url>
+* Fix [#69](https://github.com/Nordstrom/chefdk_bootstrap/issues/69)
+  On Mac, set proxy env vars in bash profile
+* Fix [#123](https://github.com/Nordstrom/chefdk_bootstrap/issues/123)
+  Bootstrap script should install latest ChefDK available by default
+* Fix [#142](https://github.com/Nordstrom/chefdk_bootstrap/issues/142)
+  Add fix_profile and remove posh-git install for kitchen tests to avoid hanging
+* Add appveyor
+* Add version as a named parameter
 
 ## 1.9.0
 * Fix [#134](https://github.com/Nordstrom/chefdk_bootstrap/issues/134):

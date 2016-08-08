@@ -61,6 +61,8 @@ script on your workstation.
  (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
 ```
 
+The ChefDK_bootstrap script will write your environment variables to your `Profile.ps1`.
+
 ### Mac
 Copy/paste these environment variables into your terminal.
 
@@ -79,7 +81,7 @@ export https_proxy=$http_proxy
 export no_proxy='localhost,127.0.0.1,example.com'
 ```
 
-If you are using Bash, the chefdk_bootstrap script will write your environment variables to your `~/.bash_profile`.
+The ChefDK_bootstrap script will write your environment variables to your `~/.bash_profile`.
 
 *If you are using a different shell, you will need to export these environment variables in your shell startup file (e.g. `.zshrc`).*
 
@@ -89,12 +91,16 @@ Now run the [Quickstart for Mac](#mac-quickstart)
 If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#windows-quickstart) (examples included below).
 
 ### JSON attributes
-You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). For Windows, we are passing this in via the `CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES` environment variable. For Mac, json-attributes is a named parameter of the bootstrap script.
+You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). For Windows, json_attributes is a named parameter of the bootstrap PowerShell script. For Mac, json-attributes is a named parameter of the bootstrap Ruby script.
 
 #### Windows
 ```PowerShell
-$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
+$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+
+$CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
+"$install -json_attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES" | Invoke-Expression
 ```
+
 #### Mac
 ```bash
 ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -j http://server/attributes.json
@@ -106,7 +112,7 @@ ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/mas
 ```PowerShell
 $install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
 
-"$install <your cookbook name> <your private supermarket url>" | Invoke-Expression
+"$install -cookbook <your cookbook name> -berks_source <your private supermarket url>" | Invoke-Expression
 ```
 
 #### Mac
@@ -116,14 +122,18 @@ ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/mas
 ```
 
 ### ChefDK Version
-For Mac installs, you can specify the version of chefdk to install as a named parameter in the bootstrap script. By default, the bootstrap script will install the latest version of chefdk. The script will not re-install chefdk if the target version is already installed.
+You can specify the version of chefdk to install as a named parameter in the bootstrap script. By default, the bootstrap script will install the latest version of chefdk. The script will not re-install chefdk if the target version is already installed.
 
 #### Windows
-Not currently supported.
+```PowerShell
+$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+
+"$install -version <target version>" | Invoke-Expression
+```
 
 #### Mac
 ```bash
-ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -v 0.15.15
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -v <target version>
 ```
 
 ## What does it do?
