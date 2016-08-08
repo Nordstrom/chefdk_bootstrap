@@ -1,4 +1,4 @@
-# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk_bootstrap) [![Build status](https://ci.appveyor.com/api/projects/status/tssh0n03tep9ida2?svg=true)](https://ci.appveyor.com/project/donneler/chefdk-bootstrap)
+# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk_bootstrap) [![Build status](https://ci.appveyor.com/api/projects/status/tssh0n03tep9ida2?svg=true)](https://ci.appveyor.com/project/nordstrom/chefdk-bootstrap)
 
 
 ## Setup your laptop for Chef development in minutes
