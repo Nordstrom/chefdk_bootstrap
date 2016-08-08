@@ -25,8 +25,14 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Break
 }
 
+# Set targetChefDk to latest version from metadata URL
+$metadataURL = "https://omnitruck.chef.io/stable/chefdk/metadata?p=windows&pv=2012r2&m=x86_64&v=latest"
+$getMetadata =  "curl '$myurl'"
+$latest_info = ($cmd | Invoke-Expression).Content
+$CHEFDK_LATEST_PATTERN = "version\s(\d{1,2}\.\d{1,2}\.\d{1,2})"
+$targetChefDk = [regex]::match($latest_info, $CHEFDK_LATEST_PATTERN).Groups[1].Value
+
 # Get command line arguments set
-$targetChefDk = '0.14.25' # TODO: need to automatically determine latest version
 if ($version) {
   $targetChefDk = $version
 }
