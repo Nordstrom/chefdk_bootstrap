@@ -33,7 +33,8 @@ function Install-Project {
     [string] $version,
     [string] $cookbook,
     [string] $json_attributes,
-    [string] $berks_source
+    [string] $berks_source,
+    [string] $branch
   )
 
   if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
@@ -71,6 +72,10 @@ function Install-Project {
     $privateSource = "source '$berks_source'"
   }
 
+  if ($branch) {
+    $devbranch = ", github: 'Nordstrom/chefdk_bootstrap', branch: '$branch'"
+  }
+
   $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
   $dotChefDKDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chefdk'
   $tempInstallDir = Join-Path -path $env:TEMP -childpath 'chefdk_bootstrap'
@@ -86,7 +91,7 @@ function Install-Project {
   source 'https://supermarket.chef.io'
   $privateSource
 
-  cookbook '$bootstrapCookbook'
+  cookbook '$bootstrapCookbook'$devbranch
 "@
 
   $chefConfig = @"
