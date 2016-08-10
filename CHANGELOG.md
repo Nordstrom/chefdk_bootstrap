@@ -11,7 +11,7 @@
   Bootstrap script should install latest ChefDK available by default
 * Fix [#142](https://github.com/Nordstrom/chefdk_bootstrap/issues/142)
   Add fix_profile and remove posh-git install for kitchen tests to avoid hanging
-* Add appveyor
+* Add Appveyor for windows integration testing
 * Add version as a named parameter
 
 ## 1.9.0

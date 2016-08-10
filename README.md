@@ -106,7 +106,7 @@ install -json_attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES
 
 #### Mac
 ```bash
-ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -j http://server/attributes.json
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --json-attributes http://server/attributes.json
 ```
 
 ### Custom cookbook
@@ -121,7 +121,7 @@ install -cookbook <your cookbook name> -berks_source <your private supermarket u
 #### Mac
 
 ```bash
-ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -c <your cookbook name> -b <your supermarket url>
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --cookbook <your cookbook name> --berks-source <your supermarket url>
 ```
 
 ### ChefDK Version
@@ -136,7 +136,7 @@ install -version <target version>
 
 #### Mac
 ```bash
-ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - -v <target version>
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --version <target version>
 ```
 
 ## What does it do?

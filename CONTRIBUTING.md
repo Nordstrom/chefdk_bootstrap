@@ -60,9 +60,9 @@ DISABLE_PRY_RESCUE before running guard:
 Will run the test kitchen integration tests.  These tests use Vagrant
 and Virtualbox, which must be installed for the tests to execute.
 
-After converging in a virtual machine, ServerSpec tests are executed.
-This skeleton comes with a very basic ServerSpec test; refer to
-http://serverspec.org for detail on how to create tests.
+After converging in a virtual machine, InSpec tests are executed.
+This skeleton comes with some basic InSpec tests; refer to
+https://www.chef.io/inspec/ for detail on how to create tests.
 
 ##### Testing bootstrap.ps1
 Use test kitchen to spin up a new VM:
