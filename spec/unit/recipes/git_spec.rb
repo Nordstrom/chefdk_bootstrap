@@ -1,5 +1,5 @@
 RSpec.describe 'chefdk_bootstrap::git' do
-  context 'On a Windows machine' do
+  context 'On a Windows machine', win_bootstrap: true do
     include_context 'windows_2012'
 
     it 'installs the correct version of Git' do

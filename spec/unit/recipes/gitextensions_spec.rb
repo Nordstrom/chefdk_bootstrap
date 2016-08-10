@@ -1,4 +1,4 @@
-RSpec.describe 'chefdk_bootstrap::gitextensions' do
+RSpec.describe 'chefdk_bootstrap::gitextensions', win_bootstrap: true do
   include_context 'windows_2012'
 
   it 'installs GitExtensions via Chocolatey' do
