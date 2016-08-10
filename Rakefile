@@ -26,7 +26,7 @@ end
 FoodCritic::Rake::LintTask.new
 
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = '--tag ~skip' if ENV['APPVEYOR']
+  t.rspec_opts = '--tag ~mac_bootstrap' if ENV['APPVEYOR']
 end
 
 desc 'Run Rubocop and Foodcritic style checks'
