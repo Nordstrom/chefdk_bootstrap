@@ -147,7 +147,7 @@ module ChefDKBootstrap
     CHEFDK_LATEST_PATTERN = /version\s(?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i
 
     def initialize(options)
-      @target_version = options[:version] || latest_version
+      @target_version = options[:version]
     end
 
     # Shell command to determine if chef is currently installed
@@ -176,12 +176,16 @@ module ChefDKBootstrap
       latest_info.match(CHEFDK_LATEST_PATTERN)[:version]
     end
 
+    def target_version
+      @target_version || latest_version
+    end
+
     # Installs chefdk
     def install
       puts 'Installing ChefDK'
       install_command = "curl --silent --show-error https://omnitruck.chef.io/install.sh | \
               sudo -E bash -s -- -c stable -P chefdk"
-      install_command << " -v #{@target_version}" if @target_version
+      install_command << " -v #{target_version}" if target_version
       raise 'ChefDK install failed' unless system(install_command)
     end
 
@@ -189,7 +193,7 @@ module ChefDKBootstrap
     #
     # @return [Boolean] true if target version is installed, else false
     def target_version_installed?
-      @target_version == installed_version
+      target_version == installed_version
     end
   end
 
