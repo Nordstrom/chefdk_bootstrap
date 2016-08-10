@@ -104,8 +104,7 @@ $wininet::InternetSetOption([IntPtr]::Zero, $INTERNET_OPTION_PROXY_SETTINGS_CHAN
 ```
 
 #### Mac
-
-If you want to run this behind a proxy, export these environment variables before you run the commands below.
+To check that the unreleased cookbook converges on a mac follow the steps below. If you want to run this behind a proxy, export these environment variables before you run the commands below.
 
 ```bash
 export http_proxy=http://myproxy.example.com:1234
@@ -115,6 +114,6 @@ export https_proxy=$http_proxy
 ```bash
 # run this from the chefdk_bootstrap directory
 
-berks vendor
+berks vendor cookbooks
 sudo -E chef-client -z -c ./client.rb -o chefdk_bootstrap
 ```
