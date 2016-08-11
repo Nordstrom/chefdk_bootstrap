@@ -30,13 +30,12 @@ RSpec.describe ChefDKBootstrap::Cli, mac_bootstrap: true do
 
     context 'long options' do
       let(:arguments) do
-        %w(--cookbook your_cookbook --berks-source https://supermarket.chef.io --json-attributes http://server/attributes.json --version 0.14.25)
+        %w(--json-attributes http://server/attributes.json --version 0.14.25)
       end
 
       it 'all long options specified' do
         options = {
-          cookbook: 'your_cookbook',
-          berks_source: 'https://supermarket.chef.io',
+          cookbook: 'chefdk_bootstrap',
           json_attributes: 'http://server/attributes.json',
           version: '0.14.25'
         }
@@ -45,13 +44,12 @@ RSpec.describe ChefDKBootstrap::Cli, mac_bootstrap: true do
     end
 
     context 'short options' do
-      let(:arguments) { %w(-c your_cookbook -b https://supermarket.chef.io -j http://server/attributes.json -v 0.14.25) }
+      let(:arguments) { %w(-j http://server/attributes.json -v 0.14.25) }
 
       it 'all short options specified' do
         options =
           {
-            cookbook: 'your_cookbook',
-            berks_source: 'https://supermarket.chef.io',
+            cookbook: 'chefdk_bootstrap',
             json_attributes: 'http://server/attributes.json',
             version: '0.14.25'
           }
@@ -72,33 +70,6 @@ RSpec.describe ChefDKBootstrap::Berksfile, mac_bootstrap: true do
       expect(File.read(berksfile.path))
         .to include("cookbook 'chefdk_bootstrap'")
         .and include("source 'https://supermarket.chef.io'")
-    end
-
-    it 'creates berksfile with custom berksfile source' do
-      options[:berks_source] = 'http://chef.example.com'
-      berksfile.create
-      expect(File.read(berksfile.path))
-        .to include("cookbook 'chefdk_bootstrap'")
-        .and include("source 'https://supermarket.chef.io'")
-        .and include("source 'http://chef.example.com'")
-    end
-
-    it 'creates berksfile with custom cookbook' do
-      options[:cookbook] = 'my_cookbook'
-      berksfile.create
-      expect(File.read(berksfile.path))
-        .to include("cookbook 'my_cookbook'")
-        .and include("source 'https://supermarket.chef.io'")
-    end
-
-    it 'creates berksfile with custom cookbook and custom berksfile source' do
-      options[:cookbook] = 'my_cookbook2'
-      options[:berks_source] = 'http://chef.example2.com'
-      berksfile.create
-      expect(File.read(berksfile.path))
-        .to include("cookbook 'my_cookbook2'")
-        .and include("source 'https://supermarket.chef.io'")
-        .and include("source 'http://chef.example2.com'")
     end
   end
 

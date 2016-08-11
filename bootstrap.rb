@@ -44,14 +44,6 @@ module ChefDKBootstrap
         executable_name = File.basename($PROGRAM_NAME)
         opts.banner = "Usage: #{executable_name} [options]"
 
-        opts.on('-c', '--cookbook COOKBOOK', 'Enter your custom ChefDK_bootstrap wrapper cookbook name.') do |v|
-          options[:cookbook] = v
-        end
-
-        opts.on('-b', '--berks-source BSOURCE_URL', 'Enter your private supermarket URL.') do |v|
-          options[:berks_source] = v
-        end
-
         opts.on('-j', '--json-attributes JSON_ATTRIBUTES', 'Enter your URL/path to the JSON file containing your JSON attributes.') do |v|
           options[:json_attributes] = v
         end
@@ -81,7 +73,6 @@ module ChefDKBootstrap
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
     def initialize(options)
-      @berks_source = options[:berks_source]
       @cookbook = options[:cookbook] || 'chefdk_bootstrap'
     end
 
@@ -90,11 +81,9 @@ module ChefDKBootstrap
     # @return [File] berksfile object
     def create
       @tempdir = Dir.mktmpdir('chefdk_bootstrap-')
-      private_source = "source '#{@berks_source}'" if @berks_source
 
       berksfile_content = <<-EOH.gsub(/^\s+/, '')
         source 'https://supermarket.chef.io'
-        #{private_source}
 
         cookbook '#{@cookbook}'
         EOH
