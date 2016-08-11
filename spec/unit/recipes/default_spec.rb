@@ -14,7 +14,7 @@
 #
 
 RSpec.describe 'chefdk_bootstrap::default' do
-  context 'On a Windows machine' do
+  context 'On a Windows machine', win_bootstrap: true do
     include_context 'windows_2012'
     include_context 'windows_mocks'
 

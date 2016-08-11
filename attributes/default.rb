@@ -35,11 +35,13 @@ when 'windows'
   default['chefdk_bootstrap']['package'].tap do |install|
     install['kdiff3'] = true
     install['gitextensions'] = true
+    install['poshgit'] = true
     install['conemu'] = true
   end
 when 'mac_os_x'
   default['chefdk_bootstrap']['package'].tap do |install|
     install['iterm2'] = true
+    install['bash_profile'] = true
   end
 end
 

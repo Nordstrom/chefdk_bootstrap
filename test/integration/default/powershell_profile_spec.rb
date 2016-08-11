@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+username = ENV['APPVEYOR'] ? ENV['machine_user'] : 'vagrant'
+
 # PowerShell profile
-describe file('C:/Users/Vagrant/Documents/WindowsPowerShell/Profile.ps1') do
+describe file("C:/Users/#{username}/Documents/WindowsPowerShell/Profile.ps1") do
   its('content') { should match(/# See chefdk_bootstrap PowerShell Module/) }
   its('content') { should match(/Enable-ChefDKBootstrap/) }
 

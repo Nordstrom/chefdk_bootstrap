@@ -60,9 +60,9 @@ DISABLE_PRY_RESCUE before running guard:
 Will run the test kitchen integration tests.  These tests use Vagrant
 and Virtualbox, which must be installed for the tests to execute.
 
-After converging in a virtual machine, ServerSpec tests are executed.
-This skeleton comes with a very basic ServerSpec test; refer to
-http://serverspec.org for detail on how to create tests.
+After converging in a virtual machine, InSpec tests are executed.
+This skeleton comes with some basic InSpec tests; refer to
+https://www.chef.io/inspec/ for detail on how to create tests.
 
 ##### Testing bootstrap.ps1
 Use test kitchen to spin up a new VM:
@@ -104,8 +104,7 @@ $wininet::InternetSetOption([IntPtr]::Zero, $INTERNET_OPTION_PROXY_SETTINGS_CHAN
 ```
 
 #### Mac
-
-If you want to run this behind a proxy, export these environment variables before you run the commands below.
+To check that the unreleased cookbook converges on a mac follow the steps below. If you want to run this behind a proxy, export these environment variables before you run the commands below.
 
 ```bash
 export http_proxy=http://myproxy.example.com:1234
@@ -115,6 +114,6 @@ export https_proxy=$http_proxy
 ```bash
 # run this from the chefdk_bootstrap directory
 
-berks vendor
+berks vendor cookbooks
 sudo -E chef-client -z -c ./client.rb -o chefdk_bootstrap
 ```

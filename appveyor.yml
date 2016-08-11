@@ -1,0 +1,38 @@
+version: "master-{build}"
+
+os: Windows Server 2012 R2
+platform:
+  - x64
+
+environment:
+  machine_user: test_user
+  machine_pass: Pass@word1
+  machine_port: 5985
+  KITCHEN_YAML: c:\projects\kitchen-machine\.kitchen.appveyor.yml
+  SSL_CERT_FILE: c:\projects\kitchen-machine\certs.pem
+
+  matrix:
+    - ruby_version: "21"
+
+clone_folder: c:\projects\kitchen-machine
+clone_depth: 1
+
+install:
+  - ps: net user /add $env:machine_user $env:machine_pass
+  - ps: net localgroup administrators $env:machine_user /add
+  - ps: $env:PATH="C:\Ruby$env:ruby_version\bin;$env:PATH"
+  - ps: Write-Host $env:PATH
+  - ps: ruby --version
+  - ps: gem --version
+  - ps: gem install bundler --quiet --no-ri --no-rdoc
+  - ps: Invoke-WebRequest -Uri http://curl.haxx.se/ca/cacert.pem -OutFile c:\projects\kitchen-machine\certs.pem
+  - ps: bundler --version
+
+build_script:
+  - bundle install
+  - bundle exec rake style
+  - bundle exec rake spec
+  - bundle exec rake coverage
+
+test_script:
+  - bundle exec kitchen verify windows

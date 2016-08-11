@@ -1,5 +1,5 @@
 RSpec.describe 'chefdk_bootstrap::vagrant' do
-  context 'on a Windows 2012R2 node' do
+  context 'on a Windows 2012R2 node', win_bootstrap: true do
     include_context 'windows_2012'
 
     it 'includes the vagrant::default recipe' do

@@ -1,4 +1,5 @@
-# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk_bootstrap)
+# ChefDK_Bootstrap [![Build Status](https://travis-ci.org/Nordstrom/chefdk_bootstrap.svg?branch=master)](https://travis-ci.org/Nordstrom/chefdk_bootstrap) [![Build status](https://ci.appveyor.com/api/projects/status/tssh0n03tep9ida2?svg=true)](https://ci.appveyor.com/project/nordstrom/chefdk-bootstrap)
+
 
 ## Setup your laptop for Chef development in minutes
 
@@ -16,15 +17,16 @@ Copy the PowerShell command below and paste them into a **PowerShell Admin** con
 script on your workstation.
 
 ```PowerShell
- (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1).Content | Invoke-Expression
+ Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
+ install
 ```
 
 ## Mac Quickstart
 
-Copy the command below and paste it into a terminal. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap) script on your workstation.
+Copy the command below and paste it into a terminal. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb) script on your workstation.
 
 ```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)"
 ```
 
 ### Mac ChefDK profile setup
@@ -57,8 +59,11 @@ Copy the PowerShell command below and paste them into a **PowerShell Admin** con
 script on your workstation.
 
 ```PowerShell
- (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content | Invoke-Expression
+ Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy | Invoke-Expression
+ install
 ```
+
+The ChefDK_bootstrap script will write your environment variables to your `Profile.ps1`.
 
 ### Mac
 Copy/paste these environment variables into your terminal.
@@ -78,7 +83,9 @@ export https_proxy=$http_proxy
 export no_proxy='localhost,127.0.0.1,example.com'
 ```
 
-*To make these changes permanent, export these environment variables from your bash or zsh profile.*
+The ChefDK_bootstrap script will write your environment variables to your `~/.bash_profile`.
+
+*If you are using a different shell, you will need to export these environment variables in your shell startup file (e.g. `.zshrc`).*
 
 Now run the [Quickstart for Mac](#mac-quickstart)
 
@@ -86,30 +93,50 @@ Now run the [Quickstart for Mac](#mac-quickstart)
 If you want to use your own custom wrapper cookbook, add the name of your cookbook and your private supermarket source to these commands instead of the original [Quickstart](#windows-quickstart) (examples included below).
 
 ### JSON attributes
-You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). Right now we're passing this in via the `CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES` environment variable, but in a future version, we'll likely make it a named parameter of the bootstrap script.
+You can pass in attributes via URL/path to a JSON file (see the --json-attributes option in [chef-client](https://docs.chef.io/ctl_chef_client.html) ). For Windows, json_attributes is a named parameter of the bootstrap PowerShell script. For Mac, json-attributes is a named parameter of the bootstrap Ruby script.
 
 #### Windows
+
 ```PowerShell
-$env:CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
+$CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES = "http://server/attributes.json"
+
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
+install -json_attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES
 ```
+
 #### Mac
 ```bash
-export CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="http://server/attributes.json"
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --json-attributes http://server/attributes.json
 ```
 
 ### Custom cookbook
 #### Windows
 
 ```PowerShell
-$install = (Invoke-WebRequest -Uri https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 -ProxyUseDefaultCredentials -Proxy $env:https_proxy).Content
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
 
-"$install <your cookbook name> <your private supermarket url>" | Invoke-Expression
+install -cookbook <your cookbook name> -berks_source <your private supermarket url>
 ```
 
 #### Mac
 
 ```bash
-curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap | bash -s -- <your cookbook name> <your private supermarket url>
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --cookbook <your cookbook name> --berks-source <your supermarket url>
+```
+
+### ChefDK Version
+You can specify the version of chefdk to install as a named parameter in the bootstrap script. By default, the bootstrap script will install the latest version of chefdk. The script will not re-install chefdk if the target version is already installed.
+
+#### Windows
+```PowerShell
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
+
+install -version <target version>
+```
+
+#### Mac
+```bash
+ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --version <target version>
 ```
 
 ## What does it do?

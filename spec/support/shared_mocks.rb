@@ -8,7 +8,8 @@ RSpec.shared_context 'windows_mocks' do
     end
 
     allow_any_instance_of(Chef::Resource::Template).to receive(
-      :chocolatey_installed?).and_return(true)
+      :chocolatey_installed?
+    ).and_return(true)
 
     allow_any_instance_of(Chef::Recipe)
       .to receive(:locate_sysnative_cmd)

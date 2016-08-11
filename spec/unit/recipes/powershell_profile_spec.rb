@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-RSpec.describe 'chefdk_bootstrap::powershell_profile' do
+RSpec.describe 'chefdk_bootstrap::powershell_profile', win_bootstrap: true do
   include_context 'windows_mocks'
 
   before do

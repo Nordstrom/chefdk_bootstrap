@@ -18,7 +18,7 @@ when 'windows'
   # chocolatey_package %w(git git-credential-manager-for-windows poshgit)
   chocolatey_package 'git'
   chocolatey_package 'git-credential-manager-for-windows'
-  chocolatey_package 'poshgit'
+  # chocolatey_package 'poshgit'
 when 'mac_os_x'
   package 'git'
 end

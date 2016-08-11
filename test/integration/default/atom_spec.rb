@@ -14,5 +14,6 @@
 
 describe command('atom -v') do
   its(:exit_status) { should eq 0 }
-  its(:stderr) { should eq '' }
+  its(:stderr) { should eq '' } unless ENV['APPVEYOR']
+  its(:stderr) { should_not include('CommandNotFound') } if ENV['APPVEYOR']
 end

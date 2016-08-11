@@ -25,7 +25,10 @@ end
 
 FoodCritic::Rake::LintTask.new
 
-RSpec::Core::RakeTask.new
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = '--tag ~mac_bootstrap' if Gem.win_platform?
+  t.rspec_opts = '--tag ~win_bootstrap' unless Gem.win_platform?
+end
 
 desc 'Run Rubocop and Foodcritic style checks'
 task style: [:rubocop, :foodcritic]

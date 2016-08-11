@@ -1,4 +1,4 @@
-RSpec.describe 'chefdk_bootstrap::kdiff3' do
+RSpec.describe 'chefdk_bootstrap::kdiff3', win_bootstrap: true do
   include_context 'windows_2012'
 
   it 'installs the kdiff3 visual diff tool' do
