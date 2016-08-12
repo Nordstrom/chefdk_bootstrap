@@ -13,4 +13,6 @@
 # limitations under the License.
 #
 
-chocolatey_package 'poshgit'
+chocolatey_package 'poshgit' do
+  options '--allow-empty-checksums'
+end

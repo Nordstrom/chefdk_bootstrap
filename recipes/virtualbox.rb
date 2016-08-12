@@ -15,7 +15,9 @@
 
 case node['platform_family']
 when 'windows'
-  chocolatey_package 'virtualbox'
+  chocolatey_package 'virtualbox' do
+    options '--allow-empty-checksums'
+  end
 when 'mac_os_x'
   dmg_package 'Virtualbox' do
     source node['chefdk_bootstrap']['virtualbox']['source']

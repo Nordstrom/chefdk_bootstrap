@@ -13,4 +13,6 @@
 # limitations under the License.
 #
 
-chocolatey_package 'kdiff3'
+chocolatey_package 'kdiff3' do
+  options '--allow-empty-checksums'
+end
