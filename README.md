@@ -110,19 +110,8 @@ ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/mas
 ```
 
 ### Custom cookbook
-#### Windows
 
-```PowerShell
-Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
-
-install -cookbook <your cookbook name> -berks_source <your private supermarket url>
-```
-
-#### Mac
-
-```bash
-ruby -e "$(curl https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.rb)" - --cookbook <your cookbook name> --berks-source <your supermarket url>
-```
+Deprecated. If you would like to use a custom cookbook, please use an earlier version of ChefDK_bootstrap.
 
 ### ChefDK Version
 You can specify the version of chefdk to install as a named parameter in the bootstrap script. By default, the bootstrap script will install the latest version of chefdk. The script will not re-install chefdk if the target version is already installed.

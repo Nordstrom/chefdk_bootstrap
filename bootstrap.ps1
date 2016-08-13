@@ -31,10 +31,7 @@ function die {
 function Install-Project {
   Param(
     [string] $version,
-    [string] $cookbook,
     [string] $json_attributes,
-    [string] $berks_source,
-    [string] $branch
   )
 
   if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
@@ -64,17 +61,6 @@ function Install-Project {
   }
 
   $bootstrapCookbook = 'chefdk_bootstrap'
-  if ($cookbook) {
-    $bootstrapCookbook = $cookbook
-  }
-
-  if ($berks_source) {
-    $privateSource = "source '$berks_source'"
-  }
-
-  if ($branch) {
-    $devbranch = ", github: 'Nordstrom/chefdk_bootstrap', branch: '$branch'"
-  }
 
   $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
   $dotChefDKDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chefdk'
@@ -89,9 +75,8 @@ function Install-Project {
 
   $berksfile = @"
   source 'https://supermarket.chef.io'
-  $privateSource
 
-  cookbook '$bootstrapCookbook'$devbranch
+  cookbook '$bootstrapCookbook'
 "@
 
   $chefConfig = @"
@@ -103,7 +88,7 @@ function Install-Project {
   ### This bootstrap script will:
 
   1. Install the ChefDK version $targetChefDk.
-  2. Download the $bootstrapCookbook cookbook via Berkshelf $privateSource
+  2. Download the $bootstrapCookbook cookbook via Berkshelf
   3. Run chef-client to install the rest of the tools you'll need.
 
 "@
