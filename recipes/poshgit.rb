@@ -14,5 +14,5 @@
 #
 
 chocolatey_package 'poshgit' do
-  options '--allow-empty-checksums'
+  options '--allow-empty-checksums-secure'
 end
