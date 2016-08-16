@@ -18,5 +18,4 @@ chocolatey_package 'conemu' do
   # installation script and we don't want to touch it
   not_if '(& "C:\Program Files\ConEmu\ConEmu\ConEmuC.exe" /IsConEmu); $LASTEXITCODE -eq 1'
   guard_interpreter :powershell_script
-  options '--allow-empty-checksums'
 end

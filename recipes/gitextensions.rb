@@ -13,6 +13,4 @@
 # limitations under the License.
 #
 
-chocolatey_package 'gitextensions' do
-  options '--allow-empty-checksums'
-end
+chocolatey_package 'gitextensions'

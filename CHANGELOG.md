@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.0.1
+* Partial fix for [#146](https://github.com/Nordstrom/chefdk_bootstrap/issues/146)
+
 ## 2.0.0
 * Fix [#96](https://github.com/Nordstrom/chefdk_bootstrap/issues/96)
   Consider rewriting bootstrap shell script in Ruby
