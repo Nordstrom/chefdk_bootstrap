@@ -31,7 +31,7 @@ function die {
 function Install-Project {
   Param(
     [string] $version,
-    [string] $json_attributes,
+    [string] $json_attributes
   )
 
   if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
