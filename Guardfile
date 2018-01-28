@@ -58,5 +58,5 @@ end
 # load local overrides
 guardfile_dir = File.absolute_path(File.join('.', 'lib', 'guardfile'))
 Dir.glob(File.join(guardfile_dir, '*.guard')).each do |snippet|
-  eval File.read(snippet), nil, snippet # rubocop:disable Lint/Eval
+  eval File.read(snippet), nil, snippet # rubocop:disable Security/Eval
 end

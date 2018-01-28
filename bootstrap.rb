@@ -36,9 +36,8 @@ module ChefDKBootstrap
     #  * :cookbook [String] custom ChefDK_bootstrap wrapper cookbook name
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
-    # rubocop:disable MethodLength
     def parse
-      options = { }
+      options = {}
 
       option_parser = OptionParser.new do |opts|
         executable_name = File.basename($PROGRAM_NAME)
@@ -52,7 +51,7 @@ module ChefDKBootstrap
           options[:version] = v
         end
 
-        opts.on('-c', '--cookbook Cookbook', 'Enter the name of a wrapper cookbook for chefdk_bootstrap.') do |v|
+        opts.on('-c', '--cookbook Cookbook', 'Enter the name of a wrapper cookbook for chefdk_bootstrap.') do |_v|
           options[:cookbook] = c
         end
       end
@@ -214,7 +213,7 @@ module ChefDKBootstrap
 end
 
 # Wrapping bootstrap script to allow for unit testing
-if __FILE__ == $PROGRAM_NAME
+if $PROGRAM_NAME == __FILE__
   include ChefDKBootstrap
   options = Cli.new(ARGV).parse
   berksfile = Berksfile.new(options)

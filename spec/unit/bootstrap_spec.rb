@@ -23,7 +23,7 @@ RSpec.describe ChefDKBootstrap::Cli, mac_bootstrap: true do
       let(:arguments) { [] }
 
       it 'nothing is returned in the options hash' do
-        options = { }
+        options = {}
         expect(cli.parse).to eq(options)
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe ChefDKBootstrap::Cli, mac_bootstrap: true do
       it 'all long options specified' do
         options = {
           json_attributes: 'http://server/attributes.json',
-          version: '0.14.25'
+          version: '0.14.25',
         }
         expect(cli.parse).to eq(options)
       end
@@ -49,7 +49,7 @@ RSpec.describe ChefDKBootstrap::Cli, mac_bootstrap: true do
         options =
           {
             json_attributes: 'http://server/attributes.json',
-            version: '0.14.25'
+            version: '0.14.25',
           }
         expect(cli.parse).to eq(options)
       end
@@ -66,7 +66,7 @@ RSpec.describe ChefDKBootstrap::Berksfile, mac_bootstrap: true do
     it 'creates berksfile with default values' do
       berksfile.create
       expect(File.read(berksfile.path))
-        .to include("cookbook")
+        .to include('cookbook')
         .and include("source 'https://supermarket.chef.io'")
     end
   end
