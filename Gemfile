@@ -7,6 +7,7 @@ gem 'stove', '~> 3.2'
 group :test do
   gem 'chefspec', '~> 4.4'
   gem 'foodcritic', '~> 5.0'
+  gem 'cookstyle', '~> 2.1'
   gem 'rubocop', '~> 0.49'
 end
 

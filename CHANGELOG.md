@@ -6,6 +6,7 @@
   Update the versions of the homebrew, line, and windows cookbooks. 
 * Mac os fix for [#149](https://github.com/Nordstrom/chefdk_bootstrap/issues/149)
   Delete the old mac bootstrap shell script. The script was replaced by bootstrap.rb
+* Use cookstyle instead of native rubocop
 
 ## 2.0.1
 * Partial fix for [#146](https://github.com/Nordstrom/chefdk_bootstrap/issues/146)
