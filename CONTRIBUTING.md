@@ -15,7 +15,9 @@ if the tests are run on a windows server.
 
 Other sections of this document will describe how to use rake on a windows
 server to check the style and run the repository test.  This checklist
-gives a minimum overview of the things to be tested.
+gives a minimum overview of the things to be tested. The rake tasks
+are problmatic at the moment.  They fail on spec tests under ubuntu,
+mac/os and windows environments.
 
 *  foodcritc .
 *  cookstyle
