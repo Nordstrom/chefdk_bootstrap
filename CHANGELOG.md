@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 2.1.1
+* Fix setting the versions
+* Update the tests for setting the version in the Berksfile
+
 ## 2.1.0
 * Mac os fix for [#153](https://github.com/Nordstrom/chefdk_bootstrap/issues/153)
   Download chefdk_bootstrap@2.1.0 to help berks resolve sooner.

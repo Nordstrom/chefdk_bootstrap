@@ -66,7 +66,7 @@ RSpec.describe ChefDKBootstrap::Berksfile, mac_bootstrap: true do
     it 'creates berksfile with default values' do
       berksfile.create
       expect(File.read(berksfile.path))
-        .to include('cookbook')
+        .to include("cookbook 'chefdk_bootstrap', '2.1.1'")
         .and include("source 'https://supermarket.chef.io'")
     end
   end
