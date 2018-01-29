@@ -17,7 +17,8 @@ Copy the PowerShell command below and paste them into a **PowerShell Admin** con
 script on your workstation.
 
 ```PowerShell
- Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression install
+ Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression
+ install
 ```
 
 ## Mac Quickstart
