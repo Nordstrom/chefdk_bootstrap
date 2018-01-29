@@ -16,5 +16,7 @@ before_script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/rubocop --version
   - /opt/chefdk/embedded/bin/foodcritic --version
+script:
+  - bundle exec rake style
 matrix:
   fast_finish: true
