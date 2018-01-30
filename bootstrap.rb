@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 #
-# Copyright 2016 Nordstrom, Inc.
+# Copyright 2016, 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,9 +36,8 @@ module ChefDKBootstrap
     #  * :cookbook [String] custom ChefDK_bootstrap wrapper cookbook name
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
-    # rubocop:disable MethodLength
     def parse
-      options = { cookbook: 'chefdk_bootstrap' }
+      options = {}
 
       option_parser = OptionParser.new do |opts|
         executable_name = File.basename($PROGRAM_NAME)
@@ -50,6 +49,10 @@ module ChefDKBootstrap
 
         opts.on('-v', '--version VERSION', 'Enter the version of ChefDK to install.') do |v|
           options[:version] = v
+        end
+
+        opts.on('-c', '--cookbook Cookbook', 'Enter the name of a wrapper cookbook for chefdk_bootstrap.') do |_v|
+          options[:cookbook] = c
         end
       end
 
@@ -73,7 +76,7 @@ module ChefDKBootstrap
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
     def initialize(options)
-      @cookbook = options[:cookbook] || 'chefdk_bootstrap'
+      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.1.1'"
     end
 
     # Creates berksfile in a temp directory
@@ -85,7 +88,7 @@ module ChefDKBootstrap
       berksfile_content = <<-EOH.gsub(/^\s+/, '')
         source 'https://supermarket.chef.io'
 
-        cookbook '#{@cookbook}'
+        cookbook #{@cookbook}
         EOH
       @path = File.join(@tempdir, 'Berksfile')
       File.open(path, 'w') { |b| b.write(berksfile_content) }
@@ -197,7 +200,7 @@ module ChefDKBootstrap
     def initialize(options, client_rb = ClientRb.new)
       @client_rb = client_rb
       @client_rb.create
-      @cookbook = options[:cookbook]
+      @cookbook = options[:cookbook] || 'chefdk_bootstrap'
       @json_attributes = options[:json_attributes].nil? ? nil : " --json-attributes #{options[:json_attributes]}"
     end
 
@@ -210,7 +213,7 @@ module ChefDKBootstrap
 end
 
 # Wrapping bootstrap script to allow for unit testing
-if __FILE__ == $PROGRAM_NAME
+if $PROGRAM_NAME == __FILE__
   include ChefDKBootstrap
   options = Cli.new(ARGV).parse
   berksfile = Berksfile.new(options)

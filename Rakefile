@@ -15,12 +15,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'cookstyle'
 require 'rubocop/rake_task'
 require 'foodcritic'
 require 'rspec/core/rake_task'
 
 RuboCop::RakeTask.new do |rubocop|
-  rubocop.options = ['-D']
+  rubocop.options << '--display-cop-names'
 end
 
 FoodCritic::Rake::LintTask.new

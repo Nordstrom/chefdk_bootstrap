@@ -2,6 +2,29 @@
 
 Thank you so much for taking the time to contribute! Below is some information that you need to contribute effectively.
 
+## General Observations
+
+The repository contains a cookbook and installation scripts.  The installtion scripts
+are not part of the cookbook. They are used to install chefdk and then to 
+download the chefdk_bootstrap cookkbook and run it.
+
+This repository supports both mac-os and windows servers. Development is simpler 
+if the tests are run on a windows server.
+
+## Testing Checklist
+
+Other sections of this document will describe how to use rake on a windows
+server to check the style and run the repository test.  This checklist
+gives a minimum overview of the things to be tested. The rake tasks
+are problmatic at the moment.  They fail on spec tests under ubuntu,
+mac/os and windows environments.
+
+*  foodcritc .
+*  cookstyle
+*  rspec
+*  kitchen verify
+*  Run the install post-implementation on both mac and windows servers
+
 ## Development
 
 The first time you check out this cookbook, run

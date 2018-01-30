@@ -1,5 +1,17 @@
 # Revision History for chefdk_bootstrap
 
+## 2.1.1
+* Fix setting the versions
+* Update the tests for setting the version in the Berksfile
+
+## 2.1.0
+* Mac os fix for [#153](https://github.com/Nordstrom/chefdk_bootstrap/issues/153)
+  Download chefdk_bootstrap@2.1.0 to help berks resolve sooner.
+  Update the versions of the homebrew, line, and windows cookbooks. 
+* Mac os fix for [#149](https://github.com/Nordstrom/chefdk_bootstrap/issues/149)
+  Delete the old mac bootstrap shell script. The script was replaced by bootstrap.rb
+* Use cookstyle instead of native rubocop
+
 ## 2.0.1
 * Partial fix for [#146](https://github.com/Nordstrom/chefdk_bootstrap/issues/146)
 
