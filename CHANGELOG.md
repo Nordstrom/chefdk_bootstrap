@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 2.2.0
+* Create a test to check that the embedded version values have been changed.
+* Add code to create a global git configuration file
+
 ## 2.1.1
 * Fix setting the versions
 * Update the tests for setting the version in the Berksfile

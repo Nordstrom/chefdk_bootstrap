@@ -27,6 +27,7 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['git'] = true
   install['chefdk_julia'] = false
   install['kitchen_proxy'] = true
+  install['gitconfig'] = false
 end
 
 # platform specific
@@ -44,6 +45,21 @@ when 'mac_os_x'
     install['bash_profile'] = true
   end
 end
+
+default['chefdk_bootstrap']['gitconfig'] = {
+  'core.editor' => { value: 'atom --wait' },
+  'core.autocrlf' => { value: 'True' },
+  'alias.co' => { value: 'checkout' },
+  'alias.br' => { value: 'branch' },
+  'alias.ci' => { value: 'commit' },
+  'alias.st' => { value: 'status' },
+  'alias.lol' => { value: "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" },
+  'push.default' => { value: 'simple' },
+}
+
+default['chefdk_bootstrap']['gitconfig']['credential.helper'] = { value: 'osxkeychain' } if platform_family?('mac_os_x')
+default['chefdk_bootstrap']['gitconfig']['user.name'] = { value: ENV['GITUSERNAME'] } if ENV['GITUSERNAME']
+default['chefdk_bootstrap']['gitconfig']['user.email'] = { value: ENV['GITUSEREMAIL'] } if ENV['GITUSEREMAIL']
 
 # whether to mess with PowerShell settings
 default['chefdk_bootstrap']['powershell']['configure'] = true
