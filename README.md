@@ -137,8 +137,7 @@ text editor. Out of the box, Atom supports all the languages you will need
 for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 
 ### Source Control
-[Git](http://git-scm.com/) - command line git client and tools.
-
+[Git](http://git-scm.com/) - command line git client and tools. Optionally configures a default global gitconfig file.
 
 ### Local Virtualization
 [Virtualbox](https://www.virtualbox.org/) - Oracle's free, open source virtualization tool for local cookbook testing.
@@ -167,11 +166,20 @@ for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 * Installs git.
 * On Windows, installs git-credential-winstore, and posh-git.
 
+### gitconfig
+* Configures a default global gitconfig.
+
 ### gitextensions
 * On Windows, installs gitextensions, a GUI git client.
 
+### iterm2
+* On Mac, installs iterm2.
+
 ### kdiff3
 * On Windows, installs the free, open-source diff/merge tool, kdiff3.
+
+### poshgit
+* On Windows, install poshgit for git/powershell integration.
 
 ### powershell_profile
 * Configures a global PowerShell profile to correct the $env:HOME environment
@@ -183,8 +191,11 @@ variable and run `chef shell-init powershell`.
 ### virtualbox
 * Installs Virtualbox.
 
-### iterm2
-* On Mac, installs iterm2.
+## Environment variables used
+Variable | Description
+---------|------------
+GITUSERNAME | User name set in gitconfig
+GITUSEREMAIL | User email name set in gitconfig
 
 ## Attributes
 
@@ -203,6 +214,7 @@ Attribute | Description | Type   | Default
 ['package']['gitextensions'] | Whether to install gitextensions or not | boolean | true
 ['package']['iterm2'] | Whether to install iterm2 or not | boolean | true
 ['package']['chefdk_julia'] | Whether to install chefdk_julia or not | boolean | false
+['package']['gitconfig'] | Whether to configure a default gitconfig or not | boolean | false
 
 ## Author
 

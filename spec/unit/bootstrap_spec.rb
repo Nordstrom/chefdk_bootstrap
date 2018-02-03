@@ -62,11 +62,12 @@ RSpec.describe ChefDKBootstrap::Berksfile, mac_bootstrap: true do
 
   describe '#create' do
     let(:options) { {} }
+    cookbook_version = File.read('metadata.rb').match(/^version[\s']+(\d+\.\d+\.\d+)/)[1]
 
     it 'creates berksfile with default values' do
       berksfile.create
       expect(File.read(berksfile.path))
-        .to include("cookbook 'chefdk_bootstrap', '2.1.1'")
+        .to include("cookbook 'chefdk_bootstrap', '#{cookbook_version}'")
         .and include("source 'https://supermarket.chef.io'")
     end
   end

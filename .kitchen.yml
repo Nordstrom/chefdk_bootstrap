@@ -21,7 +21,10 @@ suites:
       - recipe[win_proxy]
       - recipe[chefdk_bootstrap]
       - recipe[chefdk_bootstrap::fix_profile]
-    # attributes:
+    attributes:
+      chefdk_bootstrap:
+        package:
+          gitconfig: true
     #   chefdk_bootstrap:
     #     package:
     #       poshgit: false
