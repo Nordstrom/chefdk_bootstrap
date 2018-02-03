@@ -140,3 +140,8 @@ export https_proxy=$http_proxy
 berks vendor cookbooks
 sudo -E chef-client -z -c ./client.rb -o chefdk_bootstrap
 ```
+
+To test the unreleased bootstrap.rb and cookbook work you can run:
+```bash
+./test/fixtures/scripts/testboot
+```
