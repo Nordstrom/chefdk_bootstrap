@@ -1,5 +1,9 @@
 # Revision History for chefdk_bootstrap
 
+## 2.2.1
+* Monkeypatch the vagrant helper library.  The way the mac os vagrant package name is computed
+has changed. A PR was submitted for the vagrant cookbook but hasn't been merged yet.
+
 ## 2.2.0
 * Create a test to check that the embedded version values have been changed.
 * Add code to create a global git configuration file
