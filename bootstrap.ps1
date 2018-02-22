@@ -76,7 +76,7 @@ function Install-Project {
   $berksfile = @"
   source 'https://supermarket.chef.io'
 
-  cookbook '$bootstrapCookbook', '2.2.1'
+  cookbook '$bootstrapCookbook', '2.3.0'
 "@
 
   $chefConfig = @"

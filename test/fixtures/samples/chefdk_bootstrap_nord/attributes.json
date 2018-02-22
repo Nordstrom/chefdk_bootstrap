@@ -1,0 +1,21 @@
+{
+  "chefdk_bootstrap": {
+    "package": {
+      "chefdk_julia": true
+    }
+  },
+  "chefdk_bootstrap": {
+    "package": {
+      "gitconfig": true
+    }
+  },
+  "vagrant": {
+    "version": "2.0.2",
+    "msi_version": "2.0.2"
+  },
+  "chef_ca": {
+    "ca_bundle_name": "Nordstrom CA Bundle",
+    "ca_bundle":
+     "-----BEGIN CERTIFICATE-----\n Base64 .cer contents of the Certificate Bundle Go here. Imbedded newlines are replaced----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\n----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\n----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\n----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\n----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\n----END CERTIFICATE-----"
+  } 
+}
