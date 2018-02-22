@@ -76,7 +76,7 @@ module ChefDKBootstrap
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
     def initialize(options)
-      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.2.1'#{ENV['CHEFDK_BOOT_LOCAL']}"
+      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.3.0'#{ENV['CHEFDK_BOOT_LOCAL']}"
     end
 
     # Creates berksfile in a temp directory
@@ -206,7 +206,6 @@ module ChefDKBootstrap
 
     # Runs the chef-client with specified cookbook and json attributes
     def run
-      puts 'Running chef-client (installed by ChefDK) to bootstrap this machine'
       raise 'Chef-client failed' unless system("sudo -E chef-client -z -l error -c #{@client_rb.path} -o '#{@cookbook}' #{@json_attributes}")
     end
   end

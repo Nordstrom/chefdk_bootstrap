@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# Test chefdk boot on a mac, using a local copy of the cookbook
 # Set environment variable CHEFDK_VERSION to override the default version of chefdk
-# Set environment variable CHEFDK_BOOT_LOCAL to set a berksfile path to the local copy of the chefdk_bootstrap cookbook
 
 echo "Starting chefdk_bootstrap_nord bootstrap..."
 
@@ -12,14 +10,11 @@ export https_proxy=$http_proxy
 export no_proxy='localhost,127.0.0.1,nordstrom.net'
 
 # Send these attributes into the bootstrap to be passed into chef-client
-CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse/attributes.json?raw"
-# To test using the attribute file from a specific commit in bit bucket use this format
-# CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse/attributes.json\?at\=dbf3c40139c\&raw"
+# CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse/attributes.json?raw"
+CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse?at=refs%2Fheads%2FPCM-892/attributes.json?raw"
 [ -z "$CHEFDK_VERSION" ] && CHEFDK_VERSION="2.4.17"
-[ -z "$CHEFDK_BOOT_LOCAL" ] && CHEFDK_BOOT_LOCAL=", path: '$(pwd)'" && export CHEFDK_BOOT_LOCAL
 
 echo "Starting chefdk_bootstrap..."
-#ruby -e "$(cat bootstrap.rb)" - --version $CHEFDK_VERSION
 ruby -e "$(cat bootstrap.rb)" - --json-attributes $CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES --version $CHEFDK_VERSION
 
 # Check to see if the .chef folder exists and already has files in it

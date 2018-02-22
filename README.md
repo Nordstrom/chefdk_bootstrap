@@ -159,6 +159,10 @@ for Chef development: Ruby, PowerShell, Bash, XML, JSON, etc.
 ### atom
 * Installs the Atom editor
 
+### chef_ca
+* Adds a Certificate Authority cert bundle to the cacerts.pem file. See the
+test/fixtures/samples/chefdk_bootstrap_nord for an example that uses this method.
+
 ### conemu
 * On Windows, installs [ConEmu](https://conemu.github.io/) (a console replacement)
 
@@ -207,6 +211,7 @@ Attribute | Description | Type   | Default
 ['atom']['source_url'] | Windows: Atom installer package source URL | URL String | https://atom.io/download/windows
 ['atom']['source_url'] | Mac: Atom installer package source URL | URL String | https://atom.io/download/mac
 ['package']['atom'] | Whether to install Atom or not | boolean | true
+['package']['chef_ca'] | Whether to install a certificate authority cert bundleA or not | boolean | false
 ['package']['kdiff3'] | Whether to install kdiff3 or not | boolean | true
 ['package']['vagrant'] | Whether to install Vagrant or not | boolean | true
 ['package']['virtualbox'] | Whether to install Virtualbox or not | boolean | true
@@ -222,7 +227,7 @@ Nordstrom, Inc.
 
 ## License
 
-Copyright 2015 Nordstrom, Inc.
+Copyright 2015, 2018 Nordstrom, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
