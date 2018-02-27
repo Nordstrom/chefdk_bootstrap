@@ -3,8 +3,10 @@
 # Library:: apm
 #
 # Author:: Mohit Sethi <mohit@sethis.in>
+#          Mark Gibbons
 #
 # Copyright 2013-2014, Mohit Sethi.
+# Copyright 2018 Nordstrom, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
