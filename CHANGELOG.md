@@ -1,5 +1,23 @@
 # Revision History for chefdk_bootstrap
 
+## 2.3.0
+* Use chef_ca to add a Certificate Authority cert bundle to the chefdk cacert.pem file
+The goal is to allow authorized access to locally signed supermarket and chef server
+instances.
+
+The designs considered included doing a knife ssl fetch to allow access to a desired server.  
+Adding the CA bundle allows access to more than just one server and has the advantage of
+not breaking of a new certificate is issued for a locally signed supermarket or chef server.
+In addition knife ssl fetch doesn't work adequately in the case where only cert for the server
+is downloaded without the whole certificate bundle.
+
+The testboot script was included and is used by the developers to test this cookbook before
+it is available on supermarket.chef.io.
+
+Install a default set of atom plugins.  Parts of the atom cookbook (mostly and unmerged
+open pull request https://github.com/mohitsethi/chef-atom/pull/15) are included to install
+the plugins. Once merged the included parts of the atom cookbook can be removed.
+
 ## 2.2.1
 * Monkeypatch the vagrant helper library.  The way the mac os vagrant package name is computed
 has changed. A PR was submitted for the vagrant cookbook but hasn't been merged yet.

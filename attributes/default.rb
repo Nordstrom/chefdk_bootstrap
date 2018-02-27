@@ -22,6 +22,7 @@ default['chefdk_bootstrap']['atom']['source_url'] =
 # common things to install
 default['chefdk_bootstrap']['package'].tap do |install|
   install['atom'] = true
+  install['chef_ca'] = false
   install['virtualbox'] = true
   install['vagrant'] = true
   install['git'] = true
@@ -72,3 +73,6 @@ default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.co
 
 default['chefdk_bootstrap']['virtualbox']['source'] = 'http://download.virtualbox.org/virtualbox/5.0.14/VirtualBox-5.0.14-105127-OSX.dmg'
 default['chefdk_bootstrap']['virtualbox']['checksum'] = '4de41068712eb819749b5376c90dca47f9a1d6eecf4c516d83269ac12add2aa4'
+
+# Default Atom plugins
+default['atom']['packages'] = %w(language-powershell linter linter-cookstyle linter-erb linter-foodcritic linter-rubocop merge-conflicts rubocop-auto-correct)

@@ -1,4 +1,8 @@
-# Copyright 2015 Nordstrom, Inc.
+#
+# Cookbook Name:: chef-atom
+# Recipe:: debian
+#
+# Copyright (c) 2016 Doug Ireton
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,8 +15,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-include_recipe "#{cookbook_name}::#{node['platform_family']}"
-include_recipe "#{cookbook_name}::chefdk_julia"
-include_recipe "#{cookbook_name}::atom_plugins" if node['chefdk_bootstrap']['package']['atom']
+include_recipe 'apt'
+
+apt_repository 'atom-ppa' do
+  uri 'http://ppa.launchpad.net/webupd8team/atom/ubuntu'
+  distribution node['lsb']['codename']
+  components ['main']
+  keyserver 'keyserver.ubuntu.com'
+  key 'EEA14886'
+end
+
+package 'atom'

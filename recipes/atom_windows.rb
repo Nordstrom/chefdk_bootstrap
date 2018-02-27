@@ -1,4 +1,8 @@
-# Copyright 2015 Nordstrom, Inc.
+#
+# Cookbook Name:: chef-atom
+# Recipe:: windows
+#
+# Copyright (c) 2016 Doug Ireton
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,8 +15,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-include_recipe "#{cookbook_name}::#{node['platform_family']}"
-include_recipe "#{cookbook_name}::chefdk_julia"
-include_recipe "#{cookbook_name}::atom_plugins" if node['chefdk_bootstrap']['package']['atom']
+package 'Atom' do # ~FC009
+  source node['atom']['source_url']
+  remote_file_attributes(
+    path: File.join(Chef::Config[:file_cache_path], 'AtomSetup.exe')
+  )
+  installer_type :custom
+  options '/silent'
+end

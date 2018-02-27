@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # limitations under the License.
 #
 
-include_recipe "#{cookbook_name}::#{node['platform_family']}"
-include_recipe "#{cookbook_name}::chefdk_julia"
-include_recipe "#{cookbook_name}::atom_plugins" if node['chefdk_bootstrap']['package']['atom']
+chef_ca node['chef_ca']['ca_bundle_name'] do
+  type :chefdk
+  ca_bundle node['chef_ca']['ca_bundle']
+end
