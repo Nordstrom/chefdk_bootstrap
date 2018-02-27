@@ -4,7 +4,7 @@ Thank you so much for taking the time to contribute! Below is some information t
 
 ## General Observations
 
-The repository contains a cookbook and installation scripts.  The installtion scripts
+The repository contains a cookbook and installation scripts.  The installation scripts
 are not part of the cookbook. They are used to install chefdk and then to 
 download the chefdk_bootstrap cookkbook and run it.
 

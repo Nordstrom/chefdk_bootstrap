@@ -25,6 +25,3 @@ suites:
       chefdk_bootstrap:
         package:
           gitconfig: true
-    #   chefdk_bootstrap:
-    #     package:
-    #       poshgit: false

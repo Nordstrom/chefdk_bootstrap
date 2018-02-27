@@ -13,4 +13,4 @@
 # limitations under the License.
 #
 
-include_recipe 'atom'
+include_recipe "#{cookbook_name}::atom_default"

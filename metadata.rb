@@ -23,7 +23,10 @@ version          '2.3.0'
 supports         'windows'
 supports         'mac_os_x'
 
-depends          'atom', '~> 0.2.0'
+# TODO: If the chef-atom project merges the custom resource change
+# use the chef-atom cookbook and removed the parts of chef-atom
+# embedded in this cookbook.
+# while atom is embedded.  depends          'atom', '~> 0.2.0'
 depends          'chef_ca', '0.1.1'
 depends          'chocolatey', '~> 1.0'
 depends          'git', '~> 8.0'
@@ -31,6 +34,9 @@ depends          'homebrew', '~> 4.3'
 depends          'line', '~> 1.0'
 depends          'vagrant', '~> 0.5'
 depends          'windows', '~> 3.4'
+
+# temporary while atom is embedded
+depends          'apt', '~> 6.1'
 
 source_url       'https://github.com/Nordstrom/chefdk_bootstrap'
 issues_url       'https://github.com/Nordstrom/chefdk_bootstrap/issues'
