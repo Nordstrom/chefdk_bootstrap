@@ -1,5 +1,10 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.0
+* Don't install virtual box on a guest system
+* Use version 5.2.8 of virtual box on the mac
+* Fix the vagrant helper library to use the right windows package names
+
 ## 2.3.0
 * Use chef_ca to add a Certificate Authority cert bundle to the chefdk cacert.pem file
 The goal is to allow authorized access to locally signed supermarket and chef server

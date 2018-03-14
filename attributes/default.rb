@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright 2015, 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,6 +30,9 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['kitchen_proxy'] = true
   install['gitconfig'] = false
 end
+
+# No virtual box on vm
+default['chefdk_bootstrap']['package']['virtualbox'] = false if node['virtualization']['system']['role'] == 'guest'
 
 # platform specific
 case node['platform_family']
@@ -71,8 +74,8 @@ default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy'] # 'http://mypro
 # Skip the proxy for these domains and IPs. This should be a comma-separated string
 default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.com,localhost,127.0.0.1'
 
-default['chefdk_bootstrap']['virtualbox']['source'] = 'http://download.virtualbox.org/virtualbox/5.0.14/VirtualBox-5.0.14-105127-OSX.dmg'
-default['chefdk_bootstrap']['virtualbox']['checksum'] = '4de41068712eb819749b5376c90dca47f9a1d6eecf4c516d83269ac12add2aa4'
+default['chefdk_bootstrap']['virtualbox']['source'] = 'http://download.virtualbox.org/virtualbox/5.2.8/VirtualBox-5.2.8-121009-OSX.dmg'
+default['chefdk_bootstrap']['virtualbox']['checksum'] = '97764ad37c5fafdeccecfb660ce056f625e9048890af772befe0330ed2def1d8'
 
 # Default Atom plugins
 default['atom']['packages'] = %w(language-powershell linter linter-cookstyle linter-erb linter-foodcritic linter-rubocop merge-conflicts rubocop-auto-correct)
