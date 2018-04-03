@@ -32,7 +32,7 @@ depends          'chocolatey', '~> 1.0'
 depends          'git', '~> 8.0'
 depends          'homebrew', '~> 4.3'
 depends          'line', '~> 1.0'
-depends          'vagrant', '~> 0.5'
+depends          'vagrant', '~> 0.7.2'
 depends          'windows', '~> 3.4'
 
 # temporary while atom is embedded

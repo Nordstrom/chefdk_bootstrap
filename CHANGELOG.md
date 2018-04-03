@@ -3,7 +3,8 @@
 ## 2.4.0
 * Don't install virtual box on a guest system
 * Use version 5.2.8 of virtual box on the mac
-* Fix the vagrant helper library to use the right windows package names
+* Remove the vagrant monkey patches. The needed vagrant cookbook fixes have been merged and published
+* 0.7.2 is the minimum version of the vagrant cookbook
 
 ## 2.3.0
 * Use chef_ca to add a Certificate Authority cert bundle to the chefdk cacert.pem file
