@@ -17,7 +17,7 @@
 # limitations under the License.
 
 package 'Atom' do # ~FC009
-  source node['atom']['source_url']
+  source node['chefdk_bootstrap']['atom']['source_url']
   remote_file_attributes(
     path: File.join(Chef::Config[:file_cache_path], 'AtomSetup.exe')
   )
