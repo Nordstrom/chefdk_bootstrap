@@ -2,6 +2,7 @@
 
 ## 2.4.1
 * Bump the vagrant cookbook version to ~> 0.9. The new vagrant default version is 2.0.3
+* Exclude the passwd ohai plugin. This change eliminates a 6 minute hang at the start of the install that some users were experiencing.
 
 ## 2.4.0
 * Don't install virtual box on a guest system
