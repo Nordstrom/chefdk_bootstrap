@@ -76,7 +76,7 @@ module ChefDKBootstrap
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
     def initialize(options)
-      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.4.0'#{ENV['CHEFDK_BOOT_LOCAL']}"
+      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.4.1'#{ENV['CHEFDK_BOOT_LOCAL']}"
     end
 
     # Creates berksfile in a temp directory
@@ -122,6 +122,7 @@ module ChefDKBootstrap
 
       clientrb_content = <<-EOH.gsub(/^\s+/, '')
         cookbook_path '#{File.join(Dir.pwd, 'berks-cookbooks')}'
+        ohai.disabled_plugins = [ :Passwd ]
         EOH
       @path = File.join(@tempdir, 'client.rb')
       File.open(@path, 'w') { |c| c.write(clientrb_content) }

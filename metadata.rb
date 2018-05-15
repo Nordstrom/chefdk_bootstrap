@@ -18,7 +18,7 @@ maintainer       'Nordstrom, Inc.'
 maintainer_email 'techcheftm@nordstrom.com'
 license          'Apache-2.0'
 description      'Bootstrap a developer workstation for local Chef development using the ChefDK'
-version          '2.4.0'
+version          '2.4.1'
 
 supports         'windows'
 supports         'mac_os_x'
@@ -32,7 +32,7 @@ depends          'chocolatey', '~> 1.0'
 depends          'git', '~> 8.0'
 depends          'homebrew', '~> 4.3'
 depends          'line', '~> 1.0'
-depends          'vagrant', '~> 0.7.2'
+depends          'vagrant', '~> 0.9'
 depends          'windows', '~> 3.4'
 
 # temporary while atom is embedded

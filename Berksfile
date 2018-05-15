@@ -19,4 +19,4 @@ metadata
 
 # Enable Chocolatey package installs behind a proxy
 cookbook 'win_proxy', path: './test/fixtures/cookbooks/win_proxy'
-cookbook 'vagrant', path: '~/dev/community/vagrant-cookbook'
+cookbook 'vagrant', path: '~/cookbooks/vagrant'
