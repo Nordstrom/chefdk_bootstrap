@@ -7,9 +7,9 @@
 echo "Starting chefdk_bootstrap_nord bootstrap..."
 
 echo "Setting up proxy environment variables..."
-export http_proxy=http://webproxysea.nordstrom.net:8181
-export https_proxy=$http_proxy
-export no_proxy='localhost,127.0.0.1,nordstrom.net'
+# export http_proxy=http://webproxysea.nordstrom.net:8181
+# export https_proxy=$http_proxy
+# export no_proxy='localhost,127.0.0.1,nordstrom.net'
 
 # Send these attributes into the bootstrap to be passed into chef-client
 CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse/attributes.json?raw"

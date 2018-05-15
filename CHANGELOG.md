@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.1
+* Bump the vagrant cookbook version to ~> 0.9. The new vagrant default version is 2.0.3
+
 ## 2.4.0
 * Don't install virtual box on a guest system
 * Use version 5.2.8 of virtual box on the mac
