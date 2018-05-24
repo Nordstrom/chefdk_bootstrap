@@ -32,7 +32,7 @@ default['chefdk_bootstrap']['package'].tap do |install|
 end
 
 # No virtual box on vm
-default['chefdk_bootstrap']['package']['virtualbox'] = false if node['virtualization']['system']['role'] == 'guest'
+default['chefdk_bootstrap']['package']['virtualbox'] = false if node['virtualization']['role'] == 'guest'
 
 # platform specific
 case node['platform_family']
