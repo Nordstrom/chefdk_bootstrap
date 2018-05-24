@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.2
+* Use node['virtualization']['role'] to decide if a server is a guest
+
 ## 2.4.1
 * Bump the vagrant cookbook version to ~> 0.9. The new vagrant default version is 2.0.3
 * Exclude the passwd ohai plugin. This change eliminates a 6 minute hang at the start of the install that some users were experiencing.
