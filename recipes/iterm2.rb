@@ -13,4 +13,6 @@
 # limitations under the License.
 #
 
-homebrew_cask 'iterm2'
+homebrew_cask 'iterm2' do
+  version iterm2['version'] if defined?(iterm2) && defined?(iterm2['version'])
+end

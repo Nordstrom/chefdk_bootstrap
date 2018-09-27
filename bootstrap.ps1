@@ -76,7 +76,7 @@ function Install-Project {
   $berksfile = @"
   source 'https://supermarket.chef.io'
 
-  cookbook '$bootstrapCookbook', '2.4.2'
+  cookbook '$bootstrapCookbook', '2.4.3'
 "@
 
   $chefConfig = @"
@@ -153,10 +153,10 @@ function Install-Project {
   # run chef-client (installed by ChefDK) to bootstrap this machine
   # Pass optional named parameter json_attributes to chef-client
   if ($json_attributes -ne "") {
-    chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $json_attributes
+    C:\opscode\chefdk\bin\chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $json_attributes
   }
   else {
-    chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
+    C:\opscode\chefdk\bin\chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
   }
 
   if ( -not $? ) { Pop-Location;  die "Error running chef-client." }

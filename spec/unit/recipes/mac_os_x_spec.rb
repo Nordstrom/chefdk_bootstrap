@@ -51,11 +51,11 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
     )
   end
 
-  %w(
+  %w[
     /Users/doug/.chef
     /Users/doug/chef
     /Users/doug/chef/cookbooks
-  ).each do |directory|
+  ].each do |directory|
     it "creates directory #{directory}" do
       mac_os_x_chef_run.converge(described_recipe)
       expect(mac_os_x_chef_run).to create_directory(directory)
@@ -67,7 +67,7 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
       mac_os_x_chef_run.converge(described_recipe)
     end
 
-    recipes = %w(
+    recipes = %w[
       homebrew
       homebrew::cask
       chefdk_bootstrap::virtualbox
@@ -76,7 +76,7 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
       chefdk_bootstrap::git
       chefdk_bootstrap::iterm2
       chefdk_bootstrap::bash_profile
-    )
+    ]
 
     recipes.each do |recipe|
       it "includes the #{recipe} recipe" do

@@ -14,12 +14,12 @@
 #
 
 home = Dir.home(ENV['SUDO_USER'] || ENV['USER'])
-%W(
+%W[
   #{home}/.chef
   #{home}/chef
   #{home}/chef/cookbooks
   /usr/local
-).each do |dir|
+].each do |dir|
   directory dir do
     owner ENV['SUDO_USER'] || ENV['USER']
   end

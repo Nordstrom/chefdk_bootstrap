@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-property :plugin, String, name_attribute: true
+property :plugin, String, name_property: true
 resource_name :atom_apm
 default_action :install
 

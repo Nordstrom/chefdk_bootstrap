@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.3
+* Don't install atom plugins on windows. The code no longer works. Disable the code for now.
+
 ## 2.4.2
 * Use node['virtualization']['role'] to decide if a server is a guest
 

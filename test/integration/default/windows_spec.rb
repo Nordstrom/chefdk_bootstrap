@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%w(chef .chef chef\cookbooks).each do |dir|
+%w[chef .chef chef\cookbooks].each do |dir|
   describe directory(dir) do
     it { should be_directory }
   end

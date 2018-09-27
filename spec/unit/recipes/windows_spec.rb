@@ -51,11 +51,11 @@ RSpec.describe 'chefdk_bootstrap::windows', win_bootstrap: true do
       expect(windows_chef_run).to include_recipe('chefdk_bootstrap::gitextensions')
     end
 
-    %w(
+    %w[
       C:/Users/bobbie/.chef
       C:/Users/bobbie/chef
       C:/Users/bobbie/chef/cookbooks
-    ).each do |directory|
+    ].each do |directory|
       it "creates directory #{directory}" do
         expect(windows_chef_run).to create_directory(directory)
       end
