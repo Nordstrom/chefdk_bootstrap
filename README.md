@@ -7,14 +7,19 @@ Run one simple command to easily set up your Windows or Mac machine
 for Chef cookbook development in about **20 minutes**.
 
 ## Before You Begin
-* If you are on a Windows machine, you will need at least PowerShell 3.0. We recommend [PowerShell 5.0](https://www.microsoft.com/en-us/download/details.aspx?id=50395) because it supports [Microsoft DSC](https://msdn.microsoft.com/en-us/PowerShell/DSC/overview).
+* If you are on a Windows machine you will need a minimum of Windows 10.
+* You will need at least PowerShell 3.0. We recommend [PowerShell 5.0](https://www.microsoft.com/en-us/download/details.aspx?id=50395)
+* because it supports [Microsoft DSC](https://msdn.microsoft.com/en-us/PowerShell/DSC/overview). The user running the install will
+* need to be able to run powershell commands as Administrator. Powershell command "Set-ExecutionPolicy Unrestricted" may be neeeded to allow commands to run.
+
+* If you are on a Mac you will need a minimum of OS/X 11.12, Sierra. Some limited testing has been done with 10.11.
 
 * If you are behind a proxy, you will need to export these [proxy environment variables](#if-you-are-behind-a-proxy) first.
 
 ## Windows Quickstart
 
-Copy the PowerShell command below and paste them into a **PowerShell Admin** console. This will download and run the [bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1)
-script on your workstation.
+Copy the PowerShell commands below and paste them into a **PowerShell Admin** console. These command will download and run the
+[bootstrap](https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1) script on your workstation.
 
 ```PowerShell
  Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/Nordstrom/chefdk_bootstrap/master/bootstrap.ps1 | Invoke-Expression

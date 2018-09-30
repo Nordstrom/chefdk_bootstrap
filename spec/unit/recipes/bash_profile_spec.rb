@@ -23,7 +23,7 @@ RSpec.describe 'chefdk_bootstrap::bash_profile' do
     include_context 'mac_os_x'
 
     before do
-      %w(http_proxy https_proxy no_proxy).each do |proxy_var|
+      %w[http_proxy https_proxy no_proxy].each do |proxy_var|
         ENV.delete(proxy_var)
       end
     end

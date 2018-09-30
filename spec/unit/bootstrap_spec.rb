@@ -30,26 +30,26 @@ RSpec.describe ChefDKBootstrap::Cli, mac_bootstrap: true do
 
     context 'long options' do
       let(:arguments) do
-        %w(--json-attributes http://server/attributes.json --version 0.14.25)
+        %w[--json-attributes http://server/attributes.json --version 0.14.25]
       end
 
       it 'all long options specified' do
         options = {
           json_attributes: 'http://server/attributes.json',
-          version: '0.14.25',
+          version: '0.14.25'
         }
         expect(cli.parse).to eq(options)
       end
     end
 
     context 'short options' do
-      let(:arguments) { %w(-j http://server/attributes.json -v 0.14.25) }
+      let(:arguments) { %w[-j http://server/attributes.json -v 0.14.25] }
 
       it 'all short options specified' do
         options =
           {
             json_attributes: 'http://server/attributes.json',
-            version: '0.14.25',
+            version: '0.14.25'
           }
         expect(cli.parse).to eq(options)
       end

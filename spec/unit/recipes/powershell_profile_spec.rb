@@ -26,7 +26,7 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile', win_bootstrap: true do
     include_context 'windows_2012'
 
     before do
-      %w(http_proxy https_proxy no_proxy).each do |proxy_var|
+      %w[http_proxy https_proxy no_proxy].each do |proxy_var|
         ENV.delete(proxy_var)
       end
     end

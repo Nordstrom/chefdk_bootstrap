@@ -43,11 +43,14 @@ when 'windows'
     install['poshgit'] = true
     install['conemu'] = true
   end
+  default['atom']['packages'] = %w[]
 when 'mac_os_x'
   default['chefdk_bootstrap']['package'].tap do |install|
     install['iterm2'] = true
     install['bash_profile'] = true
   end
+  # Default Atom plugins
+  default['atom']['packages'] = %w[language-powershell linter linter-cookstyle linter-erb linter-foodcritic linter-rubocop merge-conflicts rubocop-auto-correct]
 end
 
 default['chefdk_bootstrap']['gitconfig'] = {
@@ -58,7 +61,7 @@ default['chefdk_bootstrap']['gitconfig'] = {
   'alias.ci' => { value: 'commit' },
   'alias.st' => { value: 'status' },
   'alias.lol' => { value: "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" },
-  'push.default' => { value: 'simple' },
+  'push.default' => { value: 'simple' }
 }
 
 default['chefdk_bootstrap']['gitconfig']['credential.helper'] = { value: 'osxkeychain' } if platform_family?('mac_os_x')
@@ -76,6 +79,3 @@ default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.co
 
 default['chefdk_bootstrap']['virtualbox']['source'] = 'http://download.virtualbox.org/virtualbox/5.2.8/VirtualBox-5.2.8-121009-OSX.dmg'
 default['chefdk_bootstrap']['virtualbox']['checksum'] = '97764ad37c5fafdeccecfb660ce056f625e9048890af772befe0330ed2def1d8'
-
-# Default Atom plugins
-default['atom']['packages'] = %w(language-powershell linter linter-cookstyle linter-erb linter-foodcritic linter-rubocop merge-conflicts rubocop-auto-correct)

@@ -15,7 +15,7 @@ echo "Setting up proxy environment variables..."
 CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse/attributes.json?raw"
 # To test using the attribute file from a specific commit in bit bucket use this format
 # CHEFDK_BOOTSTRAP_JSON_ATTRIBUTES="https://git.nordstrom.net/projects/CHF/repos/chefdk_bootstrap_nord/browse/attributes.json\?at\=dbf3c40139c\&raw"
-[ -z "$CHEFDK_VERSION" ] && CHEFDK_VERSION="2.4.17"
+[ -z "$CHEFDK_VERSION" ] && CHEFDK_VERSION="3.2.30"
 [ -z "$CHEFDK_BOOT_LOCAL" ] && CHEFDK_BOOT_LOCAL=", path: '$(pwd)'" && export CHEFDK_BOOT_LOCAL
 
 echo "Starting chefdk_bootstrap..."

@@ -16,11 +16,11 @@
 include_recipe 'chocolatey'
 
 home = Dir.home
-%W(
+%W[
   #{home}/.chef
   #{home}/chef
   #{home}/chef/cookbooks
-).each do |directory|
+].each do |directory|
   directory directory
 end
 
@@ -30,6 +30,4 @@ packages.each do |pkg, install|
   include_recipe "#{cookbook_name}::#{pkg}" if install
 end
 
-if node['chefdk_bootstrap']['powershell']['configure']
-  include_recipe "#{cookbook_name}::powershell_profile"
-end
+include_recipe "#{cookbook_name}::powershell_profile" if node['chefdk_bootstrap']['powershell']['configure']
