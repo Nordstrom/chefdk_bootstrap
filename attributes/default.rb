@@ -77,5 +77,5 @@ default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy'] # 'http://mypro
 # Skip the proxy for these domains and IPs. This should be a comma-separated string
 default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.com,localhost,127.0.0.1'
 
-default['chefdk_bootstrap']['virtualbox']['source'] = 'http://download.virtualbox.org/virtualbox/5.2.8/VirtualBox-5.2.8-121009-OSX.dmg'
-default['chefdk_bootstrap']['virtualbox']['checksum'] = '97764ad37c5fafdeccecfb660ce056f625e9048890af772befe0330ed2def1d8'
+default['chefdk_bootstrap']['virtualbox']['source'] = 'https://download.virtualbox.org/virtualbox/6.0.4/VirtualBox-6.0.4-128413-OSX.dmg'
+default['chefdk_bootstrap']['virtualbox']['checksum'] = '06d989b5717942ed5c48a3e26277885e69a3f341e459236208d01807d25dcb76'
