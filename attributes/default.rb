@@ -29,6 +29,7 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['chefdk_julia'] = false
   install['kitchen_proxy'] = true
   install['gitconfig'] = false
+  # TODO VSCODE
 end
 
 # No virtual box on vm
@@ -77,5 +78,6 @@ default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy'] # 'http://mypro
 # Skip the proxy for these domains and IPs. This should be a comma-separated string
 default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.com,localhost,127.0.0.1'
 
-default['chefdk_bootstrap']['virtualbox']['source'] = 'https://download.virtualbox.org/virtualbox/6.0.4/VirtualBox-6.0.4-128413-OSX.dmg'
-default['chefdk_bootstrap']['virtualbox']['checksum'] = '06d989b5717942ed5c48a3e26277885e69a3f341e459236208d01807d25dcb76'
+# TODO update virtual box
+default['chefdk_bootstrap']['virtualbox']['source'] = 'https://download.virtualbox.org/virtualbox/6.1.2/VirtualBox-6.1.2-135662-OSX.dmg'
+default['chefdk_bootstrap']['virtualbox']['checksum'] = '20fb52bbd7edec58c9eef69046240a809091727872b8b4b254db272ffd6950b4'
