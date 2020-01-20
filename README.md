@@ -12,9 +12,9 @@ for Chef cookbook development in about **20 minutes**.
 * because it supports [Microsoft DSC](https://msdn.microsoft.com/en-us/PowerShell/DSC/overview). The user running the install will
 * need to be able to run powershell commands as Administrator. Powershell command "Set-ExecutionPolicy Unrestricted" may be neeeded to allow commands to run.
 
-* If you are on a Mac you will need a minimum of OS/X 11.12, Sierra. Some limited testing has been done with 10.11.
+* If you are on a Mac you will need a minimum of OS/X 11.13.
 
-* If you are behind a proxy, you will need to export these [proxy environment variables](#if-you-are-behind-a-proxy) first.
+* If you need to use a proxy for internet access, you will need to export these [proxy environment variables](#if-you-are-behind-a-proxy) first.
 
 ## Windows Quickstart
 
