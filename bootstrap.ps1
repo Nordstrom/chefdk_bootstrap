@@ -40,8 +40,8 @@ function Install-Project {
       Break
   }
 
-  # Set targetChefDk to latest version from metadata URL
-  $metadataURL = "https://omnitruck.chef.io/stable/chefdk/metadata?p=windows&pv=2012r2&m=x86_64&v=latest"
+  # Set target Chef Workstation to latest version from metadata URL
+  $metadataURL = "https://omnitruck.chef.io/stable/chef-workstation/metadata?p=windows&pv=2012r2&m=x86_64&v=latest"
 
   if ( $env:http_proxy ) {
     $getMetadata = Invoke-WebRequest -UseBasicParsing $metadataURL -Proxy $env:http_proxy -ProxyUseDefaultCredentials
@@ -53,17 +53,17 @@ function Install-Project {
 
   $latest_info = $getMetadata.Content
   $CHEFDK_LATEST_PATTERN = "version\s(\d{1,2}\.\d{1,2}\.\d{1,2})"
-  $targetChefDk = [regex]::match($latest_info, $CHEFDK_LATEST_PATTERN).Groups[1].Value
+  $targetWorkstation = [regex]::match($latest_info, $CHEFDK_LATEST_PATTERN).Groups[1].Value
 
   # Get command line arguments set
   if ($version) {
-    $targetChefDk = $version
+    $targetWorkstation = $version
   }
 
   $bootstrapCookbook = 'chefdk_bootstrap'
 
   $userChefDir = Join-Path -path $env:USERPROFILE -childPath 'chef'
-  $dotChefDKDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chefdk'
+  $dotChefWorkstationDir = Join-Path -path $env:LOCALAPPDATA -childPath 'chef-workstation'
   $tempInstallDir = Join-Path -path $env:TEMP -childpath 'chefdk_bootstrap'
   $berksfilePath = Join-Path -path $tempInstallDir -childPath 'Berksfile'
   $chefConfigPath = Join-Path -path $tempInstallDir -childPath 'client.rb'
@@ -87,7 +87,7 @@ function Install-Project {
 
   ### This bootstrap script will:
 
-  1. Install the ChefDK version $targetChefDk.
+  1. Install the Chef Workstation version $targetWorkstation.
   2. Download the $bootstrapCookbook cookbook via Berkshelf
   3. Run chef-client to install the rest of the tools you'll need.
 
@@ -108,22 +108,22 @@ function Install-Project {
   # Write out minimal chef-client config file
   $chefConfig | Out-File -FilePath $chefConfigPath -Encoding ASCII
 
-  # Install ChefDK from chef omnitruck, unless installed already
-  Write-Host "Checking for installed ChefDK version"
+  # Install Chef Workstation from chef omnitruck, unless installed already
+  Write-Host "Checking for installed Chef Workstation version"
   $app = Get-CimInstance -classname win32_product -filter "Name like 'Chef Development Kit%'"
   $installedVersion = $app.Version
-  if ( $installedVersion -like "$targetChefDk*" ) {
-    Write-Host "The ChefDK version $installedVersion is already installed."
+  if ( $installedVersion -like "$targetWorkstation*" ) {
+    Write-Host "The Chef Workstation version $installedVersion is already installed."
   } else {
     if ( $installedVersion -eq $null ) {
-      Write-Host "No ChefDK found. Installing the ChefDK version $targetChefDk"
+      Write-Host "No Chef Workstation found. Installing the Chef Workstation version $targetWorkstation"
     } else {
-      Write-Host "Upgrading the ChefDK from $installedVersion to $targetChefDk"
-      Write-Host "Uninstalling ChefDK version $installedVersion. This might take a while..."
+      Write-Host "Upgrading the Chef Workstation from $installedVersion to $targetWorkstation"
+      Write-Host "Uninstalling Chef Workstation version $installedVersion. This might take a while..."
       Invoke-CimMethod -InputObject $app -MethodName Uninstall
-      if ( -not $? ) { promptContinue "Error uninstalling ChefDK version $installedVersion" }
-      if (Test-Path $dotChefDKDir) {
-        Remove-Item -Recurse $dotChefDKDir
+      if ( -not $? ) { promptContinue "Error uninstalling Chef Workstation version $installedVersion" }
+      if (Test-Path $dotChefWorkstationDir) {
+        Remove-Item -Recurse $dotChefWorkstationDir
       }
     }
     if ( $env:http_proxy ) {
@@ -135,13 +135,13 @@ function Install-Project {
     }
     $installScript | Invoke-Expression
     if ( -not $? ) { die "Error running installation script" }
-    Write-Host "Installing ChefDK version $targetChefDk. This might take a while..."
-    install -channel stable -project chefdk -version $targetChefDk
-    if ( -not $? ) { die "Error installing the ChefDK version $targetChefDk" }
+    Write-Host "Installing Chef Workstation version $targetWorkstation. This might take a while..."
+    install -channel stable -project chef-workstation -version $targetWorkstation
+    if ( -not $? ) { die "Error installing the Chef Workstation version $targetWorkstation" }
   }
 
-  # Add ChefDK to the path
-  $env:Path += ";C:\opscode\chefdk\bin"
+  # Add Chef Workstation to the path
+  $env:Path += ";C:\opscode\chef-workstation\bin"
 
   Push-Location $tempInstallDir
 
@@ -150,13 +150,13 @@ function Install-Project {
   berks vendor
   if ( -not $? ) { Pop-Location;  die "Error running berks to download cookbooks." }
 
-  # run chef-client (installed by ChefDK) to bootstrap this machine
+  # run chef-client (installed by Chef Workstation) to bootstrap this machine
   # Pass optional named parameter json_attributes to chef-client
   if ($json_attributes -ne "") {
-    C:\opscode\chefdk\bin\chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $json_attributes
+    C:\opscode\chef-workstation\bin\chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook --json-attributes $json_attributes
   }
   else {
-    C:\opscode\chefdk\bin\chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
+    C:\opscode\chef-workstation\bin\chef-client -A -z -l error -c $chefConfigPath -o $bootstrapCookbook
   }
 
   if ( -not $? ) { Pop-Location;  die "Error running chef-client." }
