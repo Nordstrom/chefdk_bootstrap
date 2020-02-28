@@ -25,14 +25,10 @@ supports         'mac_os_x'
 
 depends          'atom', '0.3.1'
 depends          'chef_ca', '0.1.1'
-depends          'chocolatey', '~> 1.0'
-depends          'git', '~> 8.0'
-depends          'homebrew', '~> 5.0'
+depends          'chocolatey', '~> 2.0'
+depends          'git', '~> 10.0'
 depends          'line', '~> 2.0'
 depends          'vagrant', '~> 2.0'
-depends          'windows', '~> 3.4'
-
-depends          'apt', '~> 6.1'
 
 source_url       'https://github.com/Nordstrom/chefdk_bootstrap'
 issues_url       'https://github.com/Nordstrom/chefdk_bootstrap/issues'
