@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 #
-# Copyright 2016, 2018 Nordstrom, Inc.
+# Copyright:: 2016, 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -135,8 +135,8 @@ module ChefDKBootstrap
 
   # Install chef workstation
   class ChefDK
-    CHEFDK_VERSION_PATTERN = /Chef Workstation Version: (?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i
-    CHEFDK_LATEST_PATTERN = /version\s(?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i
+    CHEFDK_VERSION_PATTERN = /Chef Workstation Version: (?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i.freeze
+    CHEFDK_LATEST_PATTERN = /version\s(?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i.freeze
 
     def initialize(options)
       @target_version = options[:version]

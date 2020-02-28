@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright:: 2015 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ RSpec.describe 'chefdk_bootstrap::powershell_profile', win_bootstrap: true do
     include_context 'windows_2012'
 
     before do
-      %w[http_proxy https_proxy no_proxy].each do |proxy_var|
+      %w(http_proxy https_proxy no_proxy).each do |proxy_var|
         ENV.delete(proxy_var)
       end
     end

@@ -1,4 +1,4 @@
-# Copyright 2016 Nordstrom, Inc.
+# Copyright:: 2016 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ RSpec.describe 'chefdk_bootstrap::bash_profile' do
     include_context 'mac_os_x'
 
     before do
-      %w[http_proxy https_proxy no_proxy].each do |proxy_var|
+      %w(http_proxy https_proxy no_proxy).each do |proxy_var|
         ENV.delete(proxy_var)
       end
     end
