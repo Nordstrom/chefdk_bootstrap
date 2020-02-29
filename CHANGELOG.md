@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.6
+* Bump the pinning on chef_ca
+
 ## 2.4.5
 * add chefworkstation to chef_ca
 
