@@ -1,7 +1,7 @@
-# Cookbook Name:: chefdk_bootstrap
+# Cookbook:: chefdk_bootstrap
 # Rakefile
 
-# Copyright 2016 Nordstrom, Inc.
+# Copyright:: 2016 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,10 +32,10 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 desc 'Run Rubocop and Foodcritic style checks'
-task style: %i[rubocop foodcritic]
+task style: %i(rubocop foodcritic)
 
 desc 'Run all style checks and unit tests'
-task test: %i[style spec]
+task test: %i(style spec)
 
 task default: :test
 

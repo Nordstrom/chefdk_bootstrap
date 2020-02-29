@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright:: 2015 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,4 +15,5 @@
 
 homebrew_cask 'iterm2' do
   version iterm2['version'] if defined?(iterm2) && defined?(iterm2['version'])
+  ignore_failure true
 end

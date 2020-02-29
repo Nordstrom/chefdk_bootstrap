@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 #
-# Copyright 2016, 2018 Nordstrom, Inc.
+# Copyright:: 2016, 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ module ChefDKBootstrap
           options[:json_attributes] = v
         end
 
-        opts.on('-v', '--version VERSION', 'Enter the version of ChefDK to install.') do |v|
+        opts.on('-v', '--version VERSION', 'Enter the version of Chef Workstation to install.') do |v|
           options[:version] = v
         end
 
@@ -75,7 +75,7 @@ module ChefDKBootstrap
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
     def initialize(options)
-      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.4.3'#{ENV['CHEFDK_BOOT_LOCAL']}"
+      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.4.4'#{ENV['CHEFDK_BOOT_LOCAL']}"
     end
 
     # Creates berksfile in a temp directory
@@ -133,10 +133,10 @@ module ChefDKBootstrap
     end
   end
 
-  # Install chefdk
+  # Install chef workstation
   class ChefDK
-    CHEFDK_VERSION_PATTERN = /Chef Development Kit Version: (?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i
-    CHEFDK_LATEST_PATTERN = /version\s(?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i
+    CHEFDK_VERSION_PATTERN = /Chef Workstation Version: (?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i.freeze
+    CHEFDK_LATEST_PATTERN = /version\s(?<version>\d{1,2}\.\d{1,2}\.\d{1,2})/i.freeze
 
     def initialize(options)
       @target_version = options[:version]
@@ -144,26 +144,26 @@ module ChefDKBootstrap
 
     # Shell command to determine if chef is currently installed
     #
-    # @return [string] chefdk version information or empty string if not installed
+    # @return [string] chef-workstation version information or empty string if not installed
     def installed_info
       `chef -v 2>/dev/null`
     end
 
-    # Gets chefdk version currently installed or nil if not installed
+    # Gets chef-workstation version currently installed or nil if not installed
     #
-    # @return [string] chefdk installed version or nil if not installed
+    # @return [string] chef-workstation installed version or nil if not installed
     def installed_version
       installed_info.empty? ? nil : installed_info.match(CHEFDK_VERSION_PATTERN)[:version]
     end
 
-    # Shell command to determine lastest version of chefdk
+    # Shell command to determine lastest version of chef-workstation
     #
-    # @return [String] latest stable chefdk version (assuming latest version is samme for all OS)
+    # @return [String] latest stable chef-workstation version (assuming latest version is samme for all OS)
     def latest_info
-      `curl --silent --show-error 'https://omnitruck.chef.io/stable/chefdk/metadata?p=mac_os_x&pv=10.11&m=x86_64&v=latest'`
+      `curl --silent --show-error 'https://omnitruck.chef.io/stable/chef-workstation/metadata?p=mac_os_x&pv=10.13&m=x86_64&v=latest'`
     end
 
-    # Gets chefdk latest version available
+    # Gets chef-workstation latest version available
     def latest_version
       latest_info.match(CHEFDK_LATEST_PATTERN)[:version]
     end
@@ -172,13 +172,13 @@ module ChefDKBootstrap
       @target_version || latest_version
     end
 
-    # Installs chefdk
+    # Installs chef-workstation
     def install
-      puts 'Installing ChefDK'
+      puts 'Installing Chef Workstation'
       install_command = "curl --silent --show-error https://omnitruck.chef.io/install.sh | \
-              sudo -E bash -s -- -c stable -P chefdk"
+              sudo -E bash -s -- -c stable -P chef-workstation"
       install_command << " -v #{target_version}" if target_version
-      raise 'ChefDK install failed' unless system(install_command)
+      raise 'Chef Workstation install failed' unless system(install_command)
     end
 
     # Determine if the target version is already installed

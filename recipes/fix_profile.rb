@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright:: 2015 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
 
 username = ENV['username']
 
-case node['platform_family']
-when 'windows'
+if platform_family?('windows')
   file "C:\\Users\\#{username}\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1" do
     content ''
   end

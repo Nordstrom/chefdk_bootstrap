@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: win_proxy
+# Cookbook:: win_proxy
 # Recipe:: default
 #
-# Copyright (c) 2016 Nordstrom, Inc.
+# Copyright:: (c) 2016 Nordstrom, Inc.
 
 include_recipe 'chocolatey'
 

@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright:: 2015 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 include_recipe 'chocolatey'
 
 home = Dir.home
-%W[
+%W(
   #{home}/.chef
   #{home}/chef
   #{home}/chef/cookbooks
-].each do |directory|
+).each do |directory|
   directory directory
 end
 

@@ -8,9 +8,10 @@ provisioner:
   chef_omnibus_root: c:/opscode/chefdk
 
 platforms:
-  - name: windows-2012r2
+  - name: windows-2016
     driver_config:
-      box: mwrock/Windows2012R2
+      box: tas50/windows_2016
+      box_url: https://app.vagrantup.com/tas50/boxes/windows_2016
 
 verifier:
   name: inspec

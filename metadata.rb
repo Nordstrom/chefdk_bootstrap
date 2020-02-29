@@ -1,4 +1,4 @@
-# Copyright 2015, 2018 Nordstrom, Inc.
+# Copyright:: 2015, 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,25 +18,17 @@ maintainer       'Nordstrom, Inc.'
 maintainer_email 'techcheftm@nordstrom.com'
 license          'Apache-2.0'
 description      'Bootstrap a developer workstation for local Chef development using the ChefDK'
-version          '2.4.3'
+version          '2.4.4'
 
 supports         'windows'
 supports         'mac_os_x'
 
-# TODO: If the chef-atom project merges the custom resource change
-# use the chef-atom cookbook and removed the parts of chef-atom
-# embedded in this cookbook.
-# while atom is embedded.  depends          'atom', '~> 0.2.0'
+depends          'atom', '0.3.1'
 depends          'chef_ca', '0.1.1'
-depends          'chocolatey', '~> 1.0'
-depends          'git', '~> 8.0'
-depends          'homebrew', '~> 4.3'
-depends          'line', '~> 1.0'
-depends          'vagrant', '~> 0.9'
-depends          'windows', '~> 3.4'
-
-# temporary while atom is embedded
-depends          'apt', '~> 6.1'
+depends          'chocolatey', '~> 2.0'
+depends          'git', '~> 10.0'
+depends          'line', '~> 2.0'
+depends          'vagrant', '~> 2.0'
 
 source_url       'https://github.com/Nordstrom/chefdk_bootstrap'
 issues_url       'https://github.com/Nordstrom/chefdk_bootstrap/issues'

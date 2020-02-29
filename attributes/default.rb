@@ -1,4 +1,4 @@
-# Copyright 2015, 2018 Nordstrom, Inc.
+# Copyright:: 2015, 2018 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ default['chefdk_bootstrap']['package'].tap do |install|
   install['chefdk_julia'] = false
   install['kitchen_proxy'] = true
   install['gitconfig'] = false
+  # TODO: VSCODE
 end
 
 # No virtual box on vm
@@ -43,14 +44,14 @@ when 'windows'
     install['poshgit'] = true
     install['conemu'] = true
   end
-  default['atom']['packages'] = %w[]
+  default['atom']['packages'] = %w()
 when 'mac_os_x'
   default['chefdk_bootstrap']['package'].tap do |install|
     install['iterm2'] = true
     install['bash_profile'] = true
   end
   # Default Atom plugins
-  default['atom']['packages'] = %w[language-powershell linter linter-cookstyle linter-erb linter-foodcritic linter-rubocop merge-conflicts rubocop-auto-correct]
+  default['atom']['packages'] = %w(language-powershell linter linter-cookstyle linter-erb linter-foodcritic linter-rubocop merge-conflicts rubocop-auto-correct)
 end
 
 default['chefdk_bootstrap']['gitconfig'] = {
@@ -61,7 +62,7 @@ default['chefdk_bootstrap']['gitconfig'] = {
   'alias.ci' => { value: 'commit' },
   'alias.st' => { value: 'status' },
   'alias.lol' => { value: "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" },
-  'push.default' => { value: 'simple' }
+  'push.default' => { value: 'simple' },
 }
 
 default['chefdk_bootstrap']['gitconfig']['credential.helper'] = { value: 'osxkeychain' } if platform_family?('mac_os_x')
@@ -77,5 +78,7 @@ default['chefdk_bootstrap']['proxy']['http'] = ENV['http_proxy'] # 'http://mypro
 # Skip the proxy for these domains and IPs. This should be a comma-separated string
 default['chefdk_bootstrap']['proxy']['no_proxy'] = ENV['no_proxy'] # 'example.com,localhost,127.0.0.1'
 
-default['chefdk_bootstrap']['virtualbox']['source'] = 'http://download.virtualbox.org/virtualbox/5.2.8/VirtualBox-5.2.8-121009-OSX.dmg'
-default['chefdk_bootstrap']['virtualbox']['checksum'] = '97764ad37c5fafdeccecfb660ce056f625e9048890af772befe0330ed2def1d8'
+default['vagrant']['plugins'] = [{ name: 'vagrant-vbguest' }]
+
+default['chefdk_bootstrap']['virtualbox']['source'] = 'https://download.virtualbox.org/virtualbox/6.1.4/VirtualBox-6.1.4-136177-OSX.dmg'
+default['chefdk_bootstrap']['virtualbox']['checksum'] = '2bc5d7282d9af9ce12dffddb528dcf6c9eb7ea92e644885d805e1e56fd55bacf'

@@ -1,4 +1,4 @@
-# Copyright 2015 Nordstrom, Inc.
+# Copyright:: 2015 Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,12 +14,11 @@
 #
 
 home = Dir.home(ENV['SUDO_USER'] || ENV['USER'])
-%W[
+%W(
   #{home}/.chef
   #{home}/chef
   #{home}/chef/cookbooks
-  /usr/local
-].each do |dir|
+).each do |dir|
   directory dir do
     owner ENV['SUDO_USER'] || ENV['USER']
   end
