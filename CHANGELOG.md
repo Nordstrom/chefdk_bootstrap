@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.7
+* Bump the version of the cookbook
+
 ## 2.4.6
 * Bump the pinning on chef_ca
 
