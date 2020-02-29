@@ -1,5 +1,8 @@
 # Revision History for chefdk_bootstrap
 
+## 2.4.8
+* Bump the version of the cookbook in the download scripts
+
 ## 2.4.7
 * Bump the version of the cookbook
 
