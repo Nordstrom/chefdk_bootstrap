@@ -75,7 +75,7 @@ module ChefDKBootstrap
     #  * :berks_source [String] private supermarket URL
     #  * :json_attributes [String] URL/path to the JSON file
     def initialize(options)
-      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.4.4'#{ENV['CHEFDK_BOOT_LOCAL']}"
+      @cookbook = options[:cookbook] ? "'#{options[:cookbook]}'" : "'chefdk_bootstrap', '2.4.8'#{ENV['CHEFDK_BOOT_LOCAL']}"
     end
 
     # Creates berksfile in a temp directory
