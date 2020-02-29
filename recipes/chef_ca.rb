@@ -14,6 +14,6 @@
 #
 
 chef_ca node['chef_ca']['ca_bundle_name'] do
-  type :chefdk
+  type :chefworkstation
   ca_bundle node['chef_ca']['ca_bundle']
 end

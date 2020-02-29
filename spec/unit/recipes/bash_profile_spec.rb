@@ -42,7 +42,7 @@ RSpec.describe 'chefdk_bootstrap::bash_profile' do
     cached(:mac_os_x_chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'mac_os_x',
-        version: '10.10',
+        version: '10.15',
         file_cache_path: '/var/chef/cache'
       ) do |node|
         node.set['chefdk_bootstrap']['proxy']['http'] = 'http://myproxy.example.com:1234'
