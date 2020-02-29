@@ -15,7 +15,7 @@ RSpec.shared_context 'mac_os_x' do
   cached(:mac_os_x_chef_run) do
     ChefSpec::SoloRunner.new(
       platform: 'mac_os_x',
-      version: '10.10',
+      version: '10.15',
       file_cache_path: '/var/chef/cache/'
     ) do |node|
       node.set['vagrant']['checksum'] = 'abc123'

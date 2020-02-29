@@ -18,7 +18,7 @@ RSpec.describe 'chefdk_bootstrap::mac_os_x' do
   let(:mac_os_x_chef_run) do
     ChefSpec::SoloRunner.new(
       platform: 'mac_os_x',
-      version: '10.10'
+      version: '10.15'
     ) do |node|
       node.set['vagrant']['checksum'] = 'abc123'
     end

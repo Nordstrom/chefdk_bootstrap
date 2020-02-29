@@ -19,7 +19,7 @@
 include_recipe 'apt'
 
 apt_repository 'atom-ppa' do
-  uri 'http://ppa.launchpad.net/webupd8team/atom/ubuntu'
+  uri 'ppa:webupd8team/atom'
   components ['main']
   keyserver 'keyserver.ubuntu.com'
   key 'EEA14886'
